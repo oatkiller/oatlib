@@ -30,7 +30,7 @@ def symbolize(src)
 	results = []
 
 	src.each do |line|
-		matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9]*)/)
+		matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
 		matches && matches.map {|array| array[0]}.each do |symbol|
 			symbols.push(symbol) # record any symbols in the array
 		end
@@ -122,6 +122,14 @@ task :build, :module_string do |t, args|
 	desc "pass a list of modules to build oatlib for: rake build[\"event dom-effects date\"] (oatlib.debug.js results in the dist dir)"
 	modules = args.module_string.split(' ').unshift('core').collect {|module_name| File.join('src',module_name + '.js') }
 	sprocketized_src = sprocketize(['src'],modules)
+	symbolized_src = symbolize(sprocketized_src)
+	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
+end
+
+task :build_plugins, :module_string do |t, args|
+	desc "pass a list of plugins to build oatlib for: rake build_plugin[\"oatlog\"] (oatlib.debug.js results in the dist dir)"
+	modules = args.module_string.split(' ').collect {|module_name| File.join('plugins',module_name,module_name + '.js') }.unshift(File.join('src','core.js'))
+	sprocketized_src = sprocketize(['src','plugins'],modules)
 	symbolized_src = symbolize(sprocketized_src)
 	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
 end

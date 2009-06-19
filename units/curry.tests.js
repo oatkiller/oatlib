@@ -1,7 +1,7 @@
 tests.curry = [
 	{
 		name: 'curry',
-		testCurry: function () {
+		'test curry': function () {
 			oatlib(function (o) {
 				var add = function (a,b) {return a + b;},
 				add4 = o.curry(add,4);

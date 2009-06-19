@@ -1,3 +1,4 @@
 oatlib = function (fn) {
-	return fn.call(this,oatlib);
+	return fn[$call](this,oatlib);
 };
+var emptyString = '';
