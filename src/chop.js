@@ -1,5 +1,5 @@
 oat_array_prototype[$chop] = function () {
-	var that = this();
+	var that = this.currentObj;
 	that.length--;
 	return that;
 };

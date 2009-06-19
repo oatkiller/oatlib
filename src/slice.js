@@ -1,1 +1,1 @@
-$$_slice = oatlib[$slice] = $$Array[$prototype][$slice];
+$$_slice = $$Array[$prototype][$slice];

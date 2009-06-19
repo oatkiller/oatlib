@@ -1,11 +1,6 @@
 var emptyString = '',
 namespace = 'http://oatlab.com/oatlib/v2',
 o,
-get_prototype_namespacer = function () {
-	return function () {
-		return this;
-	};
-},
 oat_array_prototype,
 oat_function_prototype;
 
@@ -17,5 +12,12 @@ o.toString = function () {
 	return namespace;
 };
 
-oat_array_prototype = $$Array[$prototype][o] = get_prototype_namespacer();
-oat_function_prototype = $$Function[$prototype][o] = get_prototype_namespacer();
+oat_array_prototype = $$Array[$prototype][o] = function () {
+	oat_array_prototype.currentObj = this;
+	return oat_array_prototype;
+};
+
+oat_function_prototype = $$Function[$prototype][o] = function () {
+	oat_function_prototype.currentObj = this;
+	return oat_function_prototype;
+};

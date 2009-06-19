@@ -1,12 +1,11 @@
 tests.bind = [
 	{
 		name: 'bind',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test bind': function () {
-			oatlib(function (o) {
-				var myObj = {name: 'robert'},
-				getName = function () {return this.name;};
-				Assert.areSame(myObj.name,o.bind(getName,myObj)(),'bind failed');
-			});
+			var myObj = {name: 'robert'},
+			getName = function () {return this.name;};
+			Assert.areSame(myObj.name,getName[o]().bind(myObj)(),'bind failed');
 		}
 	}
 ];
