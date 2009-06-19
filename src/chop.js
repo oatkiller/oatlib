@@ -1,4 +1,5 @@
-$$_chop = oatlib[$chop] = function (ra) {
-	ra.length--;
-	return ra;
+oat_array_prototype[$chop] = function () {
+	var that = this();
+	that.length--;
+	return that;
 };

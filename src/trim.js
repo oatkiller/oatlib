@@ -1,3 +1,4 @@
-$$_trim = oatlib[$trim] = function (s) {
-	return s[$replace](/^\s+|\s+$/g,emptyString);
+o[$trim] = function () {
+	var that = this();
+	return that[$replace](/^\s+|\s+$/g,emptyString);
 }; 

@@ -1,7 +1,9 @@
 //= require <array>
 //= require <bind>
-$$_curry = oatlib[$curry] = function (fn) {
-	var args = $$_array(arguments);
-	args[$splice](1,0,$$null);
-	return $$_bind[$apply]($$null,args);
+oat_function_prototype[$curry] = function () {// logic lives in bind
+	var that = this();
+	var bind = oat_function_prototype[$bind];
+	return (oat_function_prototype[$curry] = function () {
+		return bind[$apply](that,[$$null][$concat](arguments));
+	})[$apply](that,arguments);
 };

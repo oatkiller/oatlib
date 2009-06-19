@@ -1,4 +1,4 @@
 //= require <fragment>
-$$_node = oatlib[$node] = function (html) {
-	return $$_fragment(html)[$childNodes][0];
+o[$node] = function (html) {
+	return o[$fragment](html)[$childNodes][0];
 };

@@ -1,12 +1,12 @@
-//= require <slice>
+//= require <concat>
 //= require <array>
 (function () {
 
-	$$_rcurry = oatlib[$rcurry] = function (fn) { // holds logic for curry
-		var that = fn,
-		oldArguments = $$_slice[$call](arguments,1);
+	o[$rcurry] = function () { // holds logic for curry
+		var that = this(),
+		oldArguments = arguments;
 		return function () {
-			return that[$apply]($$null,$$_array(arguments)[$concat](oldArguments));
+			return that[$apply]($$null,$$_concat[$call](arguments,oldArguments));
 		};
 	};
 

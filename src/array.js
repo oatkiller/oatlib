@@ -1,4 +1,4 @@
 //= require <slice>
-$$_array = oatlib[$array] = function (arrayLike) {
+o[$array] = function (arrayLike) {
 	return $$_slice[$apply](arrayLike);
 };

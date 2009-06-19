@@ -1,13 +1,15 @@
 //= require <rcurry>
 //= require <map>
-$$_domarray = oatlib[$domarray] = function () { // try to use slice to get an array from an HTML elements collection. if this works, use slice for the array fn, else use an fn that iterates over the array like object and builds a new array incrementally. IE should get the second fn, others should get the first. generally.
+o[$domarray] = function () { // try to use slice to get an array from an HTML elements collection. if this works, use slice for the array fn, else use an fn that iterates over the array like object and builds a new array incrementally. IE should get the second fn, others should get the first. generally.
 	var testDiv = $$document[$createElement]('div');
-	testDiv[$innerHTML] = 'asdf<div></div>asdf';
+	testDiv[$innerHTML] = 'a<d></b>';
 	try {
-		$$_array(testDiv[$childNodes]);
-		$$_domarray = oatlib[$domarray] = $$_array;
+		o[$array](testDiv[$childNodes]);
+		o[$domarray] = o[$array];
 	} catch (e) {
-		$$_domarray = oatlib[$domarray] = $$_rcurry($$_map,function (a) {return a;});
+		o[$domarray] = function (arrayLike) {
+			return oat_array_prototype[$map][$apply](arrayLike,function (a) {return a;});
+		};
 	}
-	return $$_domarray[$apply]($$null,arguments);
+	return o[domarray][$apply]($$null,arguments);
 };

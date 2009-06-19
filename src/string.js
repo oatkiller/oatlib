@@ -1,4 +1,4 @@
-//= require <array>
-$$_string = oatlib[$string] = function () {
-	return $$_array(arguments)[$join](emptyString);
+//= require <join>
+o[$string] = function () {
+	return $$_join[$apply](arguments,emptyString);
 };

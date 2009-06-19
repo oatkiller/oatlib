@@ -1,8 +1,8 @@
-$$_indexOf = oatlib[$indexOf] = function (raLike,element) {
-	var that = raLike,
-	length = that[$length],
+oat_array_prototype[$indexOf] = function (element) {
 
-	from = arguments[2] || 0;
+	var that = this(),
+	length = that[$length],
+	from = arguments[1] || 0;
 
 	if (from < 0) {
 		from += length;
@@ -13,5 +13,7 @@ $$_indexOf = oatlib[$indexOf] = function (raLike,element) {
 			return from;
 		}
 	}
+
 	return -1;
+
 };

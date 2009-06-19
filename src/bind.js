@@ -1,8 +1,9 @@
 //= require <slice>
 //= require <array>
-$$_bind = oatlib[$bind] = function (fn,obj) { // holds logic for curry
-	var that = fn,
-	oldArguments = $$_slice[$call](arguments,2);
+
+oat_function_prototype[$bind] = function (obj) { // holds the logic for curry
+	var that = this(),
+	oldArguments = $$_slice[$call](arguments,1);
 	return function () {
 		return that[$apply](obj,oldArguments[$concat]($$_array(arguments)));
 	};
