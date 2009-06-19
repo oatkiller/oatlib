@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en-US" xml:lang="en-US">
+	<head>
+		<title>oatlib unit tests</title>
+	</head>
+	<body>
+		<!--CSS--> 
+		<link rel="stylesheet" type="text/css" href="assets/logger.css" />
+		<!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/logger/assets/logger.css"-->
+
+		<link rel="stylesheet" type="text/css" href="assets/testlogger.css" />
+		<!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/yuitest/assets/testlogger.css"-->
+		 
+		<!-- Dependencies -->  
+		<script type="text/javascript" src="assets/yahoo-dom-event.js"></script> 
+		<!--script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script-->
+
+		<script type="text/javascript" src="assets/logger-min.js"></script> 
+		<!--script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/logger/logger-min.js"></script-->
+		 
+		<!-- Source File --> 
+		<script type="text/javascript" src="assets/yuitest-min.js"></script> 
+		<!--script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yuitest/yuitest-min.js"></script-->
+
+		<script src="../oatlib.debug.js"></script>
+		<script>
+			Assert = YAHOO.util.Assert; 
+			tests = {};
+		</script>
+		<script src="units.js"></script>
+		<script>
+
+			var oatlibSuite = new YAHOO.tool.TestSuite('oatlib2');
+			for (var propertyName in tests) {
+				if (tests.hasOwnProperty(propertyName)) {
+					var suite = new YAHOO.tool.TestSuite(propertyName),
+					cases = tests[propertyName];
+					for (var i = 0, length = cases.length; i < length; i++) {
+						suite.add(new YAHOO.tool.TestCase(cases[i]));
+					}
+					oatlibSuite.add(suite);
+				}
+			}
+
+	    var oLogger = new YAHOO.tool.TestLogger(); 
+			YAHOO.tool.TestRunner.add(oatlibSuite);
+	    YAHOO.tool.TestRunner.run(); 
+
+		</script>
+		<style>
+		.yui-log-container {
+			width: auto;
+			padding: 1em 0;
+			position: relative;
+		}
+		</style>
+
+	</body>
+</html>
+

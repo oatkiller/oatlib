@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<style>
+button,.button {
+	border: 1px solid red;
+}
+.hover {
+	background: red;
+	cursor: pointer;
+}
+.active {
+	background: pink;
+}
+</style>
+<form method="get" action="">
+<fieldset>
+<button name="asdf">asdf</button>
+<button name="asdf">asdf</button>
+<button name="asdf">asdf</button>
+<button name="asdf">asdf</button>
+<button name="asdf">asdf</button>
+<div class="button">asdf<span>nub</span>asdf</div>
+</fieldset>
+</form>
+<script src="../oatlib.debug.js"></script>
+<script>
+var buttons = domarray(document.getElementsByTagName('button'));
+buttons.push(document.getElementsByTagName('div')[0]);
+buttons.forEach(function (node) {
+	fauxPseudoClasses(node);
+});
+document.getElementsByTagName('form')[0].onsubmit = function () {return false;};
+</script>
+</body>
+</html>
