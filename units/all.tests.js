@@ -5,6 +5,7 @@
 //= require <combine.tests>
 //= require <curry.tests>
 //= require <domarray.tests>
+//= require <each.tests>
 //= require <fragment.tests>
 //= require <inject.tests>
 //= require <injector.tests>
