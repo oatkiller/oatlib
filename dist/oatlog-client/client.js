@@ -3,7 +3,7 @@ o = window['http://oatlab.com/oatlib/v2'];
 	var payload;
 	// declare this early in your codebase
 	window.onerror = function(message, url, lineNumber) {
-		var e = payload || mask(new Error());
+		var e = payload || o.mask(new Error());
 		payload = null;
 
 		e.message = e.message || message;
@@ -65,7 +65,7 @@ o = window['http://oatlab.com/oatlib/v2'];
 
 					return parts.join('');
 				}),
-				getIEErrorRuntimeError: object_memo('ie_error',function () {
+				getIEErrorRuntimeError: o.object_memo('ie_error',function () {
 					var ieErrors = {
 						'5029': 'Array length must be a finite positive integer',
 						'5030': 'Array length must be assigned a finite positive number',
@@ -106,7 +106,7 @@ o = window['http://oatlab.com/oatlib/v2'];
 						return null;
 					}).apply(this,arguments);
 				}),
-				getName: object_memo('_name',function () {
+				getName: o.object_memo('_name',function () {
 					return (that.error_prototype.getName = this.name ? function () {
 						return this.name;
 					} : this.message && /Backtrace/.test(this.message) ? function () {
@@ -116,9 +116,9 @@ o = window['http://oatlab.com/oatlib/v2'];
 						return null;
 					}).apply(this,arguments);
 				}),
-				getStackObj: object_memo('_stackObj',function () {
+				getStackObj: o.object_memo('_stackObj',function () {
 					return (that.error_prototype.getStackObj = this.stack ? function () {
-						return this.stack.split(/\n/).chop().map(function (callString) {
+						return this.stack.split(/\n/)[o.chop]()[o.map](function (callString) {
 							return {
 								name: callString.match(/(.*)@/)[1],
 								file: callString.match(/@(.*):/)[1],
@@ -135,7 +135,7 @@ o = window['http://oatlab.com/oatlib/v2'];
 							stack.push({
 								file: line1.match(/(?:script in |linked script )(\S*)/)[1],
 								line: line1.match(/Line (\d*)/)[1],
-								code: line2.trim()
+								code: line2[o.trim]()
 							});
 						}
 						return stack;
@@ -143,11 +143,11 @@ o = window['http://oatlab.com/oatlib/v2'];
 						return null;
 					}).apply(this,arguments);
 				}),
-				getFileName: object_memo('_fileName',function () {
+				getFileName: o.object_memo('_fileName',function () {
 					return (that.error_prototype.getFileName = this.getStackObj() ? function () {
 						return this.getStackObj().map(function (stackling) {
 							return stackling.file;
-						}).unique();
+						})[o.unique]();
 					} : this.fileName ? function () {
 						return this.fileName;
 					} : this.sourceURL ? function () {
@@ -169,10 +169,10 @@ o = window['http://oatlab.com/oatlib/v2'];
 				return m;
 			},
 			log: function (payload) {
-				document.body.appendChild(node(string('<pre>',payload,'</pre>')));
+				document.body.appendChild(o.node(o.string('<pre>',payload,'</pre>')));
 			},
 			compensate_for_opera: window.opera ? function (e) {
-				var masked_error = mask(e);
+				var masked_error = o.mask(e);
 				//masked_error.fileName = e.message.match(/script in (\S*)/)[1];
 				masked_error.lineNumber = e.message.match(/Line (\d*)/)[1];
 				masked_error.data = e.message;
@@ -182,7 +182,7 @@ o = window['http://oatlab.com/oatlib/v2'];
 			convert_error: function (e) {
 				var compensated_error = this.compensate_for_opera(e);
 				var masked_error = this.get_masked_error(compensated_error);
-				combine(masked_error,{
+				o.combine(masked_error,{
 					name: masked_error.getName(),
 					fileName: masked_error.getFileName(),
 					lineNumber: masked_error.getLineNumber(),
