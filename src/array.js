@@ -1,4 +1,4 @@
 //= require <slice>
-o[$array] = function (arrayLike) {
+$$_store(function (arrayLike) {
 	return $$_slice[$apply](arrayLike);
-};
+},$array);

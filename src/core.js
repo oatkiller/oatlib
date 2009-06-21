@@ -5,7 +5,12 @@ $$_function_prototype = $$Function[$prototype],
 $$_array_prototype = $$Array[$prototype],
 $$_bindings = [],
 $$_store = function (fn,name,namespace) {
-	return ((namespace || o)[o(name)] = fn);
+	if (namespace) {
+		namespace[o(namespace)] = fn;
+	} else {
+		o[name] = fn;
+	}
+	return fn;
 };
 
 (function () {
