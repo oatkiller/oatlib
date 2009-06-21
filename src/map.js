@@ -1,5 +1,5 @@
-oat_array_prototype[$map] = function (fn) {
-	var that = this(),
+$$_store(function (fn) {
+	var that = this,
 	length = that[$length],
 	response = new $$Array(length), i = 0;
 
@@ -8,4 +8,4 @@ oat_array_prototype[$map] = function (fn) {
 	}
 	return response;
 
-};
+},$map,$$_array_prototype);

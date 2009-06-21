@@ -1,6 +1,6 @@
-oat_array_prototype[$indexOf] = function (element) {
+$$_store(function (element) {
 
-	var that = this(),
+	var that = this,
 	length = that[$length],
 	from = arguments[1] || 0;
 
@@ -16,4 +16,4 @@ oat_array_prototype[$indexOf] = function (element) {
 
 	return -1;
 
-};
+},$indexOf,$$_array_prototype);

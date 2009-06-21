@@ -1,10 +1,9 @@
 tests.inject = [
 	{
 		name: 'inject',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test inject': function (){
-			oatlib(function (o) {
-				Assert.areSame(o.inject(1,function (memo,a) {return memo * a;},2,2,2),8);
-			});
+			Assert.areSame([2,2,2][o('inject')](1,function (memo,a) {return memo * a;}),8);
 		}
 	}
 ];

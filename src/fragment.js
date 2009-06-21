@@ -1,14 +1,14 @@
-//= require <injector>
 //= require <domarray>
-o[$fragment] = function () {
+//= require <injector>
+
+$$_store(function () {
 	var getFragmentFromNodes = o[$injector](function () {return $$document.createDocumentFragment();},function (fragment,node) {
 		fragment[$appendChild](node);
 		return fragment;
 	}),
 	div = $$document[$createElement]('div');
-	return (o[$fragment] = function (html) {
+	return $$_store(function (html) {
 		div[$innerHTML] = html;
-		return getFragmentFromNodes[$apply]($$null,div[$childNodes]);
-	})[$apply](this,arguments);
-};
-
+		return getFragmentFromNodes[$apply]($$null,o[$domarray](div[$childNodes]));
+	},$fragment)[$apply](this,arguments);
+},$fragment);

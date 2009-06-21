@@ -1,1 +1,1 @@
-$$_concat = $$Array[$prototype][$concat];
+$$_concat = $$_array_prototype[$concat];

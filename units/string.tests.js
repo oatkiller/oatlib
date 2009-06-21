@@ -1,10 +1,9 @@
 tests.string = [
 	{
 		name: 'string',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test string': function () {
-			oatlib(function (o) {
-				Assert.areSame('abcd',o.string('a','b','c','d'),'string failed');
-			});
+			Assert.areSame('abcd',o.string('a','b','c','d'),'string failed');
 		}
 	}
 ];

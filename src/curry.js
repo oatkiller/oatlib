@@ -1,9 +1,5 @@
 //= require <array>
 //= require <bind>
-oat_function_prototype[$curry] = function () {// logic lives in bind
-	return (oat_function_prototype[$curry] = function () {
-		var that = oat_function_prototype.currentObj;
-		return that[o]()[$bind][$apply](this,[$$null][$concat](arguments));
-		//return bind[$apply](that,[$$null][$concat](arguments));
-	})[$apply](this,arguments);
-};
+$$_store(function () {
+	return this[o($bind)][$apply](this,[$$null][$concat](o[$array](arguments)));
+},$curry,$$_function_prototype);

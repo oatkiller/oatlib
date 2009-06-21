@@ -1,8 +1,15 @@
 tests.mask = [
 	{
 		name: 'mask',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test mask': function () {
-			Assert.fail('need test this');
+			var obj = {
+				name: 'woot'
+			},
+			masked = o.mask(obj);
+			Assert.isTrue('name' in masked);
+			Assert.isFalse(masked.hasOwnProperty('name'));
+			
 		}
 	}
 ];

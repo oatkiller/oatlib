@@ -1,13 +1,13 @@
-//= require <concat>
 //= require <array>
+//= require <concat>
 (function () {
 
-	o[$rcurry] = function () { // holds logic for curry
-		var that = this(),
-		oldArguments = arguments;
+	$$_store(function () {
+		var that = this,
+		oldArguments = o[$array](arguments);
 		return function () {
-			return that[$apply]($$null,$$_concat[$call](arguments,oldArguments));
+			return that[$apply](this,$$_concat[$call](o[$array](arguments),oldArguments));
 		};
-	};
+	},$rcurry,$$_function_prototype);
 
 })();

@@ -1,1 +1,1 @@
-$$_join = $$Array[$prototype][$join];
+$$_join = $$_array_prototype[$join];

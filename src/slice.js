@@ -1,1 +1,1 @@
-$$_slice = $$Array[$prototype][$slice];
+$$_slice = $$_array_prototype[$slice];

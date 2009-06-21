@@ -1,4 +1,3 @@
-o[$trim] = function () {
-	var that = this();
-	return that[$replace](/^\s+|\s+$/g,emptyString);
-}; 
+$$_store(function () {
+	return this[$replace](/^\s+|\s+$/g,emptyString);
+},$trim,$$String[$prototype]);
