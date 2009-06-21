@@ -6,7 +6,7 @@ $$_array_prototype = $$Array[$prototype],
 $$_bindings = [],
 $$_store = function (fn,name,namespace) {
 	if (namespace) {
-		namespace[o(namespace)] = fn;
+		namespace[o(name)] = fn;
 	} else {
 		o[name] = fn;
 	}
