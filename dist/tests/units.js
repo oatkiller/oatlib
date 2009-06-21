@@ -25,7 +25,7 @@ tests.bind = [
 		'test bind': function () {
 			var myObj = {name: 'robert'},
 			getName = function () {return this.name;};
-			Assert.areSame(myObj.name,getName[o('bind')](myObj)(),'bind failed');
+			Assert.areSame(myObj.name,getName[o.bind](myObj)(),'bind failed');
 		}
 	}
 ];
@@ -34,7 +34,7 @@ tests.chop = [
 		name: 'chop',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test chop': function () {
-			Assert.areSame([1,2,3,4][o('chop')]().length,3);
+			Assert.areSame([1,2,3,4][o.chop]().length,3);
 		}
 	}
 ];
@@ -79,7 +79,7 @@ tests.curry = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test curry': function () {
 			var add = function (a,b) {return a + b;},
-			add4 = add[o('curry')](4);
+			add4 = add[o.curry](4);
 			Assert.areSame(5,add4(1),'curry failed :(');
 		}
 	}
@@ -92,7 +92,7 @@ tests.domarray = [
 				var tmpDiv = document.createElement('div'), cells, myRa;
 				tmpDiv.innerHTML = '<table><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
 				cells = tmpDiv.childNodes[0].childNodes[0].childNodes[0].cells;
-				myRa = o['domarray'](cells);
+				myRa = o.domarray(cells);
 				Assert.isNotUndefined(myRa.push);
 		}
 	}
@@ -103,7 +103,7 @@ tests.each = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test each': function () {
 			var otherOne = [];
-			[1,2,3,4][o('each')](function (item) {
+			[1,2,3,4][o.each](function (item) {
 				otherOne.push(item);
 			});
 			Assert.isTrue(otherOne.length === 4);
@@ -126,7 +126,7 @@ tests.indexOf = [
 		name: 'indexOf',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test indexOf': function () {
-			Assert.areSame([1,2,3][o('indexOf')](2),1);
+			Assert.areSame([1,2,3][o.indexOf](2),1);
 		}
 	}
 ];
@@ -136,7 +136,7 @@ tests.inject = [
 		name: 'inject',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test inject': function (){
-			Assert.areSame([2,2,2][o('inject')](1,function (memo,a) {return memo * a;}),8);
+			Assert.areSame([2,2,2][o.inject](1,function (memo,a) {return memo * a;}),8);
 		}
 	}
 ];
@@ -168,7 +168,7 @@ tests.map = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test map': function () {
 			var original = [2,4,6],
-			mapped = original[o('map')](function (e) {
+			mapped = original[o.map](function (e) {
 					return e * 2;
 			});
 
@@ -244,7 +244,7 @@ tests.rcurry = [
 
 			Assert.areSame('.net sucks',join('.net','sucks'),'join failed');
 
-			var sucks = join[o('rcurry')]('sucks'),
+			var sucks = join[o.rcurry]('sucks'),
 			dotnetsucks = sucks('.net');
 
 			Assert.areSame('.net sucks',dotnetsucks,'rcurry failed');
@@ -265,7 +265,7 @@ tests.supplant = [
 		name: 'supplant',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test supplant': function () {
-			Assert.areSame('a: 1, b: 2, c: 3','a: {a}, b: {b}, c: {c}'[o('supplant')]({
+			Assert.areSame('a: 1, b: 2, c: 3','a: {a}, b: {b}, c: {c}'[o.supplant]({
 				a: 1,
 				b: 2,
 				c: 3
@@ -279,7 +279,7 @@ tests.trim = [
 		name: 'trim',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test trim': function () {
-			Assert.areSame('123','      123     				'[o('trim')]());
+			Assert.areSame('123','      123     				'[o.trim]());
 		}
 	}
 ];
@@ -289,7 +289,7 @@ tests.unique = [
 		name: 'unique',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test unique': function () {
-			Assert.areSame([1,1,2,2,3,3,4,5][o('unique')]().length,5);
+			Assert.areSame([1,1,2,2,3,3,4,5][o.unique]().length,5);
 		}
 	}
 ];

@@ -8,7 +8,9 @@ $$_array_prototype = $$Array[$prototype],
 $$_bindings = [],
 $$_store = function (fn,name,namespace) {
 	if (namespace) {
-		namespace[o(name)] = fn;
+		var qn = o(name);
+		namespace[qn] = fn;
+		o[name] = qn;
 	} else {
 		o[name] = fn;
 	}
@@ -48,13 +50,13 @@ $$_store(function (fn) {
 	}
 },$each,$$_array_prototype);
 $$_store(function (memo,iterator) {
-	this[o($each)](function (property) {
+	this[o[$each]](function (property) {
 		memo = iterator[$call](this,memo,property);
 	});
 	return memo;
 },$inject,$$_array_prototype);
 $$_store(function () {
-	return this[o($bind)][$apply](this,[$$null][$concat](o[$array](arguments)));
+	return this[o[$bind]][$apply](this,[$$null][$concat](o[$array](arguments)));
 },$curry,$$_function_prototype);
 (function () {
 
@@ -67,14 +69,14 @@ $$_store(function () {
 		return resultObj;
 	},
 	combinator = function (anIterator,resultObj) { // combines any number of objects
-		return $$_slice[$call](arguments,2)[o($inject)](resultObj,anIterator);
+		return $$_slice[$call](arguments,2)[o[$inject]](resultObj,anIterator);
 	};
 
-	$$_store(combinator[o($curry)](iterator[o($curry)](function (anObj,propertyName) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype
+	$$_store(combinator[o[$curry]](iterator[o[$curry]](function (anObj,propertyName) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype
 		return anObj[$hasOwnProperty](propertyName);
 	})),$combine);
 
-	$$_store(combinator[o($curry)](iterator[o($curry)](function () {return $$true;})),
+	$$_store(combinator[o[$curry]](iterator[o[$curry]](function () {return $$true;})),
 	$super_combine); // curries combinator with a test that takes every property, including ones on the subject arguments __proto__
 
 })();
@@ -107,14 +109,14 @@ $$_store(function () { // try to use slice to get an array from an HTML elements
 		$$_store($$_array,$domarray);
 	} catch (e) {
 		$$_store(function (arrayLike) {
-			return $$_array_prototype[o($map)][$apply](arrayLike,function (a) {return a;});
+			return $$_array_prototype[o[$map]][$apply](arrayLike,function (a) {return a;});
 		},$domarray);
 	}
 	return o[$domarray][$apply]($$null,arguments);
 },$domarray);
 $$_store(function (memoBuilder, iterator) { // takes a function which returns a new memo and an iterator function. returns a function which wraps inject, passes it a new memo each times its called. see document.getFragmentWithNodes. this is the way you should use inject if the memo is not primitive
 	return function () {
-		return o[$array](arguments)[o($inject)](memoBuilder(),iterator);
+		return o[$array](arguments)[o[$inject]](memoBuilder(),iterator);
 	};
 },$injector);
 
@@ -190,8 +192,8 @@ $$_store(function () {
 },$trim,$$String[$prototype]);
 $$_store(function () {
 	var uniques = [];
-	this[o($each)](function (raElement) {
-		uniques[o($indexOf)](raElement) === -1 && uniques[$push](raElement);
+	this[o[$each]](function (raElement) {
+		uniques[o[$indexOf]](raElement) === -1 && uniques[$push](raElement);
 	});
 	return uniques;
 },$unique,$$_array_prototype);

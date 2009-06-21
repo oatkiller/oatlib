@@ -5,7 +5,7 @@ tests.bind = [
 		'test bind': function () {
 			var myObj = {name: 'robert'},
 			getName = function () {return this.name;};
-			Assert.areSame(myObj.name,getName[o('bind')](myObj)(),'bind failed');
+			Assert.areSame(myObj.name,getName[o.bind](myObj)(),'bind failed');
 		}
 	}
 ];

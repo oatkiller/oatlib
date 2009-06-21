@@ -10,7 +10,7 @@ $$_store(function () { // try to use slice to get an array from an HTML elements
 		$$_store($$_array,$domarray);
 	} catch (e) {
 		$$_store(function (arrayLike) {
-			return $$_array_prototype[o($map)][$apply](arrayLike,function (a) {return a;});
+			return $$_array_prototype[o[$map]][$apply](arrayLike,function (a) {return a;});
 		},$domarray);
 	}
 	return o[$domarray][$apply]($$null,arguments);

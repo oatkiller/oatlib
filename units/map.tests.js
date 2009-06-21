@@ -4,7 +4,7 @@ tests.map = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test map': function () {
 			var original = [2,4,6],
-			mapped = original[o('map')](function (e) {
+			mapped = original[o.map](function (e) {
 					return e * 2;
 			});
 

@@ -11,14 +11,14 @@
 		return resultObj;
 	},
 	combinator = function (anIterator,resultObj) { // combines any number of objects
-		return $$_slice[$call](arguments,2)[o($inject)](resultObj,anIterator);
+		return $$_slice[$call](arguments,2)[o[$inject]](resultObj,anIterator);
 	};
 
-	$$_store(combinator[o($curry)](iterator[o($curry)](function (anObj,propertyName) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype
+	$$_store(combinator[o[$curry]](iterator[o[$curry]](function (anObj,propertyName) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype
 		return anObj[$hasOwnProperty](propertyName);
 	})),$combine);
 
-	$$_store(combinator[o($curry)](iterator[o($curry)](function () {return $$true;})),
+	$$_store(combinator[o[$curry]](iterator[o[$curry]](function () {return $$true;})),
 	$super_combine); // curries combinator with a test that takes every property, including ones on the subject arguments __proto__
 
 })();
