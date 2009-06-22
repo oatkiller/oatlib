@@ -1,11 +1,10 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $length = 'length', $call = 'call', $each = 'each', $inject = 'inject', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $concat = 'concat', $bind = 'bind', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $push = 'push', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, $$_join, $join = 'join', $string = 'string', $style = 'style', $opacity = 'opacity', $filter = 'filter', $set_opacity = 'set_opacity', $fade = 'fade', emptyString = '';
-var emptyString = '',
-namespace = 'http://oatlab.com/oatlib/v2',
-o,
-$$_function_prototype = $$Function[$prototype],
-$$_array_prototype = $$Array[$prototype],
-$$_bindings = [],
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $toString = 'toString', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $call = 'call', $concat = 'concat', $bind = 'bind', $length = 'length', $each = 'each', $inject = 'inject', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $chop = 'chop', $style = 'style', $opacity = 'opacity', $filter = 'filter', $clear_opacity = 'clear_opacity', $$_concat, $map = 'map', $$document = document, $createElement = 'createElement', $innerHTML = 'innerHTML', $$_array, $childNodes = 'childNodes', $domarray = 'domarray', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $getTransition = 'getTransition', $transitions = 'transitions', $push = 'push', $currentTime = 'currentTime', $consider = 'consider', $getCurrentTime = 'getCurrentTime', $getInterval = 'getInterval', $startPlaying = 'startPlaying', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, $isPlaying = 'isPlaying', $intervalHandle = 'intervalHandle', $iterate = 'iterate', $interval = 'interval', $getStartTime = 'getStartTime', $getEndTime = 'getEndTime', $getDuration = 'getDuration', $durationInSeconds = 'durationInSeconds', $iterator = 'iterator', $scheduleFinalRun = 'scheduleFinalRun', $callback = 'callback', $splice = 'splice', $stopPlaying = 'stopPlaying', $$Date = Date, $getTime = 'getTime', $setupTransition = 'setupTransition', $tearDownTransition = 'tearDownTransition', $$_join, $join = 'join', $string = 'string', $set_opacity = 'set_opacity', $fade = 'fade', $appendChild = 'appendChild', $fragment = 'fragment', $indexOf = 'indexOf', $mask = 'mask', $node = 'node', $rcurry = 'rcurry', $replace = 'replace', $number = 'number', $supplant = 'supplant', $$String = String, $trim = 'trim', $unique = 'unique', emptyString = '';
+var namespace = 'http://oatlab.com/oatlib/v2',
+o;
+$$_function_prototype = $$Function[$prototype];
+$$_array_prototype = $$Array[$prototype];
+$$_bindings = [];
 $$_store = function (fn,name,namespace) {
 	if (namespace) {
 		var qn = o(name);
@@ -24,9 +23,20 @@ $$_store = function (fn,name,namespace) {
 	};
 })();
 
-o.toString = function () {
+o[$toString] = function () {
 	return namespace;
 };
+$$_slice = $$_array_prototype[$slice];
+$$_store(function (arrayLike) {
+	return $$_slice[$apply](arrayLike);
+},$array);
+$$_store(function (obj) { // holds the logic for curry
+	var that = this,
+	oldArguments = $$_slice[$call](arguments,1);
+	return function () {
+		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
+	};
+},$bind,$$_function_prototype);
 $$_store(function (fn) {
 		var that = this;
 	for (var i = 0, length = that[$length]; i < length; i++) {
@@ -39,17 +49,6 @@ $$_store(function (memo,iterator) {
 	});
 	return memo;
 },$inject,$$_array_prototype);
-$$_slice = $$_array_prototype[$slice];
-$$_store(function (arrayLike) {
-	return $$_slice[$apply](arrayLike);
-},$array);
-$$_store(function (obj) { // holds the logic for curry
-	var that = this,
-	oldArguments = $$_slice[$call](arguments,1);
-	return function () {
-		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
-	};
-},$bind,$$_function_prototype);
 $$_store(function () {
 	return this[o[$bind]][$apply](this,[$$null][$concat](o[$array](arguments)));
 },$curry,$$_function_prototype);
@@ -98,6 +97,42 @@ $$_store(function (memoBuilder, iterator) { // takes a function which returns a 
 	$$_store(o[$injector](function () {return singleBuilder({});},function (aSingleBuilder,aPrototype) {return singleBuilder(aSingleBuilder(aPrototype));}),$builder);
 
 })();
+$$_store(function () {
+	var that = this;
+	that.length--;
+	return that;
+},$chop,$$_array_prototype);
+$$_store(function (node) {
+	node[$style][$opacity] = '';
+	node[$style][$filter] = 'alpha(opacity=)';
+},$clear_opacity);
+$$_concat = $$_array_prototype[$concat];
+$$_store(function (fn) {
+	var that = this,
+	length = that[$length],
+	response = new $$Array(length), i = 0;
+
+	for (; i < length; i++) {
+		response[i] = fn[$call](that,that[i],i,that);
+	}
+	return response;
+
+},$map,$$_array_prototype);
+
+$$_store(function () { // try to use slice to get an array from an HTML elements collection. if this works, use slice for the array fn, else use an fn that iterates over the array like object and builds a new array incrementally. IE should get the second fn, others should get the first. generally.
+	var testDiv = $$document[$createElement]('div');
+	testDiv[$innerHTML] = 'a<d></b>';
+	try {
+		var $$_array = o[$array];
+		$$_array(testDiv[$childNodes]);
+		$$_store($$_array,$domarray);
+	} catch (e) {
+		$$_store(function (arrayLike) {
+			return $$_array_prototype[o[$map]][$apply](arrayLike,function (a) {return a;});
+		},$domarray);
+	}
+	return o[$domarray][$apply]($$null,arguments);
+},$domarray);
 $$_store(function (propertyName,calculate) {
 	return function () {
 		var that = this;
@@ -113,20 +148,20 @@ $$_store(function (methodName,calculate) {
 	};
 },$get_once);
 
-(setupTransition = function () {
+($$_store(function () {
 
 	var that;
 
 	that = $$_transition = $$_store(function (iterator,durationInSeconds,callback) {
-		var transitionObj = that.getTransition({
+		var transitionObj = that[$getTransition]({
 			iterator: iterator,
 			durationInSeconds: durationInSeconds,
 			callback: callback
 		});
-		that.transitions[$push](transitionObj);
-		delete that.currentTime;
-		transitionObj.consider(that.getCurrentTime(),that.getInterval());
-		that.startPlaying();
+		that[$transitions][$push](transitionObj);
+		delete that[$currentTime];
+		transitionObj[$consider](that[$getCurrentTime](),that[$getInterval]());
+		that[$startPlaying]();
 		return $$true;
 	},$transition);
 
@@ -146,80 +181,82 @@ $$_store(function (methodName,calculate) {
 		transitions: [],
 		isPlaying: $$false,
 		startPlaying: function () {
-			if (this.isPlaying) {
+			if (this[$isPlaying]) {
 				return $$false;
 			}
-			this.isPlaying = $$true;
-			this.intervalHandle = this[$setInterval](this.iterate[o.bind](this),this.getInterval());
+			this[$isPlaying] = $$true;
+			this[$intervalHandle] = this[$setInterval](this[$iterate][o[$bind]](this),this[$getInterval]());
 		},
 		stopPlaying: function () {
-			if (!this.isPlaying) {
+			if (!this[$isPlaying]) {
 				return $$false;
 			}
-			this[$clearInterval](this.intervalHandle);
-			this.isPlaying = $$false;
+			this[$clearInterval](this[$intervalHandle]);
+			this[$isPlaying] = $$false;
 		},
 		fps: 22,
-		getInterval: o[$object_memo]('interval',function () {
+		getInterval: o[$object_memo]($interval,function () {
 			return (1E3 / this.fps) >>> 0;
 		}),
 		getTransition: o[$builder]({
 			transition: $$_transition,
 			stop: function () {},
-			getStartTime: o[$get_once]('getStartTime',function () {
-				return this.transition.getCurrentTime();
+			getStartTime: o[$get_once]($getStartTime,function () {
+				return this[$transition][$getCurrentTime]();
 			}),
-			getEndTime: o[$get_once]('getEndTime',function () {
-				return this.getDuration() + this.transition.getCurrentTime();
+			getEndTime: o[$get_once]($getEndTime,function () {
+				return this[$getDuration]() + this[$transition][$getCurrentTime]();
 			}),
-			getDuration: o[$get_once]('getDuration',function () {
-				return this.durationInSeconds * 1E3;
+			getDuration: o[$get_once]($getDuration,function () {
+				return this[$durationInSeconds] * 1E3;
 			}),
 			consider: function (currentTime,interval) {
-				this.iterator(currentTime - this.getStartTime(),this.getDuration());
-				if (this.getEndTime() - currentTime > interval) {
+				this[$iterator](currentTime - this[$getStartTime](),this[$getDuration]());
+				if (this[$getEndTime]() - currentTime > interval) {
 					return $$true;
 				} else {
-					this.scheduleFinalRun(currentTime);
+					this[$scheduleFinalRun](currentTime);
 					return $$false;
 				}
 			},
 			scheduleFinalRun: function (currentTime) {
 				var that = this;
-				this.transition[$setTimeout](function () {
-					that.iterator(that.getDuration(),that.getDuration());
-					that.callback && that.callback();
-				},this.getEndTime() - currentTime);
+				this[$transition][$setTimeout](function () {
+					that[$iterator](that[$getDuration](),that[$getDuration]());
+					that[$callback] && that[$callback]();
+				},this[$getEndTime]() - currentTime);
 			}
 		}),
 		iterate: function () {
-			delete this.currentTime;
+			delete this[$currentTime];
 			var that = this,
-			currentTime = that.getCurrentTime(),
-			interval = that.getInterval(),
+			currentTime = that[$getCurrentTime](),
+			interval = that[$getInterval](),
 			indiciesToRemove = [],
-			transitions = this.transitions;
-			transitions[o.each](function (transitionObj,transitionObjIndex) {
-				if (!transitionObj.consider(currentTime,interval)) {
+			transitions = this[$transitions];
+			transitions[o[$each]](function (transitionObj,transitionObjIndex) {
+				if (!transitionObj[$consider](currentTime,interval)) {
 					indiciesToRemove[$push](transitionObjIndex);
 				}
 			});
-			for (var i = indiciesToRemove.length - 1; i > -1; i--) {
-				transitions.splice(indiciesToRemove[i],1);
+			for (var i = indiciesToRemove[$length] - 1; i > -1; i--) {
+				transitions[$splice](indiciesToRemove[i],1);
 			}
-			if (!transitions.length) {
-				this.stopPlaying();
+			if (!transitions[$length]) {
+				this[$stopPlaying]();
 			}
 
 		},
-		getCurrentTime: o.object_memo('currentTime',function () {return new Date().getTime();})
+		getCurrentTime: o[$object_memo]($currentTime,function () {return new $$Date()[$getTime]();})
 	});
 
-})();
+},$setupTransition))();
 
-tearDownTransition = function () {
-	transition = $$_transition = null;
-};
+$$_store(function () {
+	tearDownTransition = function () {
+		o[$transition] = $$_transition = $$null;
+	};
+},$tearDownTransition);
 $$_join = $$_array_prototype[$join];
 $$_store(function () {
 	return $$_join[$call](arguments,emptyString);
@@ -257,4 +294,72 @@ $$_store(function (node,value) {
 	},$fade);
 
 })();
+
+$$_store(function () {
+	var getFragmentFromNodes = o[$injector](function () {return $$document.createDocumentFragment();},function (fragment,node) {
+		fragment[$appendChild](node);
+		return fragment;
+	}),
+	div = $$document[$createElement]('div');
+	return $$_store(function (html) {
+		div[$innerHTML] = html;
+		return getFragmentFromNodes[$apply]($$null,o[$domarray](div[$childNodes]));
+	},$fragment)[$apply](this,arguments);
+},$fragment);
+$$_store(function (element) {
+
+	var that = this,
+	length = that[$length],
+	from = arguments[1] || 0;
+
+	if (from < 0) {
+		from += length;
+	}
+
+	for (; from < length; from++) {
+		if (that[$hasOwnProperty](from) && that[from] === element) {
+			return from;
+		}
+	}
+
+	return -1;
+
+},$indexOf,$$_array_prototype);
+$$_store(function (obj) {
+	var C = function () {};
+	C[$prototype] = obj;
+	return new C();
+},$mask);
+$$_store(function (html) {
+	return o[$fragment](html)[$childNodes][0];
+},$node);
+(function () {
+
+	$$_store(function () {
+		var that = this,
+		oldArguments = o[$array](arguments);
+		return function () {
+			return that[$apply](this,$$_concat[$call](o[$array](arguments),oldArguments));
+		};
+	},$rcurry,$$_function_prototype);
+
+})();
+$$_store(function (o) {
+	return this[$replace](/{([^{}]*)}/g,
+		function (a,b) {
+			var r = o[b];
+			return typeof r === $string || typeof r === $number ? r : a;
+		}
+	);
+},$supplant,$$String[$prototype]);
+$$_store(function () {
+	return this[$replace](/^\s+|\s+$/g,emptyString);
+},$trim,$$String[$prototype]);
+$$_store(function () {
+	var uniques = [];
+	this[o[$each]](function (raElement) {
+		uniques[o[$indexOf]](raElement) === -1 && uniques[$push](raElement);
+	});
+	return uniques;
+},$unique,$$_array_prototype);
 })();

@@ -1,9 +1,8 @@
-var emptyString = '',
-namespace = 'http://oatlab.com/oatlib/v2',
-o,
-$$_function_prototype = $$Function[$prototype],
-$$_array_prototype = $$Array[$prototype],
-$$_bindings = [],
+var namespace = 'http://oatlab.com/oatlib/v2',
+o;
+$$_function_prototype = $$Function[$prototype];
+$$_array_prototype = $$Array[$prototype];
+$$_bindings = [];
 $$_store = function (fn,name,namespace) {
 	if (namespace) {
 		var qn = o(name);
