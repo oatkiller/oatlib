@@ -10,6 +10,7 @@
 //= require <domarray>
 //= require <each>
 //= require <fragment>
+//= require <get_once>
 //= require <indexOf>
 //= require <inject>
 //= require <injector>
