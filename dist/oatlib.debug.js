@@ -1,5 +1,5 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $toString = 'toString', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $call = 'call', $concat = 'concat', $bind = 'bind', $length = 'length', $each = 'each', $inject = 'inject', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $chop = 'chop', $style = 'style', $opacity = 'opacity', $filter = 'filter', $clear_opacity = 'clear_opacity', $$_concat, $map = 'map', $$document = document, $createElement = 'createElement', $innerHTML = 'innerHTML', $$_array, $childNodes = 'childNodes', $domarray = 'domarray', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $getTransition = 'getTransition', $transitions = 'transitions', $push = 'push', $currentTime = 'currentTime', $consider = 'consider', $getCurrentTime = 'getCurrentTime', $getInterval = 'getInterval', $startPlaying = 'startPlaying', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, $isPlaying = 'isPlaying', $intervalHandle = 'intervalHandle', $iterate = 'iterate', $interval = 'interval', $getStartTime = 'getStartTime', $getEndTime = 'getEndTime', $getDuration = 'getDuration', $durationInSeconds = 'durationInSeconds', $iterator = 'iterator', $scheduleFinalRun = 'scheduleFinalRun', $callback = 'callback', $splice = 'splice', $stopPlaying = 'stopPlaying', $$Date = Date, $getTime = 'getTime', $setupTransition = 'setupTransition', $tearDownTransition = 'tearDownTransition', $$_join, $join = 'join', $string = 'string', $set_opacity = 'set_opacity', $fade = 'fade', $appendChild = 'appendChild', $fragment = 'fragment', $indexOf = 'indexOf', $mask = 'mask', $node = 'node', $rcurry = 'rcurry', $replace = 'replace', $number = 'number', $supplant = 'supplant', $$String = String, $trim = 'trim', $unique = 'unique', emptyString = '';
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $toString = 'toString', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $call = 'call', $concat = 'concat', $bind = 'bind', $length = 'length', $each = 'each', $inject = 'inject', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $chop = 'chop', $style = 'style', $opacity = 'opacity', $filter = 'filter', $clear_opacity = 'clear_opacity', $$_concat, $map = 'map', $$document = document, $createElement = 'createElement', $innerHTML = 'innerHTML', $$_array, $childNodes = 'childNodes', $domarray = 'domarray', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $getTransition = 'getTransition', $transitions = 'transitions', $push = 'push', $currentTime = 'currentTime', $consider = 'consider', $getCurrentTime = 'getCurrentTime', $getInterval = 'getInterval', $startPlaying = 'startPlaying', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, $isPlaying = 'isPlaying', $intervalHandle = 'intervalHandle', $iterate = 'iterate', $interval = 'interval', $getStartTime = 'getStartTime', $getEndTime = 'getEndTime', $getDuration = 'getDuration', $durationInSeconds = 'durationInSeconds', $iterator = 'iterator', $scheduleFinalRun = 'scheduleFinalRun', $callback = 'callback', $splice = 'splice', $stopPlaying = 'stopPlaying', $$Date = Date, $getTime = 'getTime', $setupTransition = 'setupTransition', $tearDownTransition = 'tearDownTransition', $$_join, $join = 'join', $string = 'string', $set_opacity = 'set_opacity', $fade = 'fade', $appendChild = 'appendChild', $fragment = 'fragment', $indexOf = 'indexOf', $mask = 'mask', $namespace = 'namespace', $node = 'node', $rcurry = 'rcurry', $replace = 'replace', $number = 'number', $supplant = 'supplant', $$String = String, $$_sqrt, $$_asin, $$_abs, $$_PI, $$_sin, $$_pow, $$_cos, $$_transitions, $back = 'back', $ease_in = 'ease_in', $ease_in_out = 'ease_in_out', $ease_out = 'ease_out', $bounce = 'bounce', $circular = 'circular', $cubic = 'cubic', $elastic = 'elastic', $exponential = 'exponential', $linear = 'linear', $quadratic = 'quadratic', $quart = 'quart', $quint = 'quint', $sine = 'sine', $trim = 'trim', $unique = 'unique', emptyString = '';
 var namespace = 'http://oatlab.com/oatlib/v2',
 o;
 $$_function_prototype = $$Function[$prototype];
@@ -330,6 +330,13 @@ $$_store(function (obj) {
 	C[$prototype] = obj;
 	return new C();
 },$mask);
+$$_store(function (obj,namespaceArray) {
+	var finalObj = obj;
+	namespaceArray[o[$each]](function (namespace) {
+		finalObj = obj[namespace] || (obj[namespace] = {});
+	});
+	return finalObj;
+},$namespace);
 $$_store(function (html) {
 	return o[$fragment](html)[$childNodes][0];
 },$node);
@@ -352,6 +359,150 @@ $$_store(function (o) {
 		}
 	);
 },$supplant,$$String[$prototype]);
+$$_sqrt = Math.sqrt;
+$$_asin = Math.asin;
+$$_abs = Math.abs;
+$$_PI = Math.PI;
+$$_sin = Math.sin;
+$$_pow = Math.pow;
+$$_cos = Math.cos;
+$$_transitions = $$_store({},$transitions);
+o[$namespace]($$_transitions,[$back])[$ease_in] = function (t, b, c, d) {
+	s = s || 1.70158;
+	return c*(t/=d)*t*((s+1)*t - s) + b;
+};
+o[$namespace]($$_transitions,[$back])[$ease_in_out] = function (t, b, c, d) {
+	s = s || 1.70158;
+	if ((t/=d/2) < 1) {return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;}
+	return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+};
+o[$namespace]($$_transitions,[$back])[$ease_out] = function (t, b, c, d) {
+	s = s || 1.70158;
+	return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+};
+o[$namespace]($$_transitions,[$bounce])[$ease_out] = function (t, b, c, d) {
+	if ((t/=d) < (1/2.75)) {
+		return c*(7.5625*t*t) + b;
+	} else if (t < (2/2.75)) {
+		return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
+	} else if (t < (2.5/2.75)) {
+		return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
+	} else {
+		return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+	}
+};
+(function () {
+	var bounce_ease_out = o[$transitions][$bounce][$ease_out];
+	o[$namespace]($$_transitions,[$bounce])[$ease_in] = function (t, b, c, d) {
+		return c - bounce_ease_out(d-t, 0, c, d) + b;
+	};
+})();
+(function () {
+	var bounce_ease_out = o[$transitions][$bounce][$ease_out],
+	bounce_ease_in = o[$transitions][$bounce][$ease_in];
+	o[$namespace]($$_transitions,[$bounce])[$ease_in_out] = function (t, b, c, d) {
+		if (t < d/2) {return bounce_ease_in(t*2, 0, c, d) * 0.5 + b;}
+		else {return bounce_ease_out(t*2-d, 0, c, d) * 0.5 + c*0.5 + b;}
+	};
+})();
+o[$namespace]($$_transitions,[$circular])[$ease_in] = function (t, b, c, d) {
+	return -c * (sqrt(1 - (t/=d)*t) - 1) + b;
+};
+o[$namespace]($$_transitions,[$circular])[$ease_in_out] = function (t, b, c, d) {
+	if ((t/=d/2) < 1) {return -c/2 * (sqrt(1 - t*t) - 1) + b;}
+	return c/2 * (sqrt(1 - (t-=2)*t) + 1) + b;
+};
+o[$namespace]($$_transitions,[$circular])[$ease_out] = function (t, b, c, d) {
+	return c * sqrt(1 - (t=t/d-1)*t) + b;
+};
+o[$namespace]($$_transitions,[$cubic])[$ease_in] = function (t, b, c, d) {
+				return c*(t/=d)*t*t + b;
+};
+o[$namespace]($$_transitions,[$cubic])[$ease_in_out] = function (t, b, c, d) {
+	if ((t/=d/2) < 1) {return c/2*t*t*t + b;}
+	return c/2*((t-=2)*t*t + 2) + b;
+};
+o[$namespace]($$_transitions,[$cubic])[$ease_out] = function (t, b, c, d) {
+	return c*((t=t/d-1)*t*t + 1) + b;
+};
+o[$namespace]($$_transitions,[$elastic])[$ease_in] = function (t, b, c, d) {
+	var s;
+	if (t===0) {return b;}  if ((t/=d)==1) {return b+c;}  if (!p) {p=d*0.3;}
+	if (!a || a < abs(c)) { a=c; s=p/4; }
+	else {s = p/(2*PI) * asin(c/a);}
+	return -(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*PI)/p )) + b;
+};
+o[$namespace]($$_transitions,[$elastic])[$ease_in_out] = function (t, b, c, d) {
+	var s;
+	if (t===0) {return b;}  if ((t/=d/2)==2) {return b+c;}  if (!p) {p=d*(0.3*1.5);}
+	if (!a || a < abs(c)) { a=c; s=p/4; }
+	else {s = p/(2*PI) * asin(c/a);}
+	if (t < 1) {return -0.5*(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*PI)/p )) + b;}
+	return a*pow(2,-10*(t-=1)) * sin( (t*d-s)*(2*PI)/p )*0.5 + c + b;
+};
+
+o[$namespace]($$_transitions,[$elastic])[$ease_out] = function (t, b, c, d) {
+	var s;
+	if (t===0) {return b;}  if ((t/=d)==1) {return b+c;}  if (!p) {p=d*0.3;}
+	if (!a || a < abs(c)) { a=c; s=p/4; }
+	else {s = p/(2*PI) * asin(c/a);}
+	return (a*pow(2,-10*t) * sin( (t*d-s)*(2*PI)/p ) + c + b);
+};
+o[$namespace]($$_transitions,[$exponential])[$ease_in] = function (t, b, c, d) {
+	return (t===0) ? b : c * pow(2, 10 * (t/d - 1)) + b;
+};
+o[$namespace]($$_transitions,[$exponential])[$ease_in_out] = function (t, b, c, d) {
+	if (t===0) {return b;}
+	if (t==d) {return b+c;}
+	if ((t/=d/2) < 1) {return c/2 * pow(2, 10 * (t - 1)) + b;}
+	return c/2 * (-pow(2, -10 * --t) + 2) + b;
+};
+o[$namespace]($$_transitions,[$exponential])[$ease_out] = function (t, b, c, d) {
+	return (t==d) ? b+c : c * (-pow(2, -10 * t/d) + 1) + b;
+};
+$$_transitions[$linear] = function (t, b, c, d) {
+	return c*t/d + b;
+};
+o[$namespace]($$_transitions,[$quadratic])[$ease_in] = function (t, b, c, d) {
+	return c*(t/=d)*t + b;
+};
+o[$namespace]($$_transitions,[$quadratic])[$ease_in_out] = function (t, b, c, d) {
+	if ((t/=d/2) < 1) {return c/2*t*t + b;}
+	return -c/2 * ((--t)*(t-2) - 1) + b;
+};
+o[$namespace]($$_transitions,[$quadratic])[$ease_out] = function (t, b, c, d) {
+	return -c *(t/=d)*(t-2) + b;
+};
+o[$namespace]($$_transitions,[$quart])[$ease_in] = function (t, b, c, d) {
+				return c*(t/=d)*t*t*t + b;
+};
+o[$namespace]($$_transitions,[$quart])[$ease_in_out] = function (t, b, c, d) {
+	if ((t/=d/2) < 1) {return c/2*t*t*t*t + b;}
+	return -c/2 * ((t-=2)*t*t*t - 2) + b;
+};
+o[$namespace]($$_transitions,[$quart])[$ease_out] = function (t, b, c, d) {
+	return -c * ((t=t/d-1)*t*t*t - 1) + b;
+};
+o[$namespace]($$_transitions,[$quint])[$ease_in] = function (t, b, c, d) {
+	return c*(t/=d)*t*t*t*t + b;
+};
+o[$namespace]($$_transitions,[$quint])[$ease_in_out] = function (t, b, c, d) {
+	if ((t/=d/2) < 1) {return c/2*t*t*t*t*t + b;}
+	return c/2*((t-=2)*t*t*t*t + 2) + b;
+};
+o[$namespace]($$_transitions,[$quint])[$ease_out] = function (t, b, c, d) {
+	return c*((t=t/d-1)*t*t*t*t + 1) + b;
+};
+o[$namespace]($$_transitions,[$sine])[$ease_in] = function (t, b, c, d) {
+	return -c * cos(t/d * (PI/2)) + c + b;
+};
+o[$namespace]($$_transitions,[$sine])[$ease_in_out] = function (t, b, c, d) {
+	return -c/2 * (cos(PI*t/d) - 1) + b;
+};
+o[$namespace]($$_transitions,[$sine])[$ease_out] = function (t, b, c, d) {
+	return c * sin(t/d * (PI/2)) + b;
+};
+
 $$_store(function () {
 	return this[$replace](/^\s+|\s+$/g,emptyString);
 },$trim,$$String[$prototype]);
