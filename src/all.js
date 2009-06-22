@@ -2,6 +2,7 @@
 //= require <bind>
 //= require <builder>
 //= require <chop>
+//= require <clear_opacity>
 //= require <combine>
 //= require <concat>
 //= require <constructor>
@@ -9,6 +10,7 @@
 //= require <curry>
 //= require <domarray>
 //= require <each>
+//= require <fade>
 //= require <fragment>
 //= require <get_once>
 //= require <indexOf>
@@ -20,6 +22,7 @@
 //= require <node>
 //= require <object_memo>
 //= require <rcurry>
+//= require <set_opacity>
 //= require <slice>
 //= require <string>
 //= require <super_combine>

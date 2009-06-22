@@ -1,5 +1,5 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $length = 'length', $call = 'call', $each = 'each', $inject = 'inject', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $concat = 'concat', $bind = 'bind', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $push = 'push', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, emptyString = '';
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $length = 'length', $call = 'call', $each = 'each', $inject = 'inject', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $concat = 'concat', $bind = 'bind', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $push = 'push', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, $$_join, $join = 'join', $string = 'string', $style = 'style', $opacity = 'opacity', $filter = 'filter', $set_opacity = 'set_opacity', $fade = 'fade', emptyString = '';
 var emptyString = '',
 namespace = 'http://oatlab.com/oatlib/v2',
 o,
@@ -220,4 +220,41 @@ $$_store(function (methodName,calculate) {
 tearDownTransition = function () {
 	transition = $$_transition = null;
 };
+$$_join = $$_array_prototype[$join];
+$$_store(function () {
+	return $$_join[$call](arguments,emptyString);
+},$string);
+$$_store(function (node,value) {
+	node[$style][$opacity] = value / 10;
+	node[$style][$filter] = o[$string]('alpha(opacity=',value * 10,')');
+},$set_opacity);
+
+(function () {
+
+	var defaults = {
+		start: 10,
+		end: 0,
+		timeInSeconds: .25,
+		callback: function () {},
+		aTransition: function (t, b, c, d) {
+			return c*t/d + b;
+		}
+	};
+
+	$$_store(function (node,options) {
+
+		var settings = o[$combine]({},defaults,options),
+		aTransition = settings.aTransition,
+		start = settings.start,
+		end = settings.end,
+		timeInSeconds = settings.timeInSeconds,
+		change = end - start;
+
+		return o[$transition](function (soFar,total) {
+			var value = aTransition(soFar,start,change,total);
+			o[$set_opacity](node,value);
+		},timeInSeconds,settings.callback);
+	},$fade);
+
+})();
 })();

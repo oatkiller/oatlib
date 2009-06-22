@@ -22,6 +22,6 @@ $$_store = function (fn,name,namespace) {
 	};
 })();
 
-o.toString = function () {
+o[$toString] = function () {
 	return namespace;
 };
