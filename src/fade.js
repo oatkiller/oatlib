@@ -1,5 +1,6 @@
 //= require <transition>
 //= require <set_opacity>
+//= require <clear_opacity>
 //= require <combine>
 
 (function () {
@@ -8,7 +9,9 @@
 		start: 10,
 		end: 0,
 		timeInSeconds: .25,
-		callback: function () {},
+		callback: function (node) {
+			o[$clear_opacity](node);
+		},
 		aTransition: function (t, b, c, d) {
 			return c*t/d + b;
 		}
@@ -26,7 +29,7 @@
 		return o[$transition](function (soFar,total) {
 			var value = aTransition(soFar,start,change,total);
 			o[$set_opacity](node,value);
-		},timeInSeconds,settings.callback);
+		},timeInSeconds,settings.callback[o[$curry]](node));
 	},$fade);
 
 })();

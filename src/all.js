@@ -10,6 +10,7 @@
 //= require <curry>
 //= require <domarray>
 //= require <each>
+//= require <error>
 //= require <fade>
 //= require <fragment>
 //= require <get_once>
@@ -23,6 +24,7 @@
 //= require <node>
 //= require <object_memo>
 //= require <rcurry>
+//= require <request>
 //= require <set_opacity>
 //= require <slice>
 //= require <string>

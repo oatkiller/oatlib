@@ -1,13 +1,3 @@
-tests.core = [
-	{
-		name: 'core',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test core': function () {
-			Assert.areSame('http://oatlab.com/oatlib/v2'+':::'+'dumb',o('dumb'));
-			Assert.areEqual('http://oatlab.com/oatlib/v2',o);
-		}
-	}
-];
 (function () {
 	tests['xmlhttp-helper'] = [
 		{
@@ -17,6 +7,7 @@ tests.core = [
 				error: {
 				},
 				ignore: {
+					// no way to actually test this i think :(
 					testRequestHeaders: true,
 					testPost: true
 				}
@@ -125,3 +116,5 @@ tests.core = [
 		}
 	];
 })();
+
+
