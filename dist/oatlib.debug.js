@@ -1,5 +1,5 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $call = 'call', $concat = 'concat', $bind = 'bind', $chop = 'chop', $length = 'length', $each = 'each', $inject = 'inject', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $$_concat, $constructor = 'constructor', $map = 'map', $$document = document, $createElement = 'createElement', $innerHTML = 'innerHTML', $$_array, $childNodes = 'childNodes', $domarray = 'domarray', $injector = 'injector', $appendChild = 'appendChild', $fragment = 'fragment', $indexOf = 'indexOf', $$_join, $join = 'join', $mask = 'mask', $node = 'node', $object_memo = 'object_memo', $rcurry = 'rcurry', $string = 'string', $replace = 'replace', $number = 'number', $supplant = 'supplant', $$String = String, $trim = 'trim', $push = 'push', $unique = 'unique', emptyString = '';
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $length = 'length', $call = 'call', $each = 'each', $inject = 'inject', $$_slice, $slice = 'slice', $apply = 'apply', $array = 'array', $concat = 'concat', $bind = 'bind', $$null = null, $curry = 'curry', $hasOwnProperty = 'hasOwnProperty', $combine = 'combine', $$true = true, $super_combine = 'super_combine', $constructor = 'constructor', $injector = 'injector', $builder = 'builder', $object_memo = 'object_memo', $get_once = 'get_once', $$_transition, $push = 'push', $transition = 'transition', $$window = window, $setTimeout = 'setTimeout', $clearTimeout = 'clearTimeout', $setInterval = 'setInterval', $clearInterval = 'clearInterval', $$false = false, emptyString = '';
 var emptyString = '',
 namespace = 'http://oatlab.com/oatlib/v2',
 o,
@@ -27,22 +27,6 @@ $$_store = function (fn,name,namespace) {
 o.toString = function () {
 	return namespace;
 };
-$$_slice = $$_array_prototype[$slice];
-$$_store(function (arrayLike) {
-	return $$_slice[$apply](arrayLike);
-},$array);
-$$_store(function (obj) { // holds the logic for curry
-	var that = this,
-	oldArguments = $$_slice[$call](arguments,1);
-	return function () {
-		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
-	};
-},$bind,$$_function_prototype);
-$$_store(function () {
-	var that = this;
-	that.length--;
-	return that;
-},$chop,$$_array_prototype);
 $$_store(function (fn) {
 		var that = this;
 	for (var i = 0, length = that[$length]; i < length; i++) {
@@ -55,6 +39,17 @@ $$_store(function (memo,iterator) {
 	});
 	return memo;
 },$inject,$$_array_prototype);
+$$_slice = $$_array_prototype[$slice];
+$$_store(function (arrayLike) {
+	return $$_slice[$apply](arrayLike);
+},$array);
+$$_store(function (obj) { // holds the logic for curry
+	var that = this,
+	oldArguments = $$_slice[$call](arguments,1);
+	return function () {
+		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
+	};
+},$bind,$$_function_prototype);
 $$_store(function () {
 	return this[o[$bind]][$apply](this,[$$null][$concat](o[$array](arguments)));
 },$curry,$$_function_prototype);
@@ -80,7 +75,6 @@ $$_store(function () {
 	$super_combine); // curries combinator with a test that takes every property, including ones on the subject arguments __proto__
 
 })();
-$$_concat = $$_array_prototype[$concat];
 $$_store(function (prototype) { // produces a new generic object constructor function
 	var fn = function () {
 		return o[$super_combine][$apply]($$null,[this][$concat](o[$array](arguments)));
@@ -88,113 +82,142 @@ $$_store(function (prototype) { // produces a new generic object constructor fun
 	fn[$prototype] = prototype;
   return fn;
 },$constructor);
-$$_store(function (fn) {
-	var that = this,
-	length = that[$length],
-	response = new $$Array(length), i = 0;
-
-	for (; i < length; i++) {
-		response[i] = fn[$call](that,that[i],i,that);
-	}
-	return response;
-
-},$map,$$_array_prototype);
-
-$$_store(function () { // try to use slice to get an array from an HTML elements collection. if this works, use slice for the array fn, else use an fn that iterates over the array like object and builds a new array incrementally. IE should get the second fn, others should get the first. generally.
-	var testDiv = $$document[$createElement]('div');
-	testDiv[$innerHTML] = 'a<d></b>';
-	try {
-		var $$_array = o[$array];
-		$$_array(testDiv[$childNodes]);
-		$$_store($$_array,$domarray);
-	} catch (e) {
-		$$_store(function (arrayLike) {
-			return $$_array_prototype[o[$map]][$apply](arrayLike,function (a) {return a;});
-		},$domarray);
-	}
-	return o[$domarray][$apply]($$null,arguments);
-},$domarray);
 $$_store(function (memoBuilder, iterator) { // takes a function which returns a new memo and an iterator function. returns a function which wraps inject, passes it a new memo each times its called. see document.getFragmentWithNodes. this is the way you should use inject if the memo is not primitive
 	return function () {
 		return o[$array](arguments)[o[$inject]](memoBuilder(),iterator);
 	};
 },$injector);
+(function () {
 
-$$_store(function () {
-	var getFragmentFromNodes = o[$injector](function () {return $$document.createDocumentFragment();},function (fragment,node) {
-		fragment[$appendChild](node);
-		return fragment;
-	}),
-	div = $$document[$createElement]('div');
-	return $$_store(function (html) {
-		div[$innerHTML] = html;
-		return getFragmentFromNodes[$apply]($$null,o[$domarray](div[$childNodes]));
-	},$fragment)[$apply](this,arguments);
-},$fragment);
-$$_store(function (element) {
+  var singleBuilder = function (prototype) { // takes a prototype and produces a function which takes a properties object and produces an instance
+    return function (properties) {
+      return new (o[$constructor](prototype))(properties);
+    };
+	};
 
-	var that = this,
-	length = that[$length],
-	from = arguments[1] || 0;
+	$$_store(o[$injector](function () {return singleBuilder({});},function (aSingleBuilder,aPrototype) {return singleBuilder(aSingleBuilder(aPrototype));}),$builder);
 
-	if (from < 0) {
-		from += length;
-	}
-
-	for (; from < length; from++) {
-		if (that[$hasOwnProperty](from) && that[from] === element) {
-			return from;
-		}
-	}
-
-	return -1;
-
-},$indexOf,$$_array_prototype);
-$$_join = $$_array_prototype[$join];
-$$_store(function (obj) {
-	var C = function () {};
-	C[$prototype] = obj;
-	return new C();
-},$mask);
-$$_store(function (html) {
-	return o[$fragment](html)[$childNodes][0];
-},$node);
+})();
 $$_store(function (propertyName,calculate) {
 	return function () {
 		var that = this;
 		return that[$hasOwnProperty](propertyName) ? that[propertyName] : (that[propertyName] = calculate[$apply](that,arguments));
 	};
 },$object_memo);
-(function () {
+$$_store(function (methodName,calculate) {
+	return function () {
+		var value = calculate[$apply](this,arguments);
+		return (this[methodName] = function () {
+			return value;
+		})[$apply](this,arguments);
+	};
+},$get_once);
 
-	$$_store(function () {
-		var that = this,
-		oldArguments = o[$array](arguments);
-		return function () {
-			return that[$apply](this,$$_concat[$call](o[$array](arguments),oldArguments));
-		};
-	},$rcurry,$$_function_prototype);
+(setupTransition = function () {
+
+	var that;
+
+	that = $$_transition = $$_store(function (iterator,durationInSeconds,callback) {
+		var transitionObj = that.getTransition({
+			iterator: iterator,
+			durationInSeconds: durationInSeconds,
+			callback: callback
+		});
+		that.transitions[$push](transitionObj);
+		delete that.currentTime;
+		transitionObj.consider(that.getCurrentTime(),that.getInterval());
+		that.startPlaying();
+		return $$true;
+	},$transition);
+
+	o[$combine]($$_transition,{
+		setTimeout: function (fn,time) {
+			return $$window[$setTimeout](fn,time);
+		},
+		clearTimeout: function (handle) {
+			return $$window[$clearTimeout](handle);
+		},
+		setInterval: function (fn,time) {
+			return $$window[$setInterval](fn,time);
+		},
+		clearInterval: function (handle) {
+			return $$window[$clearInterval](handle);
+		},
+		transitions: [],
+		isPlaying: $$false,
+		startPlaying: function () {
+			if (this.isPlaying) {
+				return $$false;
+			}
+			this.isPlaying = $$true;
+			this.intervalHandle = this[$setInterval](this.iterate[o.bind](this),this.getInterval());
+		},
+		stopPlaying: function () {
+			if (!this.isPlaying) {
+				return $$false;
+			}
+			this[$clearInterval](this.intervalHandle);
+			this.isPlaying = $$false;
+		},
+		fps: 22,
+		getInterval: o[$object_memo]('interval',function () {
+			return (1E3 / this.fps) >>> 0;
+		}),
+		getTransition: o[$builder]({
+			transition: $$_transition,
+			stop: function () {},
+			getStartTime: o[$get_once]('getStartTime',function () {
+				return this.transition.getCurrentTime();
+			}),
+			getEndTime: o[$get_once]('getEndTime',function () {
+				return this.getDuration() + this.transition.getCurrentTime();
+			}),
+			getDuration: o[$get_once]('getDuration',function () {
+				return this.durationInSeconds * 1E3;
+			}),
+			consider: function (currentTime,interval) {
+				this.iterator(currentTime - this.getStartTime(),this.getDuration());
+				if (this.getEndTime() - currentTime > interval) {
+					return $$true;
+				} else {
+					this.scheduleFinalRun(currentTime);
+					return $$false;
+				}
+			},
+			scheduleFinalRun: function (currentTime) {
+				var that = this;
+				this.transition[$setTimeout](function () {
+					that.iterator(that.getDuration(),that.getDuration());
+					that.callback && that.callback();
+				},this.getEndTime() - currentTime);
+			}
+		}),
+		iterate: function () {
+			delete this.currentTime;
+			var that = this,
+			currentTime = that.getCurrentTime(),
+			interval = that.getInterval(),
+			indiciesToRemove = [],
+			transitions = this.transitions;
+			transitions[o.each](function (transitionObj,transitionObjIndex) {
+				if (!transitionObj.consider(currentTime,interval)) {
+					indiciesToRemove[$push](transitionObjIndex);
+				}
+			});
+			for (var i = indiciesToRemove.length - 1; i > -1; i--) {
+				transitions.splice(indiciesToRemove[i],1);
+			}
+			if (!transitions.length) {
+				this.stopPlaying();
+			}
+
+		},
+		getCurrentTime: o.object_memo('currentTime',function () {return new Date().getTime();})
+	});
 
 })();
-$$_store(function () {
-	return $$_join[$call](arguments,emptyString);
-},$string);
-$$_store(function (o) {
-	return this[$replace](/{([^{}]*)}/g,
-		function (a,b) {
-			var r = o[b];
-			return typeof r === $string || typeof r === $number ? r : a;
-		}
-	);
-},$supplant,$$String[$prototype]);
-$$_store(function () {
-	return this[$replace](/^\s+|\s+$/g,emptyString);
-},$trim,$$String[$prototype]);
-$$_store(function () {
-	var uniques = [];
-	this[o[$each]](function (raElement) {
-		uniques[o[$indexOf]](raElement) === -1 && uniques[$push](raElement);
-	});
-	return uniques;
-},$unique,$$_array_prototype);
+
+tearDownTransition = function () {
+	transition = $$_transition = null;
+};
 })();

@@ -1,13 +1,3 @@
-tests.core = [
-	{
-		name: 'core',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test core': function () {
-			Assert.areSame('http://oatlab.com/oatlib/v2'+':::'+'dumb',o('dumb'));
-			Assert.areEqual('http://oatlab.com/oatlib/v2',o);
-		}
-	}
-];
 tests['dom-effects'] = [
 	{
 		name: 'transition',
@@ -19,13 +9,16 @@ tests['dom-effects'] = [
 			}
 		},
 		setUp: function () {
+			// get a new transitions obj
 			setupTransition();
 			this.transition = o.transition;
 		},
 		tearDown: function () {
+			// destroy transitions obj
 			tearDownTransition();
 		},
 		'test transition function': function () {
+			// should add a transition object to transition.transitions and should start playing
 			var startedPlaying = false;
 			this.transition.startPlaying = function () {
 				startedPlaying = true;
@@ -38,9 +31,14 @@ tests['dom-effects'] = [
 
 		},
 		'test transition.getCurrentTime': function () {
+			// should return the getTime fer now
 			Assert.isTrue(typeof(this.transition.getCurrentTime()) === 'number','shouldve returned a Date obj');
 		},
 		'test transition.iterate': function () {
+			// should delete current time so a new one is calculated for this pass
+			// should get a new currentTime
+			// should consider all of the transition objects in .transitions. if they are about to expire, schedule their final run and remove them from the transitions object
+			// should get the interval once
 			var considerCount = 0,
 			currentTimeCount = 0,
 			oldCurrentTimeFn = this.transition.getCurrentTime,
@@ -56,7 +54,7 @@ tests['dom-effects'] = [
 				intervalCount++;
 				return oldItervalFn.apply(this);
 			};
-
+				
 			this.transition.transitions = [
 				this.transition.getTransition({
 					durationInSeconds: 1,
@@ -81,6 +79,7 @@ tests['dom-effects'] = [
 				})
 			];
 			var shouldntByThis = this.transition.currentTime = 'blahblahlah';
+			// reset currentTimeCount cause getTransition uses that too
 			currentTimeCount = 0;
 			this.transition.iterate();
 			Assert.isFalse(shouldntByThis === this.transition.currentTime,'was supposed to balete currentTime');
@@ -90,6 +89,7 @@ tests['dom-effects'] = [
 			Assert.areSame(this.transition.transitions.length,2,'should be 2 transition objs left');
 		},
 		'test transition.iterate total whipeout': function () {
+			// if all the transtions are in their final run, stopPlaying should be called
 
 			var stopPlayingCount = 0;
 
@@ -123,13 +123,17 @@ tests['dom-effects'] = [
 			Assert.areSame(1,stopPlayingCount,'shouldve stopped playing exactly once');
 		},
 		'test getInterval': function () {
+			// should return the number of milliseconds per interval. intervals are calculated from fps. so for an fps of 10. 100 should be the interval (milliseconds)
 			this.transition.fps = 10;
 			Assert.areSame(this.transition.getInterval(),100,'shouldve been 100, duh');
 			this.transition.fps = 22;
+			// its a get_once fn
 			delete this.transition.interval;
 			Assert.areSame(this.transition.getInterval(),45,'shouldve been 45, duh');
 		},
 		'test transitionObj.consider': function () {
+			// considers the transition against a time in milliseconds. evaluates the iterator with the times passed. if the transition has at least one cycle left, return true. otherwise, schedule the final run, then return false
+			// should getStartTime
 
 			var args = [],
 			triedToScheduleFinalRun = false;
@@ -187,10 +191,15 @@ tests['dom-effects'] = [
 
 		},
 		'test startPlaying when already playing': function () {
+			// should return false if already playing
 			this.transition.isPlaying = true;
 			Assert.isFalse(this.transition.startPlaying(),'shouldve returned false cause we already started duh');
 		},
 		'test startPlaying': function () {
+			// should call get interval
+			// should call setinterval
+			// should pass iterate to setinterval
+			// should toggle isPlaying;
 
 			var realSetInterval = this.transition.setInterval,
 			setIntervalArgs = [];
@@ -213,9 +222,12 @@ tests['dom-effects'] = [
 			Assert.isTrue(this.transition.isPlaying,'shouldve turned this flag on');
 		},
 		'test stopPlaying': function () {
+			// should return false if not playing
 			Assert.isFalse(this.transition.stopPlaying(),'shouldnt stop cause its not started');
 		},
 		'test stopPlaying': function () {
+			// should call clearInterval with intervalHandle
+			// should toggle isPlaying
 
 			var realClearInterval = this.transition.clearInterval,
 			clearIntervalArgs = [];
@@ -236,3 +248,4 @@ tests['dom-effects'] = [
 		}
 	}
 ];
+
