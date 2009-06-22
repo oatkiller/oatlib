@@ -1,5 +1,6 @@
 //= require <array>
 //= require <bind>
+//= require <builder>
 //= require <chop>
 //= require <combine>
 //= require <concat>
@@ -22,5 +23,6 @@
 //= require <string>
 //= require <super_combine>
 //= require <supplant>
+//= require <transition>
 //= require <trim>
 //= require <unique>

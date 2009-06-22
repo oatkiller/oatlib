@@ -1,5 +1,6 @@
 //= require <array.tests>
 //= require <bind.tests>
+//= require <builder.tests>
 //= require <chop.tests>
 //= require <combine.tests>
 //= require <constructor.tests>
@@ -19,5 +20,6 @@
 //= require <slice.tests>
 //= require <string.tests>
 //= require <supplant.tests>
+//= require <transition.tests>
 //= require <trim.tests>
 //= require <unique.tests>
