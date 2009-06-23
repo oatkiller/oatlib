@@ -4,6 +4,7 @@
 //= require <array.tests>
 //= require <bind.tests>
 //= require <builder.tests>
+//= require <cancel_event.tests>
 //= require <chop.tests>
 //= require <combine.tests>
 //= require <constructor.tests>

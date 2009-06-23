@@ -1,9 +1,11 @@
 //= require <add_class_name>
+//= require <cancel_event>
 //= require <add_event_handler>
 //= require <ajax>
 //= require <array>
 //= require <bind>
 //= require <builder>
+//= require <cancel_event>
 //= require <chop>
 //= require <clear_opacity>
 //= require <combine>
