@@ -1,4 +1,5 @@
 //= require <add_class_name>
+//= require <add_event_handler>
 //= require <ajax>
 //= require <array>
 //= require <bind>

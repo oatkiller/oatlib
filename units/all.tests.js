@@ -1,3 +1,5 @@
+//= require <add_class_name.tests>
+//= require <add_event_handler.tests>
 //= require <ajax.tests>
 //= require <array.tests>
 //= require <bind.tests>
@@ -12,8 +14,6 @@
 //= require <error.tests>
 //= require <fragment.tests>
 //= require <has_class_name.tests>
-//= require <remove_class_name.tests>
-//= require <add_class_name.tests>
 //= require <indexOf.tests>
 //= require <inject.tests>
 //= require <injector.tests>
@@ -23,6 +23,7 @@
 //= require <node.tests>
 //= require <object_memo.tests>
 //= require <rcurry.tests>
+//= require <remove_class_name.tests>
 //= require <request.tests>
 //= require <request.tests>
 //= require <slice.tests>
