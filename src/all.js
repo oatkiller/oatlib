@@ -1,3 +1,4 @@
+//= require <ajax>
 //= require <array>
 //= require <bind>
 //= require <builder>
@@ -24,6 +25,7 @@
 //= require <node>
 //= require <object_memo>
 //= require <rcurry>
+//= require <request>
 //= require <request>
 //= require <set_opacity>
 //= require <slice>

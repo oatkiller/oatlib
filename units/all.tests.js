@@ -1,3 +1,4 @@
+//= require <ajax.tests>
 //= require <array.tests>
 //= require <bind.tests>
 //= require <builder.tests>
@@ -18,6 +19,7 @@
 //= require <node.tests>
 //= require <object_memo.tests>
 //= require <rcurry.tests>
+//= require <request.tests>
 //= require <request.tests>
 //= require <slice.tests>
 //= require <string.tests>
