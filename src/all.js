@@ -1,3 +1,4 @@
+//= require <add_class_name>
 //= require <ajax>
 //= require <array>
 //= require <bind>
@@ -29,6 +30,7 @@
 //= require <object_memo>
 //= require <rcurry>
 //= require <regex>
+//= require <remove_class_name>
 //= require <request>
 //= require <request>
 //= require <set_opacity>
