@@ -1,4 +1,4 @@
-$$_store(function (element) {
+$$_store($$_array_prototype[$indexOf] || function (element) {
 
 	var that = this,
 	length = that[$length],

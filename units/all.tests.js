@@ -16,6 +16,7 @@
 //= require <injector.tests>
 //= require <map.tests>
 //= require <mask.tests>
+//= require <memoize.tests>
 //= require <node.tests>
 //= require <object_memo.tests>
 //= require <rcurry.tests>
@@ -24,6 +25,7 @@
 //= require <slice.tests>
 //= require <string.tests>
 //= require <supplant.tests>
+//= require <take.tests>
 //= require <transition.tests>
 //= require <trim.tests>
 //= require <unique.tests>

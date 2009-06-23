@@ -22,6 +22,7 @@
 //= require <join>
 //= require <map>
 //= require <mask>
+//= require <memoize>
 //= require <namespace>
 //= require <node>
 //= require <object_memo>
@@ -33,6 +34,7 @@
 //= require <string>
 //= require <super_combine>
 //= require <supplant>
+//= require <take>
 //= require <transition>
 //= require <transitions/back_ease_in>
 //= require <transitions/back_ease_in_out>
