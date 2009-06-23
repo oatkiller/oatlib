@@ -11,6 +11,7 @@
 //= require <curry>
 //= require <domarray>
 //= require <each>
+//= require <element>
 //= require <error>
 //= require <fade>
 //= require <fragment>
