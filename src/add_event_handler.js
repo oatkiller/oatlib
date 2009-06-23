@@ -1,7 +1,10 @@
-$$_store(function (element,type,fn,bubble) {
-	$$_store(element[$addEventListener] ? function (element,type,fn,bubble) {
-		return element[$addEventListener](type,fn,bubble);
-	} : function (element,type,fn) {
-		return element[$attachEvent]('on'+type,fn);
-	},$add_event_handler)[$apply](this,arguments);
-},$add_event_handler);
+//= require <base_event_modifier>
+//= require <curry>
+(function () {
+
+	$$_store(function (element,type,fn,bubble) {
+		$$_store(element[$addEventListener] ? o[$base_event_modifier][o[$curry]]($addEventListener,emptyString) : o[$base_event_modifier][o[$curry]]($attachEvent,$on),$add_event_handler)[$apply]($this,arguments);
+	},$add_event_handler);
+
+})();
+
