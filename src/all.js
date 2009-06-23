@@ -16,6 +16,7 @@
 //= require <fade>
 //= require <fragment>
 //= require <get_once>
+//= require <has_class_name>
 //= require <indexOf>
 //= require <inject>
 //= require <injector>
@@ -27,6 +28,7 @@
 //= require <node>
 //= require <object_memo>
 //= require <rcurry>
+//= require <regex>
 //= require <request>
 //= require <request>
 //= require <set_opacity>

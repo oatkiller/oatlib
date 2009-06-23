@@ -11,6 +11,7 @@
 //= require <each.tests>
 //= require <error.tests>
 //= require <fragment.tests>
+//= require <has_class_name.tests>
 //= require <indexOf.tests>
 //= require <inject.tests>
 //= require <injector.tests>

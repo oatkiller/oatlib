@@ -1,5 +1,5 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $toString = 'toString', $$_slice, $slice = 'slice', $apply = 'apply', $call = 'call', $take = 'take', $$_join, $join = 'join', $hasOwnProperty = 'hasOwnProperty', $memoize = 'memoize', emptyString = '';
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_bindings, $$_store, $toString = 'toString', $$_slice, $slice = 'slice', $apply = 'apply', $call = 'call', $take = 'take', $$_join, $join = 'join', $hasOwnProperty = 'hasOwnProperty', $memoize = 'memoize', $$RegExp = RegExp, $regex = 'regex', $string = 'string', $$_class_name_test_regex, $test = 'test', $className = 'className', $has_class_name = 'has_class_name', emptyString = '';
 var namespace = 'http://oatlab.com/oatlib/v2',
 o;
 $$_function_prototype = $$Function[$prototype];
@@ -43,4 +43,16 @@ $$_join = $$_array_prototype[$join];
 		};
 	},$memoize);
 })();
+$$_store(function (pattern,flags) {
+	return new $$RegExp(pattern,flags);
+},$regex);
+$$_store(function () {
+	return $$_join[$call](arguments,emptyString);
+},$string);
+$$_class_name_test_regex = o[$memoize](function (className) {
+	return o[$regex](o[$string]('(^|\\s+)',className,'(\\s+|$)'));
+});
+$$_store(function (element,className) {
+	return $$_class_name_test_regex(className)[$test](element[$className]);
+},$has_class_name);
 })();

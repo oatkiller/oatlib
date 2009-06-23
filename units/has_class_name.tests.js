@@ -1,13 +1,3 @@
-tests.core = [
-	{
-		name: 'core',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test core': function () {
-			Assert.areSame('http://oatlab.com/oatlib/v2'+':::'+'dumb',o('dumb'));
-			Assert.areEqual('http://oatlab.com/oatlib/v2',o);
-		}
-	}
-];
 tests.has_class_name = [
 	{
 		name: 'has_class_name',
@@ -39,3 +29,4 @@ tests.has_class_name = [
 		}
 	}
 ];
+
