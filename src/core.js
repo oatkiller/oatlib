@@ -1,24 +1,32 @@
 var namespace = 'http://oatlab.com/oatlib/v2',
 o,
-$$_function_prototype = $$Function[$prototype],
-$$_array_prototype = $$Array[$prototype],
-$$_namespace = function (ra) {
-	var obj = o,
-	propertyName;
-	for (var i = 0, length = ra[$length]; i < length; i++) {
-		propertyName = ra[i];
-		obj = propertyName in obj ? obj[propertyName] : (obj[propertyName] = {});
+emptyArray = [];
+$$_function_prototype = $$Function[$prototype];
+$$_array_prototype = $$Array[$prototype];
+$$_namespace = function (ra,obj) {
+	obj = obj || o;
+	if (!ra[$length]) {
+		return obj;
 	}
-	return obj;
+	if (ra[0] in obj) {
+		return $$_namespace(ra[$slice](1),obj[ra[0]]);
+	} else {
+		for (var i = 0, length = ra[$length], propertyName; i < length; i++) {
+			propertyName = ra[i];
+			obj[propertyName] = {};
+			obj = obj[propertyName];
+		}
+		return obj;
+	}
 };
-window['$$_namespace'] = $$_namespace;
 (function () {
  	var qname,
 	namespace_obj;
 	$$_store = function (fn,name,namespace,obj) {
 		namespace_obj = $$_namespace(namespace || []);
 		if (obj) {
-			obj[(qname = o(name))] = fn;
+			qname = o(name);
+			obj[qname] = fn;
 			namespace_obj[name] = qname;
 		} else {
 			namespace_obj[name] = fn;

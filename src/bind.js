@@ -6,4 +6,4 @@ $$_store(function (obj) { // holds the logic for curry
 	return function () {
 		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
 	};
-},$bind,$$_function_prototype);
+},$bind,emptyArray,$$_function_prototype);

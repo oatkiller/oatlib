@@ -1,0 +1,1 @@
+$$_sin = $$Math.sin;

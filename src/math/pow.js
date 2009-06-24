@@ -1,0 +1,1 @@
+$$_pow = $$Math.pow;

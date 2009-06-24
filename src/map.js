@@ -8,4 +8,4 @@ $$_store(function (fn) {
 	}
 	return response;
 
-},$map,$$_array_prototype);
+},$map,emptyArray,$$_array_prototype);

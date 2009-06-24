@@ -6,4 +6,4 @@ $$_store(function () {
 		uniques[o[$indexOf]](raElement) === -1 && uniques[$push](raElement);
 	});
 	return uniques;
-},$unique,$$_array_prototype);
+},$unique,emptyArray,$$_array_prototype);

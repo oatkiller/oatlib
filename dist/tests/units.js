@@ -8,32 +8,24 @@ tests.core = [
 		}
 	}
 ];
-tests.dom = [
+tests.cancel_event = [
 	{
-		name: 'addClassName',
-		setUp: function () {
-			this.element = document.createElement('div');
-			document.body.appendChild(this.element);
-			o = window['http://oatlab.com/oatlib/v2'];
-		},
-		tearDown: function () {
-			try {
-				document.body.removeChild(this.element);
-			} catch (e) {}
-		},
-		testNoClassName: function () {
-			o.dom.add_class_name(this.element,'foo');
-			Assert.isTrue(/(\s+|^)foo(\s+|$)/.test(this.element.className))
-		},
-		testSomeClassNames: function () {
-			this.element.className = 'asdew asdf duck';
-			o.dom.add_class_name(this.element,'foo');
-			Assert.areSame('foo asdew asdf duck',this.element.className);
-		},
-		testExistsAlready: function () {
-			this.element.className = 'foo asdf';
-			o.dom.add_class_name(this.element,'foo');
-			Assert.areSame('foo asdf',this.element.className);
+		name: 'cancel_event',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test cancel_event': function () {
+			var worked = null,
+			button = document.createElement('button'),
+			div = document.createElement('div');
+			div.appendChild(button);
+			button.onclick = function (e) {
+				worked = true;
+				o.dom.cancel_event(e);
+			};
+			div.onclick = function (e) {
+				worked = false;
+			};
+			YAHOO.util.UserAction.click(button);
+			Assert.areSame(worked,true);
 		}
 	}
 ];

@@ -1,1 +1,1 @@
-//= require <combine>
+//= require <combine.tests>

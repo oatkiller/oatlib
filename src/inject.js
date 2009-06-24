@@ -4,4 +4,4 @@ $$_store(function (memo,iterator) {
 		memo = iterator[$call](this,memo,property);
 	});
 	return memo;
-},$inject,$$_array_prototype);
+},$inject,emptyArray,$$_array_prototype);

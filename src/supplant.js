@@ -5,4 +5,4 @@ $$_store(function (o) {
 			return typeof r === $string || typeof r === $number ? r : a;
 		}
 	);
-},$supplant,$$String[$prototype]);
+},$supplant,emptyArray,$$String[$prototype]);

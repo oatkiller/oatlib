@@ -1,0 +1,9 @@
+//= require <dom/add_class_name.tests>
+//= require <dom/add_event_handler.tests>
+//= require <dom/cancel_event.tests>
+//= require <dom/array.tests>
+//= require <dom/fragment.tests>
+//= require <dom/has_class_name.tests>
+//= require <dom/node.tests>
+//= require <dom/remove_class_name.tests>
+//= require <dom/remove_event_handler.tests>

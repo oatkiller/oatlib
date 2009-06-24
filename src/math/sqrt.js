@@ -1,0 +1,1 @@
+$$_sqrt = $$Math.sqrt;

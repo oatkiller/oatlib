@@ -8,6 +8,6 @@
 		return function () {
 			return that[$apply](this,$$_concat[$call](o[$array](arguments),oldArguments));
 		};
-	},$rcurry,$$_function_prototype);
+	},$rcurry,emptyArray,$$_function_prototype);
 
 })();

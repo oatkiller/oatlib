@@ -1,26 +1,34 @@
 (function () {
-var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_namespace, $length = 'length', $$_store, $toString = 'toString', $$RegExp = RegExp, $regex = 'regex', $$_join, $join = 'join', $call = 'call', $string = 'string', $className = 'className', $replace = 'replace', $add_class_name = 'add_class_name', $dom = 'dom', emptyString = '';
+var $$_function_prototype, $$Function = Function, $prototype = 'prototype', $$_array_prototype, $$Array = Array, $$_namespace, $length = 'length', $slice = 'slice', $$_store, $toString = 'toString', $$window = window, $event = 'event', $cancelBubble = 'cancelBubble', $$true = true, $stopPropagation = 'stopPropagation', $cancel_event = 'cancel_event', $dom = 'dom', $apply = 'apply', emptyString = '';
 var namespace = 'http://oatlab.com/oatlib/v2',
 o,
-$$_function_prototype = $$Function[$prototype],
-$$_array_prototype = $$Array[$prototype],
-$$_namespace = function (ra) {
-	var obj = o,
-	propertyName;
-	for (var i = 0, length = ra[$length]; i < length; i++) {
-		propertyName = ra[i];
-		obj = propertyName in obj ? obj[propertyName] : (obj[propertyName] = {});
+emptyArray = [];
+$$_function_prototype = $$Function[$prototype];
+$$_array_prototype = $$Array[$prototype];
+$$_namespace = function (ra,obj) {
+	obj = obj || o;
+	if (!ra[$length]) {
+		return obj;
 	}
-	return obj;
+	if (ra[0] in obj) {
+		return $$_namespace(ra[$slice](1),obj[ra[0]]);
+	} else {
+		for (var i = 0, length = ra[$length], propertyName; i < length; i++) {
+			propertyName = ra[i];
+			obj[propertyName] = {};
+			obj = obj[propertyName];
+		}
+		return obj;
+	}
 };
-window['$$_namespace'] = $$_namespace;
 (function () {
  	var qname,
 	namespace_obj;
 	$$_store = function (fn,name,namespace,obj) {
 		namespace_obj = $$_namespace(namespace || []);
 		if (obj) {
-			obj[(qname = o(name))] = fn;
+			qname = o(name);
+			obj[qname] = fn;
 			namespace_obj[name] = qname;
 		} else {
 			namespace_obj[name] = fn;
@@ -28,18 +36,6 @@ window['$$_namespace'] = $$_namespace;
 		return fn;
 	};
 })();
-/*
-$$_store = function (fn,name,namespace) {
-	if (namespace) {
-		var qn = o(name);
-		namespace[qn] = fn;
-		o[name] = qn;
-	} else {
-		o[name] = fn;
-	}
-	return fn;
-};
-*/
 
 (function () {
  	var prefix = namespace + ':::';
@@ -51,15 +47,11 @@ $$_store = function (fn,name,namespace) {
 o[$toString] = function () {
 	return namespace;
 };
-$$_store(function (pattern,flags) {
-	return new $$RegExp(pattern,flags);
-},$regex);
-$$_join = $$_array_prototype[$join];
-$$_store(function () {
-	return $$_join[$call](arguments,emptyString);
-},$string);
-$$_store(function (element,className) {
-	element[$className] = element[$className][$replace](o[$regex](o[$string]('^(?!.*',className,'(\\s+|$))')),o[$string](className,' '));
-	return element;
-},$add_class_name,[$dom]);
+$$_store(function (e) {
+	$$_store($$window[$event] && $$window[$event][$cancelBubble] ? function () {
+		$$window[$event][$cancelBubble] = $$true;
+	} : function (e) {
+		e[$stopPropagation]();
+	},$cancel_event,[$dom])[$apply](this,arguments);
+},$cancel_event,[$dom]);
 })();

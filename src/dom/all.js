@@ -1,0 +1,17 @@
+//= require <dom/add_class_name>
+//= require <dom/add_event_handler>
+//= require <dom/array>
+//= require <dom/base_event_modifier>
+//= require <dom/cancel_event>
+//= require <dom/class_name_test_regex>
+//= require <dom/clear_opacity>
+//= require <dom/element>
+//= require <dom/fade>
+//= require <dom/fragment>
+//= require <dom/has_class_name>
+//= require <dom/node>
+//= require <dom/remove_class_name>
+//= require <dom/remove_event_handler>
+//= require <dom/set_opacity>
+//= require <dom/transition>
+//= require <dom/transitions/all>

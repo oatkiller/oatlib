@@ -3,4 +3,4 @@ $$_store(function (fn) {
 	for (var i = 0, length = that[$length]; i < length; i++) {
 		fn[$call](that, that[i], i, that);
 	}
-},$each,$$_array_prototype);
+},$each,emptyArray,$$_array_prototype);

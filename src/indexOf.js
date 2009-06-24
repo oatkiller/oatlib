@@ -16,4 +16,4 @@ $$_store($$_array_prototype[$indexOf] || function (element) {
 
 	return -1;
 
-},$indexOf,$$_array_prototype);
+},$indexOf,emptyArray,$$_array_prototype);
