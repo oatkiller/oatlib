@@ -10,12 +10,12 @@ tests['dom-effects'] = [
 		},
 		setUp: function () {
 			// get a new transitions obj
-			o.setupTransition();
-			this.transition = o.transition;
+			o.dom.setupTransition();
+			this.transition = o.dom.transition;
 		},
 		tearDown: function () {
 			// destroy transitions obj
-			o.tearDownTransition();
+			o.dom.tearDownTransition();
 		},
 		'test transition function': function () {
 			// should add a transition object to transition.transitions and should start playing

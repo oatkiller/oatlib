@@ -23,6 +23,5 @@
 //= require <super_combine.tests>
 //= require <supplant.tests>
 //= require <take.tests>
-//= require <transition.tests>
 //= require <trim.tests>
 //= require <unique.tests>

@@ -108,7 +108,7 @@
 		getCurrentTime: o[$object_memo]($currentTime,function () {return new $$Date()[$getTime]();})
 	});
 
-},$setupTransition))();
+},$setupTransition,[$dom]))();
 
 $$_store(function () {
 	tearDownTransition = function () {
