@@ -1,3 +1,3 @@
-//= require <dom/reference_to_dom>
+//= require <dom/reference>
 $$_event = $$_namespace([$event],$$_dom);
 

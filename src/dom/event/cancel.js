@@ -3,5 +3,5 @@ $$_store(function (e) {
 		$$window[$event][$cancelBubble] = $$true;
 	} : function (e) {
 		e[$stopPropagation]();
-	},$cancel_event,[$dom])[$apply](this,arguments);
-},$cancel_event,[$dom]);
+	},$cancel,[$dom,$event])[$apply](this,arguments);
+},$cancel,[$dom,$event]);

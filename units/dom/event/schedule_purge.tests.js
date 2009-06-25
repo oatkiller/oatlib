@@ -8,7 +8,7 @@ tests.add_event_listener = [
 			
 			var args,
 			purged = false;
-			o.dom.event.add_event_listener = function () {
+			o.dom.event.add_listener = function () {
 				args = arguments;
 			};
 

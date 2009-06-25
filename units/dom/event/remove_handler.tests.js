@@ -5,7 +5,7 @@ tests.remove_event_handler = [
 		'test remove_event_handler': function () {
 			var worked = true,
 			button = document.createElement('button');
-			o.dom.remove_event_handler(button,'click',function (e) {
+			o.dom.event.remove_handler(button,'click',function (e) {
 				worked = false;
 			});
 			YAHOO.util.UserAction.click(button); 
