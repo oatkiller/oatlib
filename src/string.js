@@ -1,4 +1,4 @@
 //= require <join>
-$$_store(function () {
+$$_string = $$_store(o,$string,function () {
 	return $$_join[$call](arguments,emptyString);
-},$string);
+});

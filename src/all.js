@@ -1,6 +1,8 @@
 //= require <dom/all>
 //= require <remote/all>
+//= require <all>
 //= require <array>
+//= require <basic-package>
 //= require <bind>
 //= require <builder>
 //= require <chop>

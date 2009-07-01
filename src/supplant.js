@@ -1,8 +1,9 @@
-$$_store(function (o) {
+//= require <language/prototypes/string>
+$$_store($$_language_prototypes_string,$supplant,function (o) {
 	return this[$replace](/{([^{}]*)}/g,
 		function (a,b) {
 			var r = o[b];
 			return typeof r === $string || typeof r === $number ? r : a;
 		}
 	);
-},$supplant,emptyArray,$$String[$prototype]);
+},$$true);

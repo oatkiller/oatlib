@@ -1,5 +1,6 @@
+//= require <dom/reference>
 //= require <dom/class_name_test_regex>
-$$_store(function (element,className) {
+$$_store($$_dom,$remove_class_name,function (element,className) {
 	element[$className] = element[$className][$replace](
 		$$_class_name_test_regex(className),
 		'$1$2'
@@ -11,4 +12,4 @@ $$_store(function (element,className) {
 		emptyString
 	);
 	return element;
-},$remove_class_name,[$dom]);
+});

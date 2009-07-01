@@ -1,3 +1,4 @@
+//= require <remote/reference>
 //= require <combine>
 //= require <curry>
 //= require <each>
@@ -34,7 +35,7 @@
 	defaultOptions[$method] = $GET;
 	defaultOptions[$async] = $$true;
 
-	$$_store(function (responseOptions) {
+	$$_store($$_remote,$ajax,function (responseOptions) {
 		// merge default headers and specified headers
 		var headers = o[$combine]({},defaultHeaders,responseOptions[$headers]),
  		// create a new object with default options and specified options smushed together
@@ -65,7 +66,7 @@
 				myRequest[$abort]();
 			}
 		});
-	},$ajax,[$remote]);
+	});
 
 })();
 

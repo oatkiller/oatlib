@@ -1,4 +1,4 @@
 //= require <dom/fragment>
-$$_store(function (html) {
+$$_store($$_dom,$node,function (html) {
 	return o[$dom][$fragment](html)[$childNodes][0];
-},$node,[$dom]);
+});

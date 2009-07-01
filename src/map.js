@@ -1,4 +1,5 @@
-$$_store(function (fn) {
+//= require <language/prototypes/array>
+$$_store($$_language_prototypes_array,$map,function (fn) {
 	var that = this,
 	length = that[$length],
 	response = new $$Array(length), i = 0;
@@ -8,4 +9,4 @@ $$_store(function (fn) {
 	}
 	return response;
 
-},$map,emptyArray,$$_array_prototype);
+},$$true);

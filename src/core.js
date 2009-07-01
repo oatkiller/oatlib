@@ -1,47 +1,25 @@
 var namespace = 'http://oatlab.com/oatlib/v2',
+qname_prefix = namespace + ':::',
 o,
+emptyString = '',
 emptyArray = [];
-$$_function_prototype = $$Function[$prototype];
-$$_array_prototype = $$Array[$prototype];
-$$_namespace = function (ra,obj) {
-	obj = obj || o;
-	if (!ra[$length]) {
-		return obj;
-	}
-	if (ra[0] in obj) {
-		return $$_namespace(ra[$slice](1),obj[ra[0]]);
+
+// $$_store($$_language_prototypes_array,$each,fn,$$true);
+// $$_store($$_o_dom_event,$add_listener,fn);
+
+$$_qname = function (name) {
+	return qname_prefix + name;
+};
+$$_store = function (obj,name,payload,qualify) {
+	if (qualify) {
+		var qname = $$_qname(name);
+		o[name] = qname;
+		return (obj[qname] = payload);
 	} else {
-		for (var i = 0, length = ra[$length], propertyName; i < length; i++) {
-			propertyName = ra[i];
-			obj[propertyName] = {};
-			obj = obj[propertyName];
-		}
-		return obj;
+		return (obj[name] = payload);
 	}
 };
-(function () {
- 	var qname,
-	namespace_obj;
-	$$_store = function (fn,name,namespace,obj) {
-		namespace_obj = $$_namespace(namespace || []);
-		if (obj) {
-			qname = o(name);
-			obj[qname] = fn;
-			namespace_obj[name] = qname;
-		} else {
-			namespace_obj[name] = fn;
-		}
-		return fn;
-	};
-})();
-
-(function () {
- 	var prefix = namespace + ':::';
-	window[namespace] = o = function (name) {
-		return prefix + name;
-	};
-})();
-
+$$window[namespace] = o = {};
 o[$toString] = function () {
 	return namespace;
 };
