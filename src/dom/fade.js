@@ -1,3 +1,4 @@
+//= require <dom/reference>
 //= require <dom/transition>
 //= require <dom/set_opacity>
 //= require <dom/clear_opacity>
@@ -17,7 +18,7 @@
 		}
 	};
 
-	$$_store(function (node,options) {
+	$$_store($$_dom,$fade,function (node,options) {
 
 		var settings = o[$combine]({},defaults,options),
 		aTransition = settings.aTransition,
@@ -30,6 +31,6 @@
 			var value = aTransition(soFar,start,change,total);
 			o[$dom][$set_opacity](node,value);
 		},timeInSeconds,settings.callback[o[$curry]](node));
-	},$fade,[$dom]);
+	});
 
 })();
