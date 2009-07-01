@@ -1,6 +1,6 @@
 //= require <slice>
-$$_store(function (fn) {
-	return function (obj) {
-		return fn[$apply](obj,$$_slice[$call](arguments,1));
+$$_take = $$_store(o,$take,function (fn) {
+	return function () {
+		return fn[$apply](arguments[0],$$_slice[$call](arguments,1));
 	};
-},$take);
+});

@@ -1,5 +1,5 @@
-$$_store(function (obj,fn) {
+$$_store(o,$for_each,function (obj,fn) {
 	for (var propertyName in obj) {
 		fn(obj[propertyName],propertyName,obj);
 	}
-},$for_each);
+});

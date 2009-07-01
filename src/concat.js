@@ -1,1 +1,2 @@
-$$_concat = $$_array_prototype[$concat];
+//= require <language/prototypes/array>
+$$_concat = $$_language_prototypes_array[$concat];

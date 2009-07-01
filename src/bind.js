@@ -1,5 +1,5 @@
-//= require <array>
 //= require <language/prototypes/function>
+//= require <array>
 //= require <slice>
 $$_store($$_language_prototypes_function,$bind,function (obj) { // holds the logic for curry
 	var that = this,

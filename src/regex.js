@@ -1,3 +1,3 @@
-$$_store(function (pattern,flags) {
+$$_store(o,$regex,function (pattern,flags) {
 	return new $$RegExp(pattern,flags);
-},$regex);
+});
