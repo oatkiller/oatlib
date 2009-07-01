@@ -1,6 +1,7 @@
+//= require <remote/reference>
 //= require <curry>
 //= require <error>
-$$_store(function () {
+$$_store($$_remote,$request,function () {
 	// try a few ways to create a xmlhttp request object. when one works return the object it produced. also redefine this fn to the lucky fn that worked
 	// if this fn returns false. then i dunno how to ajax on this browser.
 	var requestObject = $$false,
@@ -36,4 +37,4 @@ $$_store(function () {
 	}
 	o[$error]('ajax not supported');
 	return $$false;
-},$request,[$remote]);
+});

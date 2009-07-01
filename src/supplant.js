@@ -6,4 +6,4 @@ $$_store($$_language_prototypes_string,$supplant,function (o) {
 			return typeof r === $string || typeof r === $number ? r : a;
 		}
 	);
-});
+},$$true);

@@ -7,4 +7,4 @@ $$_store($$_language_prototypes_array,$unique,function () {
 		uniques[o[$indexOf]](raElement) === -1 && uniques[$push](raElement);
 	});
 	return uniques;
-});
+},$$true);
