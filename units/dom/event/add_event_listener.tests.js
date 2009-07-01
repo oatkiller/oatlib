@@ -9,10 +9,10 @@ tests.add_event_listener = [
 		},
 		'test add_event_listener should try to add listener': function () {
 			var tried_to_add = false;
-			o.dom.event.add_handler = function () {
+			o.dom.event.add_event_handler = function () {
 				tried_to_add = true;
 			};
-			o.dom.event.add_listener(document.body,'click',function (e) {});
+			o.dom.event.add_event_listener(document.body,'click',function (e) {});
 			Assert.isTrue(tried_to_add);
 		},
 		'test add_event_listener should record the signature': function () {
@@ -22,7 +22,7 @@ tests.add_event_listener = [
 			fn = function () {},
 			bubble = false;
 
-			o.dom.event.add_listener(element,type,fn,bubble);
+			o.dom.event.add_event_listener(element,type,fn,bubble);
 
 			var signature = o.dom.event.event_listeners[0];
 			Assert.areSame(signature[0],element);
@@ -35,7 +35,7 @@ tests.add_event_listener = [
 			o.dom.event.schedule_purge = function () {
 				scheduled = true;
 			};
-			o.dom.event.add_listener(document.body,'click',function (e) {});
+			o.dom.event.add_event_listener(document.body,'click',function (e) {});
 			Assert.isTrue(scheduled);
 
 		}

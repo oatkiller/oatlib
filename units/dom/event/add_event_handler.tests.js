@@ -34,7 +34,7 @@ tests.add_event_handler = [
 		'test add_event_handler': function () {
 			var worked = false,
 			button = document.createElement('button');
-			o.dom.event.add_handler(button,'click',function (e) {
+			o.dom.event.add_event_handler(button,'click',function (e) {
 				worked = true;
 			});
 			YAHOO.util.UserAction.click(button); 

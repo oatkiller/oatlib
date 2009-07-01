@@ -9,7 +9,7 @@ tests.cancel_event = [
 			div.appendChild(button);
 			button.onclick = function (e) {
 				worked = true;
-				o.dom.event.cancel(e);
+				o.dom.cancel_event(e);
 			};
 			div.onclick = function (e) {
 				worked = false;
