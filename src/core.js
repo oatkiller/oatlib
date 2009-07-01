@@ -10,7 +10,13 @@ $$_qname = function (name) {
 	return qname_prefix + name;
 };
 $$_store = function (obj,name,payload,qualify) {
-	return (obj[qualify ? $$_qname(name) : name] = payload);
+	if (qualify) {
+		var qname = $$_qname(name);
+		o[name] = qname;
+		return (obj[qname] = payload);
+	} else {
+		return (obj[name] = payload);
+	}
 };
 $$window[namespace] = o = {};
 o[$toString] = function () {
