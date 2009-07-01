@@ -1,5 +1,5 @@
 var namespace = 'http://oatlab.com/oatlib/v2',
-qname_prefix = namespace + ':::';
+qname_prefix = namespace + ':::',
 o,
 emptyArray = [];
 
@@ -12,9 +12,7 @@ $$_qname = function (name) {
 $$_store = function (obj,name,payload,qualify) {
 	return (obj[qualify ? $$_qname(name) : name] = payload);
 };
-$$window[namespace] = o = function (name) {
-	return prefix + name;
-};
+$$window[namespace] = o = {};
 o[$toString] = function () {
 	return namespace;
 };
