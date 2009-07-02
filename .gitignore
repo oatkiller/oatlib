@@ -1,3 +1,4 @@
 *.sw[pon]
 oatlib.debug.js
 oatlib.min.js
+plugins
