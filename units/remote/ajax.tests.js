@@ -18,7 +18,7 @@
 			},
 			testBasic: function () {
 				var that = this;
-				o.remote.ajax({
+				o.remote.request({
 					url: 'ajaxtest.xml',
 					onComplete: function (responseObj) {
 						Assert.isTrue(responseObj !== null && responseObj !== false,'no response obj');
@@ -29,7 +29,7 @@
 			},
 			testRequestHeaders: function () {
 				var that = this;
-				o.remote.ajax({
+				o.remote.request({
 					url: 'ajaxtest.xml',
 					headers: {
 						'Accept': 'text/*, text/html, text/html;level=1, */*'
@@ -43,7 +43,7 @@
 			},
 			testAbort: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'ajaxtest.xml',
 					onComplete: function (responseObj) {
 						Assert.fail('failed to abort');
@@ -54,7 +54,7 @@
 			},
 			testStatusText: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'ajaxtest.xml',
 					onComplete: function (responseObj) {
 						Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
@@ -65,7 +65,7 @@
 			},
 			testOnSuccess: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'ajaxtest.xml',
 					onSuccess: function (responseObj,options) {
 						that.resume();
@@ -79,7 +79,7 @@
 			},
 			testOnFailure: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'asdfasdfasdfa',
 					onFailure: function (responseObj,options) {
 						that.resume();
@@ -93,7 +93,7 @@
 			},
 			testPost: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'ajaxtest.xml',
 					post: 'some vars, etc',
 					onSuccess: function (responseObj) {
@@ -104,7 +104,7 @@
 			},
 			testResponseXML: function () {
 				var that = this;
-				var myRequest = o.remote.ajax({
+				var myRequest = o.remote.request({
 					url: 'ajaxtest.xml',
 					onSuccess: function (responseObj) {
 						Assert.areSame(responseObj.responseXML.childNodes[0].nodeName.toLowerCase(),'root','didnt get root object from xml');
