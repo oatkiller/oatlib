@@ -4,3 +4,4 @@
 //= require <dom/event/get_key.tests>
 //= require <dom/event/get_button.tests>
 //= require <dom/event/get_mouse_coordinates.tests>
+//= require <dom/event/get_event_abstractor.tests>
