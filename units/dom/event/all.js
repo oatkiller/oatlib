@@ -3,3 +3,4 @@
 //= require <dom/event/get_related_target.tests>
 //= require <dom/event/get_key.tests>
 //= require <dom/event/get_button.tests>
+//= require <dom/event/get_mouse_coordinates.tests>
