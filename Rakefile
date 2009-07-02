@@ -128,7 +128,7 @@ end
 
 task :build_plugins, :module_string do |t, args|
 	desc "pass a list of plugins to build oatlib for: rake build_plugin[\"oatlog\"] (oatlib.debug.js results in the dist dir)"
-	modules = args.module_string.split(' ').collect {|module_name| File.join('plugins',module_name,module_name + '.js') }.unshift(File.join('src','core.js'))
+	modules = args.module_string.split(' ').collect {|module_name| File.join('plugins',module_name + '.js') }.unshift(File.join('src','core.js'))
 	sprocketized_src = sprocketize(['src','plugins'],modules)
 	symbolized_src = symbolize(sprocketized_src)
 	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
