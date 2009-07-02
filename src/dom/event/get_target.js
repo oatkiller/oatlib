@@ -1,4 +1,5 @@
 //= require <dom/event/reference>
+//= require <get_object_property>
 //= require <curry>
 (function () {
 
