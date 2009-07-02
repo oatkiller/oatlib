@@ -3,7 +3,7 @@ tests.request = [
 		name: 'request',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		testBasic: function () {
-			var myRequest = o.remote.request();
+			var myRequest = o.remote.ajax();
 			Assert.isTrue('abort' in myRequest,'request return had no abort method');
 			Assert.isTrue('abort' in myRequest,'request return had no abort method or property');
 			Assert.isTrue('getAllResponseHeaders' in myRequest,'request return had no getAllResponseHeaders method or property');
