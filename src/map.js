@@ -9,4 +9,4 @@ $$_store($$_language_prototypes_array,$map,function (fn) {
 	}
 	return response;
 
-},$$true);
+});

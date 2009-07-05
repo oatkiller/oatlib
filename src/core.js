@@ -10,14 +10,10 @@ emptyArray = [];
 $$_qname = function (name) {
 	return qname_prefix + name;
 };
-$$_store = function (obj,name,payload,qualify) {
-	if (qualify) {
-		var qname = $$_qname(name);
-		o[name] = qname;
-		return (obj[qname] = payload);
-	} else {
-		return (obj[name] = payload);
-	}
+$$_store = function (obj,name,payload) {
+	var qname = $$_qname(name);
+	o[name] = qname;
+	return (obj[qname] = payload);
 };
 $$window[namespace] = o = {};
 o[$toString] = function () {

@@ -1,1 +1,1 @@
-$$_json = $$_store(o,$json,{});
+$$_json = o[$json] = {};

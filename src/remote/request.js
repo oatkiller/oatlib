@@ -35,7 +35,7 @@
 	defaultOptions[$method] = $GET;
 	defaultOptions[$async] = $$true;
 
-	$$_store($$_remote,$request,function (responseOptions) {
+	$$_remote[$request] = function (responseOptions) {
 		// merge default headers and specified headers
 		var headers = o[$combine]({},defaultHeaders,responseOptions[$headers]),
  		// create a new object with default options and specified options smushed together
@@ -66,7 +66,7 @@
 				myAjax[$abort]();
 			}
 		});
-	});
+	};
 
 })();
 

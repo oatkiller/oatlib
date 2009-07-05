@@ -7,4 +7,4 @@ $$_store($$_language_prototypes_function,$bind,function (obj) { // holds the log
 	return function () {
 		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
 	};
-},$$true);
+});

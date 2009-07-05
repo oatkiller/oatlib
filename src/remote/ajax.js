@@ -1,7 +1,7 @@
 //= require <remote/reference>
 //= require <curry>
 //= require <error>
-$$_store($$_remote,$ajax,function () {
+$$_remote[$ajax] = function () {
 	// try a few ways to create a xmlhttp ajax object. when one works return the object it produced. also redefine this fn to the lucky fn that worked
 	// if this fn returns false. then i dunno how to ajax on this browser.
 	var ajaxObject = $$false,
@@ -27,7 +27,7 @@ $$_store($$_remote,$ajax,function () {
 			ajaxObject = fn();
 
 			// redefine ajax as this fn for future uses. this way we dont go through all this crazy stuff each time we run a piece of ajax
-			$$_store(fn,$ajax);
+			$$_remote[$ajax] = fn;
 			// quit trying cause this one rox
 			return ajaxObject;
 		} catch (e) {
@@ -37,4 +37,4 @@ $$_store($$_remote,$ajax,function () {
 	}
 	o[$error]('ajax not supported');
 	return $$false;
-});
+};

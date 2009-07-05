@@ -3,4 +3,4 @@ $$_store($$_language_prototypes_array,$chop,function () {
 	var that = this;
 	that.length--;
 	return that;
-},$$true);
+});

@@ -8,6 +8,6 @@ var fn = function (e) {
 	})[$apply](this,arguments);
 };
 
-$$_store($$_dom_event,$get_mouse_coordinates,function (e) {
+$$_dom_event[$get_mouse_coordinates] = function (e) {
 	return fn[$apply](this,arguments);
-});
+};

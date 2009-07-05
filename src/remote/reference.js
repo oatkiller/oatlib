@@ -1,1 +1,1 @@
-$$_remote = $$_store(o,$remote,{});
+$$_remote = o[$remote] = {};

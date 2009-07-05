@@ -4,4 +4,4 @@ $$_store($$_language_prototypes_array,$each,function (fn) {
 	for (var i = 0, length = that[$length]; i < length; i++) {
 		fn[$call](that, that[i], i, that);
 	}
-},$$true);
+});

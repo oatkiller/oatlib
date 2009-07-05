@@ -11,8 +11,8 @@
 		return (fn = e[$target] ? base_fn[o[$curry]]($target) : base_fn[o[$curry]]($srcElement))[$apply](this,arguments);
 	};
 
-	$$_store($$_dom_event,$get_target,function () {
+	$$_dom_event[$get_target] = function () {
 		return fn[$apply](this,arguments);
-	});
+	};
 
 })();

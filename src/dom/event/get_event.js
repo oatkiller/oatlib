@@ -12,7 +12,7 @@
 			return (fn = e ? $$_K : $$_get_object_property[o[$curry]]($event,$$window))[$apply](this,arguments);
 		};
 	//}))();
-	$$_store($$_dom_event,$get_event,function () {
+ 	$$_dom_event[$get_event] = function () {
 		return fn[$apply](this,arguments);
-	});
+	};
 })();

@@ -9,6 +9,6 @@
 		return function () {
 			return that[$apply](this,$$_concat[$call](o[$array](arguments),oldArguments));
 		};
-	},$$true);
+	});
 
 })();

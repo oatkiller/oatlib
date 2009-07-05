@@ -1,1 +1,1 @@
-$$_dom = $$_store(o,$dom,{});
+$$_dom = o[$dom] = {};
