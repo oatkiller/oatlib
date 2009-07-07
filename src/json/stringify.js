@@ -138,7 +138,7 @@
 		}
 
 
-			$$_json[$stringify] = function (value, replacer, space) {
+			$$_json_stringify = $$_json[$stringify] = function (value, replacer, space) {
 
 // The stringify method takes a value and an optional replacer, and an optional
 // space parameter, and returns a JSON text. The replacer can be a function

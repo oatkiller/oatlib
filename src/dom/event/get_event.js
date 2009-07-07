@@ -9,10 +9,10 @@
 	//($$_store($$_dom_event,$set_get_event,function () {
 	// if running that test, remove var from next line !!!!
 		var fn = function (e) {
-			return (fn = e ? $$_K : $$_get_object_property[o[$curry]]($event,$$window))[$apply](this,arguments);
+			return (fn = e ? $$_K : $$_get_object_property[$$_o$curry]($event,$$window))[$apply](this,arguments);
 		};
 	//}))();
- 	$$_dom_event[$get_event] = function () {
+ 	$$_dom_event_get_event = $$_dom_event[$get_event] = function () {
 		return fn[$apply](this,arguments);
 	};
 })();

@@ -14,9 +14,9 @@
 		},
 		fns = [
 			// ms style one
-			activeXFn[o[$curry]]('Msxml2.XMLHTTP'),
+			activeXFn[$$_o$curry]('Msxml2.XMLHTTP'),
 			// ms style two
-			activeXFn[o[$curry]]('Microsoft.XMLHTTP'),
+			activeXFn[$$_o$curry]('Microsoft.XMLHTTP'),
 			// netscrapters style
 			function () {
 				return new XMLHttpRequest();

@@ -2,7 +2,7 @@
 (function () {
 	var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 
-	$$_json[$parse] = function (text, reviver) {
+	$$_json_parse = $$_json[$parse] = function (text, reviver) {
 
 	// The parse method takes a text and an optional reviver function, and returns
 	// a JavaScript value if the text is a valid JSON text.

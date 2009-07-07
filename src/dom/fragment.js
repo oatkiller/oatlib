@@ -3,17 +3,17 @@
 //= require <injector>
 
 var fn = function () {
-	var getFragmentFromNodes = o[$injector](function () {return $$document.createDocumentFragment();},function (fragment,node) {
+	var getFragmentFromNodes = $$_injector(function () {return $$document.createDocumentFragment();},function (fragment,node) {
 		fragment[$appendChild](node);
 		return fragment;
 	}),
-	div = $$document[$createElement]('div');
-	return (fn = function (html) {
+	div = $$document[$createElement]($div);
+	return (fn = $$_dom_fragment = $$_dom[$fragment] = function (html) {
 		div[$innerHTML] = html;
-		return getFragmentFromNodes[$apply]($$null,o[$dom][$array](div[$childNodes]));
+		return getFragmentFromNodes[$apply]($$null,$$_dom_array(div[$childNodes]));
 	})[$apply](this,arguments);
 };
 
-$$_dom[$fragment] = function () {
+$$_dom_fragment = $$_dom[$fragment] = function () {
 	return fn[$apply](this,arguments);
 };

@@ -11,6 +11,6 @@
 })();
 //});
 
-$$_dom_event[$get_button] = function (e) {
+$$_dom_event_get_button = $$_dom_event[$get_button] = function (e) {
 	return fn[$apply](this,arguments);
 };
