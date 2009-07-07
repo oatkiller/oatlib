@@ -1,16 +1,16 @@
-//= require <dom/all>
-//= require <remote/all>
 //= require <all>
 //= require <array>
 //= require <basic-package>
 //= require <bind>
 //= require <builder>
+//= require <call_once>
 //= require <chop>
 //= require <combine>
 //= require <concat>
 //= require <constructor>
 //= require <core>
 //= require <curry>
+//= require <dom/all>
 //= require <each>
 //= require <error>
 //= require <for_each>
@@ -25,6 +25,7 @@
 //= require <object_memo>
 //= require <rcurry>
 //= require <regex>
+//= require <remote/all>
 //= require <slice>
 //= require <string>
 //= require <super_combine>

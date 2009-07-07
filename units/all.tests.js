@@ -1,6 +1,7 @@
 //= require <array.tests>
 //= require <bind.tests>
 //= require <builder.tests>
+//= require <call_once.tests>
 //= require <chop.tests>
 //= require <combine.tests>
 //= require <constructor.tests>
