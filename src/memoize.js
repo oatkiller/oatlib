@@ -2,7 +2,7 @@
 //= require <join>
 //= require <language/prototypes/function>
 (function () {
-	var join = o[$take]($$_join),
+	var join = $$_take($$_join),
 	$$_qname_memoize = $$_qname($memoize);
 	$$_o$memoize = $$_qname_memoize;
 	// store this fn on the prototype and at o.memoize

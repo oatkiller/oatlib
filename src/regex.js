@@ -1,3 +1,3 @@
-o[$regex] = function (pattern,flags) {
+$$_regex = o[$regex] = function (pattern,flags) {
 	return new $$RegExp(pattern,flags);
 }

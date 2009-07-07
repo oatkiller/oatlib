@@ -10,3 +10,4 @@ $$_store($$_language_prototypes_array,$map,function (fn) {
 	return response;
 
 });
+$$_o$map = o[$map];

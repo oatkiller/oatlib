@@ -2,4 +2,3 @@
 $$_array = o[$array] = function (arrayLike) {
 	return $$_slice[$apply](arrayLike);
 };
-$$_o$array = o[$array];

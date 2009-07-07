@@ -5,6 +5,7 @@ $$_store($$_language_prototypes_function,$bind,function (obj) { // holds the log
 	var that = this,
 	oldArguments = $$_slice[$call](arguments,1);
 	return function () {
-		return that[$apply](obj,oldArguments[$concat](o[$array](arguments)));
+		return that[$apply](obj,oldArguments[$concat]($$_array(arguments)));
 	};
 });
+$$_o$bind = o[$bind];

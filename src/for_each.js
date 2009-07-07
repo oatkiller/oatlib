@@ -1,4 +1,4 @@
-o[$for_each] = function (obj,fn) {
+$$_for_each = o[$for_each] = function (obj,fn) {
 	for (var propertyName in obj) {
 		fn(obj[propertyName],propertyName,obj);
 	}
