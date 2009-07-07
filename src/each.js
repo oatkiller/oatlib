@@ -5,3 +5,4 @@ $$_store($$_language_prototypes_array,$each,function (fn) {
 		fn[$call](that, that[i], i, that);
 	}
 });
+$$_o$each = o[$each];

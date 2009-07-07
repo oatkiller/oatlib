@@ -1,7 +1,7 @@
 //= require <remote/reference>
 //= require <curry>
 //= require <error>
-$$_remote[$ajax] = function () {
+$$_remote_ajax = $$_remote[$ajax] = function () {
 	// try a few ways to create a xmlhttp ajax object. when one works return the object it produced. also redefine this fn to the lucky fn that worked
 	// if this fn returns false. then i dunno how to ajax on this browser.
 	var ajaxObject = $$false,

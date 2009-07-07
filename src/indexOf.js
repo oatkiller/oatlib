@@ -18,3 +18,4 @@ $$_store($$_language_prototypes_array,$indexOf,$$_language_prototypes_array[$ind
 	return -1;
 
 });
+$$_o$indexOf = o[$indexOf];

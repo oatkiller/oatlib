@@ -7,3 +7,4 @@ $$_store($$_language_prototypes_string,$supplant,function (o) {
 		}
 	);
 });
+$$_o$supplant = o[$supplant];
