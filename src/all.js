@@ -13,6 +13,7 @@
 //= require <dom/all>
 //= require <each>
 //= require <error>
+//= require <every>
 //= require <for_each>
 //= require <get_once>
 //= require <indexOf>
