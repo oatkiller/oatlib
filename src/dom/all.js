@@ -3,6 +3,7 @@
 //= require <dom/class_name_test_regex>
 //= require <dom/clear_opacity>
 //= require <dom/element>
+//= require <dom/find_ancestor_or_self>
 //= require <dom/fragment>
 //= require <dom/has_class_name>
 //= require <dom/node>
