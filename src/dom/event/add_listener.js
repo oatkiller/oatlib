@@ -8,11 +8,13 @@ $$_dom_event_add_listener = $$_dom_event[$add_listener] = function (node,type,fn
 
 	var wrapped_fn = function (e) {
 		return fn[$call](this,e,$$_dom_event_get_abstraction(e));
-	};
+	},
+	args = [node,type,wrapped_fn,bubble];
+	$$_dom_event_add_handler[$apply]($$null,args);
 
 	// register event for removal at page unload
 	var index = $$_dom_event_events_to_remove[$length]; // future position of the args array
-	$$_dom_event_events_to_remove[$push]([node,type,wrapped_fn,bubble);
+	$$_dom_event_events_to_remove[$push](args);
 	return function () {
 		// remove the args from the array of args scheduled from remove. 
 		// then remove them args :)
