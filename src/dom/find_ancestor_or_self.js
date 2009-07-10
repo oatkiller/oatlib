@@ -8,11 +8,10 @@ $$_dom_find_ancestor_or_self = $$_dom[$find_ancestor_or_self] = function (node,f
 		return node[$parentNode];
 	};
 
-	looking: do {
+	do {
 		if (fn(node)) {
 			found = node;
-			break looking;
+			return found;
 		}
 	} while (node = test(node))
-	return found;
 };
