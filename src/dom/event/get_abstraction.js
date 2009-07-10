@@ -13,7 +13,7 @@
 (function () {
  	var curry_with_this_dot_event = function (fn) {
 		return function () {
-			return fn[$apply](this,[this[$event]][$concat]($$_array(arguments)));
+			return fn[$call](this,this[$event]);
 		};
 	},
 	getter = $$_builder({
@@ -27,6 +27,6 @@
 		cancel: curry_with_this_dot_event($$_dom_event_cancel)
 	});
 	$$_dom_event_get_abstraction = $$_dom_event[$get_abstraction] = function (e) {
-		return getter({event: e});
+		return getter({event: $$_dom_event_get_event(e)});
 	};
 })();
