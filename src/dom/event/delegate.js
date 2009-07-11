@@ -5,11 +5,6 @@
 //= require <dom/event/add_listener>
 (function () {
 	$$_dom_event_delegate = $$_dom_event[$delegate] = function (options) {
-		// option has
-		// ancestor
-		// type
-		// test
-		// action
 		var ancestor = options[$ancestor],
 		action = options[$action],
 		test = options[$test];
