@@ -6,6 +6,7 @@ tests.each = [
 			var otherOne = [];
 			[1,2,3,4][o.each](function (item) {
 				otherOne.push(item);
+				Assert.areSame(this.length,this[this.length - 1]);
 			});
 			Assert.isTrue(otherOne.length === 4);
 		}

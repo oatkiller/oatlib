@@ -23,8 +23,10 @@ tests.bind = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test bind': function () {
 			var myObj = {name: 'robert'},
-			getName = function () {return this.name;};
-			Assert.areSame(myObj.name,getName[o.bind](myObj)(),'bind failed');
+			a = 'a',
+			b = 'b',
+			getName = function (a,b) {return this.name + a + b;};
+			Assert.areSame(myObj.name + a + b,getName[o.bind](myObj,a)(b),'bind failed');
 		}
 	}
 ];
@@ -140,135 +142,9 @@ tests.curry = [
 		name: 'curry',
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test curry': function () {
-			var add = function (a,b) {return a + b;},
+			var add = function (a,b,c) {return a + b + c;},
 			add4 = add[o.curry](4);
-			Assert.areSame(5,add4(1),'curry failed :(');
-		}
-	}
-];
-tests.dom = [
-	{
-		name: 'addClassName',
-		setUp: function () {
-			this.element = document.createElement('div');
-			document.body.appendChild(this.element);
-			o = window['http://oatlab.com/oatlib/v2'];
-		},
-		tearDown: function () {
-			try {
-				document.body.removeChild(this.element);
-			} catch (e) {}
-		},
-		testNoClassName: function () {
-			o.dom.add_class_name(this.element,'foo');
-			Assert.isTrue(/(\s+|^)foo(\s+|$)/.test(this.element.className))
-		},
-		testSomeClassNames: function () {
-			this.element.className = 'asdew asdf duck';
-			o.dom.add_class_name(this.element,'foo');
-			Assert.areSame('foo asdew asdf duck',this.element.className);
-		},
-		testExistsAlready: function () {
-			this.element.className = 'foo asdf';
-			o.dom.add_class_name(this.element,'foo');
-			Assert.areSame('foo asdf',this.element.className);
-		}
-	}
-];
-tests.domarray = [
-	{
-		name: 'domarray',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test domArray': function () {
-				var tmpDiv = document.createElement('div'), cells, myRa;
-				tmpDiv.innerHTML = '<table><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
-				cells = tmpDiv.childNodes[0].childNodes[0].childNodes[0].cells;
-				myRa = o.dom.array(cells);
-				Assert.isNotUndefined(myRa.push);
-		}
-	}
-];
-tests.fragment = [
-	{
-		name: 'fragment',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test fragment': function () {
-			var stuff = o.dom.fragment('well<div>nope</div> har');
-			Assert.areSame(3,stuff.childNodes.length,'fragment didnt get childnodes');
-		}
-	}
-];
-tests.has_class_name = [
-	{
-		name: 'has_class_name',
-		setUp: function () {
-			this.element = document.createElement('div');
-			document.body.appendChild(this.element);
-			o = window['http://oatlab.com/oatlib/v2'];
-		},
-		tearDown: function () {
-			try {
-				document.body.removeChild(this.element);
-			} catch (e) {}
-		},
-		'test element with several classes, finding first class': function () {
-			this.element.className = 'foo bar gaz lulz';
-			Assert.isTrue(o.dom.has_class_name(this.element,'foo'));
-		},
-		'test element with one class, finding it': function () {
-			this.element.className = 'bar';
-			Assert.isTrue(o.dom.has_class_name(this.element,'bar'));
-		},
-		'test element with several classes, finding second class': function () {
-			this.element.className = 'bar lulz goat';
-			Assert.isTrue(o.dom.has_class_name(this.element,'lulz'));
-		},
-		'test element with a classname, not finding a classname which is a substring of the elements class': function () {
-			this.element.className = 'asdfnubzasdf';
-			Assert.isFalse(o.dom.has_class_name(this.element,'nubz'));
-		}
-	}
-];
-
-tests.node = [
-	{
-		name: 'node',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test node': function () {
-			var myNode = o.dom.node('something');
-			Assert.areSame(3,myNode.nodeType,'node failed to get node');
-		}
-	}
-];
-tests.remove_class_name = [
-	{
-		name: 'removeClassName',
-		setUp: function () {
-			o = window['http://oatlab.com/oatlib/v2'];
-			this.element = document.createElement('div');
-			document.body.appendChild(this.element);
-		},
-		tearDown: function () {
-			try {
-				document.body.removeChild(this.element);
-			} catch (e) {}
-		},
-		testRemoveClassName: function () {
-			var myElement;
-			var setupElement = function () {
-				myElement = document.createElement('div');
-				myElement.className = 'foo bar woot';
-			};
-
-			setupElement();
-			o.dom.remove_class_name(myElement,'foo');
-			Assert.areSame('bar woot',myElement.className,'1');
-			setupElement();
-			o.dom.remove_class_name(myElement,'bar');
-			Assert.areSame('foo woot',myElement.className,'2');
-			setupElement();
-			o.dom.remove_class_name(myElement,'woot');
-			Assert.areSame('foo bar',myElement.className,'3');
+			Assert.areSame(7,add4(1,2),'curry failed :(');
 		}
 	}
 ];
@@ -280,6 +156,7 @@ tests.each = [
 			var otherOne = [];
 			[1,2,3,4][o.each](function (item) {
 				otherOne.push(item);
+				Assert.areSame(this.length,this[this.length - 1]);
 			});
 			Assert.isTrue(otherOne.length === 4);
 		}
@@ -289,10 +166,133 @@ tests.each = [
 tests.error = [
 	{
 		name: 'error',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];}
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		_should: {
+			error: {
+				'test that error throws an error?': true
+			}
+		},
+		'test that error throws an error?': function () {
+			o.error('nubs');
+		}
 	}
 ];
 
+tests.each = [
+	{
+		name: 'every',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test every': function () {
+			var otherOne = [];
+			var answer = [1,true,'yes',undefined][o.every](function (a) {return a;});
+			Assert.isFalse(answer);
+			answer = [1,true,'yes',2][o.every](function (a) {return a;});
+			Assert.isTrue(answer);
+		}
+	}
+];
+tests.each = [
+	{
+		name: 'every',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test every': function () {
+			var answer = [
+				{id: 1, value: false},
+				{id: 2, value: false},
+				{id: 3, value: true},
+				{id: 4, value: false}
+			][o.find](function (obj) {return obj.value;});
+			Assert.areSame(answer.id,3);
+		}
+	}
+];
+tests.for_each = [
+	{
+		name: 'for_each',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test for_each': function () {
+			var obj = {
+				a: 1,
+				b: 2,
+				c: 3
+			};
+			o.for_each(obj,function (property,property_name,obj) {
+				obj[property_name] = property + 1;
+			});
+			Assert.areSame(obj.a,2);
+			Assert.areSame(obj.b,3);
+			Assert.areSame(obj.c,4);
+		}
+	}
+];
+
+tests.get_flattened = [
+	{
+		name: 'get_flattened',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test getFlattened': function () {
+			var source = [1,2,[3,4],[5],6],
+			result = source[o.get_flattened](),
+			expected_result = [1,2,3,4,5,6]
+			i = 0,
+			length = expected_result.length;
+			Assert.areSame(result.length,expected_result.length);
+			for (; i < length; i++) {
+				Assert.areSame(result[i],expected_result[i]);
+			}
+		},
+		'test getFlattened in take form': function () {
+			var source = [1,2,[3,4],[5],6],
+			result = o.get_flattened(source),
+			expected_result = [1,2,3,4,5,6]
+			i = 0,
+			length = expected_result.length;
+			Assert.areSame(result.length,expected_result.length);
+			for (; i < length; i++) {
+				Assert.areSame(result[i],expected_result[i]);
+			}
+		}
+	}
+];
+
+tests.get_object_property = [
+	{
+		name: 'get_object_property',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test get_object_property': function () {
+			var obj = {
+				name: 'robert'
+			};
+			Assert.areSame(o.get_object_property('name',obj),obj.name);
+		}
+	}
+];
+
+tests.get_once = [
+	{
+		name: 'get_once',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test get_once': function () {
+			var count = 0,
+			proto = {
+				get_it: o.get_once('get_it',function () {
+					count++;
+					return 1;
+				})
+			},
+			C = function () {
+			},
+			my_c;
+			C.prototype = proto;
+			my_c = new C();
+			Assert.areSame(count,0);
+			Assert.areSame(1,my_c.get_it());
+			Assert.areSame(count,1);
+			Assert.areSame(1,my_c.get_it());
+			Assert.areSame(count,1);
+		}
+	}
+];
 tests.indexOf = [
 	{
 		name: 'indexOf',
@@ -309,6 +309,7 @@ tests.inject = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test inject': function (){
 			Assert.areSame([2,2,2][o.inject](1,function (memo,a) {return memo * a;}),8);
+			Assert.areSame(o.inject([2,2,2],1,function (memo,a) {return memo * a;}),8);
 		}
 	}
 ];
@@ -334,6 +335,36 @@ tests.functional = [
 		}
 	}
 ];
+tests.invoke = [
+	{
+		name: 'invoke',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test invoke': function () {
+			var count = 0,
+			fn = function () {
+				count++;
+			};
+			Assert.areSame(count,0);
+			o.invoke(fn);
+			Assert.areSame(count,1);
+			o.invoke(fn);
+			Assert.areSame(count,2);
+
+		}
+	}
+];
+
+tests.last = [
+	{
+		name: 'last',
+		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
+		'test last': function () {
+			Assert.areSame([1,2,3][o.last](),3);
+			Assert.areSame(o.last([1,2,3]),3);
+		}
+	}
+];
+
 tests.map = [
 	{
 		name: 'map',
@@ -388,10 +419,10 @@ tests.memoize = [
 		'test new o.memoize, with invalidateKey': function () {
 			var total = 0,
 			memo = {},
-			getDouble = o.memoize(function (value) {
+			getDouble = function (value) {
 				total += 1;
 				return value * 2;
-			},memo);
+			}[o.memoize](memo);
 
 			getDouble(1);
 			getDouble(1);
@@ -488,150 +519,6 @@ tests.rcurry = [
 			dotnetsucks = sucks('.net');
 
 			Assert.areSame('.net sucks',dotnetsucks,'rcurry failed');
-		}
-	}
-];
-(function () {
-	tests['xmlhttp-helper'] = [
-		{
-			name: 'xmlhttp-helper',
-			setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-			_should: {
-				error: {
-				},
-				ignore: {
-					testRequestHeaders: true,
-					testPost: true
-				}
-			},
-			setUp: function () {
-			},
-			tearDown: function () {
-			},
-			testBasic: function () {
-				var that = this;
-				o.remote.request({
-					url: 'ajaxtest.xml',
-					onComplete: function (responseObj) {
-						Assert.isTrue(responseObj !== null && responseObj !== false,'no response obj');
-						that.resume();
-					}
-				});
-				this.wait();
-			},
-			testRequestHeaders: function () {
-				var that = this;
-				o.remote.request({
-					url: 'ajaxtest.xml',
-					headers: {
-						'Accept': 'text/*, text/html, text/html;level=1, */*'
-					},
-					onComplete: function (responseObj) {
-						Assert.isTrue(responseObj !== null && responseObj !== false,'no response obj');
-						that.resume();
-					}
-				});
-				this.wait();
-			},
-			testAbort: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'ajaxtest.xml',
-					onComplete: function (responseObj) {
-						Assert.fail('failed to abort');
-						that.resume();
-					}
-				});
-				myRequest.abort();
-			},
-			testStatusText: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'ajaxtest.xml',
-					onComplete: function (responseObj) {
-						Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
-						that.resume();
-					}
-				});
-				this.wait();
-			},
-			testOnSuccess: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'ajaxtest.xml',
-					onSuccess: function (responseObj,options) {
-						that.resume();
-						delete options.onComplete;
-					},
-					onComplete: function () {
-						Assert.fail('completed before success');
-					}
-				});
-				this.wait();
-			},
-			testOnFailure: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'asdfasdfasdfa',
-					onFailure: function (responseObj,options) {
-						that.resume();
-						delete options.onComplete;
-					},
-					onComplete: function () {
-						Assert.fail('completed before success');
-					}
-				});
-				this.wait();
-			},
-			testPost: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'ajaxtest.xml',
-					post: 'some vars, etc',
-					onSuccess: function (responseObj) {
-						that.resume();
-					}
-				});
-				this.wait();
-			},
-			testResponseXML: function () {
-				var that = this;
-				var myRequest = o.remote.request({
-					url: 'ajaxtest.xml',
-					onSuccess: function (responseObj) {
-						Assert.areSame(responseObj.responseXML.childNodes[0].nodeName.toLowerCase(),'root','didnt get root object from xml');
-						that.resume();
-					}
-				});
-				this.wait();
-			}
-		}
-	];
-})();
-
-
-tests.request = [
-	{
-		name: 'request',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		testBasic: function () {
-			var myRequest = o.remote.ajax();
-			Assert.isTrue('abort' in myRequest,'request return had no abort method');
-			Assert.isTrue('abort' in myRequest,'request return had no abort method or property');
-			Assert.isTrue('getAllResponseHeaders' in myRequest,'request return had no getAllResponseHeaders method or property');
-			Assert.isTrue('getResponseHeader' in myRequest,'request return had no getResponseHeader method or property');
-			Assert.isTrue('open' in myRequest,'request return had no open method or property');
-			Assert.isTrue('send' in myRequest,'request return had no send method or property');
-			Assert.isTrue('setRequestHeader' in myRequest,'request return had no setRequestHeader method or property');
-		}
-	}
-];
-tests.string = [
-	{
-		name: 'string',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test string': function () {
-			Assert.areSame('abcd',o.string('a','b','c','d'),'string failed');
 		}
 	}
 ];

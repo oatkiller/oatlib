@@ -21,10 +21,10 @@ tests.memoize = [
 		'test new o.memoize, with invalidateKey': function () {
 			var total = 0,
 			memo = {},
-			getDouble = o.memoize(function (value) {
+			getDouble = function (value) {
 				total += 1;
 				return value * 2;
-			},memo);
+			}[o.memoize](memo);
 
 			getDouble(1);
 			getDouble(1);

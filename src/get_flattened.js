@@ -1,4 +1,6 @@
 //= require <language/prototypes/array>
+//= require <K>
+//= require <curry>
 //= require <inject>
 
 (function () {
@@ -9,8 +11,8 @@
 		});
 	};
 
-	$$_get_flattened = o[$get_flattened] = $$_take(fn);
 	$$_o$get_flattened = $$_store($$_language_prototypes_array,$get_flattened,fn);
-	$$_get_flattened[$toString] = function () {return $$_o$get_flattened;};
+	$$_get_flattened = o[$get_flattened] = $$_take(fn);
+	$$_get_flattened[$toString] = $$_K[$$_o$curry]($$_o$get_flattened);
 		
 })();

@@ -1,4 +1,6 @@
 //= require <take>
+//= require <K>
+//= require <curry>
 //= require <join>
 //= require <language/prototypes/function>
 (function () {
@@ -12,8 +14,8 @@
 		};
 	};
 
-	$$_memoize = o[$memoize] = $$_take(fn);
 	$$_o$memoize = $$_store($$_language_prototypes_function,$memoize,fn);
-	$$_memoize[$toString] = function () {return $$_o$memoize;};
+	$$_memoize = o[$memoize] = $$_take(fn);
+	$$_memoize[$toString] = $$_K[$$_o$curry]($$_o$memoize);
 	
 })();

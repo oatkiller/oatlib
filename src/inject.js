@@ -1,4 +1,6 @@
 //= require <each>
+//= require <K>
+//= require <curry>
 //= require <take>
 //= require <language/prototypes/array>
 
@@ -11,8 +13,8 @@
 		return memo;
 	};
 
-	$$_inject = o[$inject] = $$_take(fn);
 	$$_o$inject = $$_store($$_language_prototypes_array,$inject,fn);
-	$$_inject[$toString] = function () {return $$_o$inject;};
+	$$_inject = o[$inject] = $$_take(fn);
+	$$_inject[$toString] = $$_K[$$_o$curry]($$_o$inject);
 		
 })();

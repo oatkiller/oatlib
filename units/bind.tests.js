@@ -4,8 +4,10 @@ tests.bind = [
 		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 		'test bind': function () {
 			var myObj = {name: 'robert'},
-			getName = function () {return this.name;};
-			Assert.areSame(myObj.name,getName[o.bind](myObj)(),'bind failed');
+			a = 'a',
+			b = 'b',
+			getName = function (a,b) {return this.name + a + b;};
+			Assert.areSame(myObj.name + a + b,getName[o.bind](myObj,a)(b),'bind failed');
 		}
 	}
 ];

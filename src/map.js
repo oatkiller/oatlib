@@ -1,5 +1,5 @@
 //= require <language/prototypes/array>
-$$_store($$_language_prototypes_array,$map,function (fn) {
+$$_o$map = $$_store($$_language_prototypes_array,$map,function (fn) {
 	var that = this,
 	length = that[$length],
 	response = new $$Array(length), i = 0;
@@ -10,4 +10,3 @@ $$_store($$_language_prototypes_array,$map,function (fn) {
 	return response;
 
 });
-$$_o$map = o[$map];

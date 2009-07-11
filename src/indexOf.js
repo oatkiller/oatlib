@@ -1,5 +1,5 @@
 //= require <language/prototypes/array>
-$$_store($$_language_prototypes_array,$indexOf,$$_language_prototypes_array[$indexOf] || function (element) {
+$$_o$indexOf = $$_store($$_language_prototypes_array,$indexOf,$$_language_prototypes_array[$indexOf] || function (element) {
 
 	var that = this,
 	length = that[$length],
@@ -18,4 +18,3 @@ $$_store($$_language_prototypes_array,$indexOf,$$_language_prototypes_array[$ind
 	return -1;
 
 });
-$$_o$indexOf = o[$indexOf];
