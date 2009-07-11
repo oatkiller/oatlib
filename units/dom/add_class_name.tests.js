@@ -9,7 +9,6 @@ tests.add_class_name = [
 		},
 		testNoClassName: function () {
 			o.dom.add_class_name(this.element,'foo');
-			console.log('!',this.element.className,'!');
 			Assert.areSame(this.element.className,'foo');
 		},
 		testSomeClassNames: function () {

@@ -135,7 +135,7 @@
 				gap = mind;
 				return v;
 			}
-		}
+		};
 
 
 			$$_json_stringify = $$_json[$stringify] = function (value, replacer, space) {

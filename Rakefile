@@ -107,8 +107,8 @@ end
 
 task :default do
 	desc "build all modules and their tests"
-	Rake::Task['build_tests'].invoke('all')
-	Rake::Task['minify'].invoke
+	Rake::Task['build_all_tests'].invoke
+	Rake::Task['build_all'].invoke
 end
 
 task :build_tests, [:module_string] => [:build] do |t, args|
@@ -116,6 +116,7 @@ task :build_tests, [:module_string] => [:build] do |t, args|
 	modules = args.module_string.split(' ').unshift('core').collect {|module_name| File.join('units',module_name + '.tests.js') }
 	sprocketized_src = sprocketize(['src','units'],modules)
 	dist(File.join(LIBRARY_ROOT,'dist','tests','units.js'),sprocketized_src)
+	Rake::Task['minify'].invoke
 end
 
 task :build, :module_string do |t, args|
@@ -124,6 +125,22 @@ task :build, :module_string do |t, args|
 	sprocketized_src = sprocketize(['src'],modules)
 	symbolized_src = symbolize(sprocketized_src)
 	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
+	Rake::Task['minify'].invoke
+end
+
+task :build_all do
+	desc "gets every js file in source and builds it all"
+	modules = get_files_under_path(File.join(LIBRARY_ROOT,'src')).map {|x| x.sub(/\.js$/,' ') }.join
+	Rake::Task['build'].invoke(modules)
+	Rake::Task['minify'].invoke
+end
+
+task :build_all_tests  do
+	desc "gets every js ile in units and builds and builds tests for it"
+	modules = get_files_under_path(File.join(LIBRARY_ROOT,'units')).map {|x| x.sub(/\.tests\.js$/,' ') }.join
+	print modules
+	Rake::Task['build_tests'].invoke(modules)
+	Rake::Task['minify'].invoke
 end
 
 task :build_plugins, :module_string do |t, args|
@@ -132,6 +149,7 @@ task :build_plugins, :module_string do |t, args|
 	sprocketized_src = sprocketize(['src','plugins'],modules)
 	symbolized_src = symbolize(sprocketized_src)
 	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
+	Rake::Task['minify'].invoke
 end
 
 task :minify do
