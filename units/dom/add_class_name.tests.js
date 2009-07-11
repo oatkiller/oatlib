@@ -1,19 +1,16 @@
-tests.dom = [
+tests.add_class_name = [
 	{
 		name: 'addClassName',
 		setUp: function () {
-			this.element = document.createElement('div');
-			document.body.appendChild(this.element);
+			this.element = {
+				className: ''
+			};
 			o = window['http://oatlab.com/oatlib/v2'];
-		},
-		tearDown: function () {
-			try {
-				document.body.removeChild(this.element);
-			} catch (e) {}
 		},
 		testNoClassName: function () {
 			o.dom.add_class_name(this.element,'foo');
-			Assert.isTrue(/(\s+|^)foo(\s+|$)/.test(this.element.className))
+			console.log('!',this.element.className,'!');
+			Assert.areSame(this.element.className,'foo');
 		},
 		testSomeClassNames: function () {
 			this.element.className = 'asdew asdf duck';

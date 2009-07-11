@@ -3,7 +3,8 @@ $$_dom_find_ancestor_or_self = $$_dom[$find_ancestor_or_self] = function (node,f
 	// test each ancestor until one passes the test, return that one
 	var found = $$null,
 	test = grandparent ? function (node) {
-		return node !== grandparent ? node[$parentNode] : $$null;
+		var parent_node = node[$parentNode];
+		return parent_node && parent_node !== grandparent && parent_node;
 	} : function (node) {
 		return node[$parentNode];
 	};
@@ -14,4 +15,5 @@ $$_dom_find_ancestor_or_self = $$_dom[$find_ancestor_or_self] = function (node,f
 			return found;
 		}
 	} while (node = test(node))
+	return false;
 };

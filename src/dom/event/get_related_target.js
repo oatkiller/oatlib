@@ -1,11 +1,11 @@
 //= require <dom/event/reference>
 //= require <get_object_property>
-//= require <curry>
+//= require <rcurry>
 (function (fn_name,property) {
 
  // muahahah :)
 	var fn = function (e) {
-		return (fn = e[$relatedTarget] ? $$_get_object_property[$$_o$curry]($relatedTarget) : $$_get_object_property[$$_o$curry](property))[$apply](this,arguments);
+		return (fn = e[$relatedTarget] ? $$_get_object_property[$$_o$rcurry]($relatedTarget) : $$_get_object_property[$$_o$rcurry](property))[$apply](this,arguments);
 	};
 
 	$$_dom_event[fn_name] = function () {

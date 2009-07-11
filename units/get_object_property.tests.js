@@ -6,7 +6,7 @@ tests.get_object_property = [
 			var obj = {
 				name: 'robert'
 			};
-			Assert.areSame(o.get_object_property('name',obj),obj.name);
+			Assert.areSame(o.get_object_property(obj,'name'),obj.name);
 		}
 	}
 ];

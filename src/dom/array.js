@@ -5,10 +5,9 @@
 
 (function () {
 
-	var testDiv = $$document[$createElement]('div'),
-	fn;
-	testDiv[$innerHTML] = 'a<b>b</b>';
-	fn = function () {
+	var fn = function () {
+		var testDiv = $$document[$createElement]('div');
+		testDiv[$innerHTML] = 'a';
 		try {// try to use slice to get an array from an HTML elements collection. if this works, use slice for the array fn, else use an fn that iterates over the array like object and builds a new array incrementally. IE should get the second fn, others should get the first. generally.
 			$$_array(testDiv[$childNodes]);
 			fn = $$_dom_array = $$_dom[$array] = $$_array;
