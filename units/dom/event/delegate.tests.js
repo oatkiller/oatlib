@@ -1,13 +1,4 @@
-tests.core = [
-	{
-		name: 'core',
-		setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
-		'test core': function () {
-			Assert.areEqual('http://oatlab.com/oatlib/v2',o);
-		}
-	}
-];
-tests.filter_delegates_by_descendant = [
+tests.dom_event_delegate = [
 	{
 		name: 'filter_delegates_by_descendant',
 		setUp: function () {
@@ -22,6 +13,14 @@ tests.filter_delegates_by_descendant = [
 			],my_div.firstChild.firstChild);
 			Assert.areSame(results[0].ancestor,my_div);
 			Assert.areSame(results.length,1);
+		}
+	},
+	{
+		name: 'consider_delegates_for_node',
+		setUp: function () {
+			o = window['http://oatlab.com/oatlib/v2'];
+		},
+		'testworks': function () {
 		}
 	}
 ];
