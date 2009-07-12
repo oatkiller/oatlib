@@ -15,7 +15,7 @@ $$_store = function (obj,name,payload) {
 	obj[qname] = payload;
 	return (o[name] = qname);
 };
-$$window[namespace] = o = {};
+this[namespace] = o = {};
 o[$toString] = function () {
 	return namespace;
 };

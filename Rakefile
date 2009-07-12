@@ -40,7 +40,7 @@ def symbolize(src)
 	results.push('(function () {')
 	results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"emptyString = '';"].join())
 	results.concat(codeLines)
-	results.push('})();')
+	results.push('}).apply(this);')
 
 	return results
 
