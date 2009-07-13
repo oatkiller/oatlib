@@ -3,6 +3,7 @@ require 'rake/packagetask'
 require 'yaml'
 
 LIBRARY_ROOT = File.expand_path(File.dirname(__FILE__))
+YUI_COMPRESSOR_ROOT = File.join(LIBRARY_ROOT,'yuicompressor.jar')
 
 def sprocketize(load_path, sources)
   begin
