@@ -12,7 +12,7 @@
 	};
 	$$_dom_event_consider_delegates_for_node = $$_dom_event[$consider_delegates_for_node] = function (delegates,node,e,oe) {
 		var filtered_delegates = delegates[$$_o$filter](function (delegate) {
-			if (delegate[$ancestor] === node) {
+			if (!delegate[$ancestor] || delegate[$ancestor] === node) { // if the ancestor got deleted
 				return $$false;
 			} else if (!delegate[$test](node,e,oe)) {
 				return $$true;
@@ -44,11 +44,15 @@
 	};
 	$$_dom_event_delegate = $$_dom_event[$delegate] = function (options) {
 		var type = options[$type],
-		array_of_delegates = $$_dom_event_get_or_create_array_of_delegates_by_type(type);
-		array_of_delegates[$push]({
+		array_of_delegates = $$_dom_event_get_or_create_array_of_delegates_by_type(type),
+		delegate_object = {
 			test: options[$test],
 			action: options[$action],
 			ancestor: options[$ancestor]
-		});
+		};
+		array_of_delegates[$push](delegate_object);
+		return function () {
+			delete delegate_object[$ancestor];
+		};
 	};
 })();
