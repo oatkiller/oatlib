@@ -5,16 +5,14 @@
 //= require <dom/contains>
 (function () {
 
-	$$_dom_event_filter_delegates_by_descendant = $$_dom_event[$filter_delegates_by_descendant] = function (delegates,descendant) {
+	var filter_delegates_by_descendant = $$_dom_event[$filter_delegates_by_descendant] = function (delegates,descendant) {
 		return $$_filter(delegates,function (delegate) {
 			return $$_dom_contains(delegate[$ancestor],descendant);
 		});
 	};
-	$$_dom_event_consider_delegates_for_node = $$_dom_event[$consider_delegates_for_node] = function (delegates,node,e,oe) {
+	var consider_delegates_for_node = $$_dom_event[$consider_delegates_for_node] = function (delegates,node,e,oe) {
 		var filtered_delegates = delegates[$$_o$filter](function (delegate) {
-			if (!delegate[$ancestor] || delegate[$ancestor] === node) { // if the ancestor got deleted
-				return $$false;
-			} else if (!delegate[$test](node,e,oe)) {
+			if (!delegate[$test](node,e,oe)) {
 				return $$true;
 			} else {
 				oe[$delegate_target] = node;
@@ -25,26 +23,33 @@
 		new_node = node[$parentNode];
 		return filtered_delegates[$length] && new_node ? arguments[$callee](filtered_delegates,new_node,e,oe) : $$true;
 	};
-	$$_dom_event_delegates = $$_dom_event[$delegates] = [];
- 	$$_dom_event_delegate_handler = $$_dom_event[$delegate_handler] = function (type,e,oe) {
-		var delegates_by_type = $$_dom_event_delegates[type],
+	var delegates = $$_dom_event[$delegates] = $$_dom_event[$delegates] = [];
+	var garbage_collect_delegates_by_type = function (type) {
+		return delegates[type] = delegates[type][$$_o$filter](function (delegate) {
+			return $ancestor in delegate;
+		});
+	};
+ 	var delegate_handler = $$_dom_event[$delegate_handler] = function (type,e,oe) {
+		garbage_collect_delegates_by_type(type);
+		var delegates_by_type = delegates[type],
 		current_target = oe[$get_target](),
-		delegates_by_descendant = $$_dom_event_filter_delegates_by_descendant(delegates_by_type,current_target);
-		$$_dom_event_consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
+		delegates_by_descendant;
+		delegates_by_descendant = filter_delegates_by_descendant(delegates_by_type,current_target);
+		consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
+	},
+	add_delegate_handler_by_type = $$_dom_event[$add_delegate_handler_by_type] = function (type) {
+		$$_dom_event_add_listener($$document[$body],type,delegate_handler[$$_o$curry](type));
 	};
-	$$_dom_event_add_delegate_handler_by_type = $$_dom_event[$add_delegate_handler_by_type] = function (type) {
-		$$_dom_event_add_listener($$document[$body],type,$$_dom_event_delegate_handler[$$_o$curry](type));
-	};
-	$$_dom_event_get_or_create_array_of_delegates_by_type = $$_dom_event[$get_or_create_array_of_delegates_by_type] = function (type) {
-		if (!$$_dom_event_delegates[$hasOwnProperty](type)) {
-			$$_dom_event_add_delegate_handler_by_type(type);
-			$$_dom_event_delegates[type] = [];
+	get_or_create_array_of_delegates_by_type = $$_dom_event[$get_or_create_array_of_delegates_by_type] = function (type) {
+		if (!delegates[$hasOwnProperty](type)) {
+			add_delegate_handler_by_type(type);
+			delegates[type] = [];
 		}
-		return $$_dom_event_delegates[type];
+		return delegates[type];
 	};
 	$$_dom_event_delegate = $$_dom_event[$delegate] = function (options) {
 		var type = options[$type],
-		array_of_delegates = $$_dom_event_get_or_create_array_of_delegates_by_type(type),
+		array_of_delegates = get_or_create_array_of_delegates_by_type(type),
 		delegate_object = {
 			test: options[$test],
 			action: options[$action],

@@ -12,7 +12,7 @@
 			}
 		}
 		return results;
-	}
+	};
 
 	$$_o$filter = $$_store($$_language_prototypes_array,$filter,fn);
 	$$_filter = o[$filter] = $$_take(fn);
