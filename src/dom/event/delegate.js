@@ -20,12 +20,13 @@
 		});
 	};
 	consider_delegates_for_node = $$_dom_event[$consider_delegates_for_node] = function (delegates,node,e,oe) {
-		var filtered_delegates = delegates[$$_o$filter](function (delegate) {
+		var result,
+		filtered_delegates = delegates[$$_o$filter](function (delegate) {
 			if (!delegate[$test](node,e,oe)) {
 				return $$true;
 			} else {
 				oe[$delegate_target] = node;
-				delegate[$action](e,oe);
+				result = delegate[$action](e,oe);
 				return $$false;
 			}
 		}),
@@ -44,7 +45,7 @@
 		current_target = oe[$get_target](),
 		delegates_by_descendant;
 		delegates_by_descendant = filter_delegates_by_descendant(delegates_by_type,current_target);
-		consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
+		return consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
 	};
 	add_delegate_handler_by_type = $$_dom_event[$add_delegate_handler_by_type] = function (type) {
 		$$_dom_event_add_listener($$document[$body],type,delegate_handler[$$_o$curry](type));
