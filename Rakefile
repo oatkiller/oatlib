@@ -25,12 +25,53 @@ def sprocketize(load_path, sources)
   secretary.concatenation.to_s.split(/\n/)
 end
 
+def neutralize_literals(line)
+	minus_double_quotes = line.gsub(/"[^"]*"/) {|s| "\"" + s[0,s.length-2].gsub(/./,'b') + "\""}
+	minus_single_quotes = minus_double_quotes.gsub(/'[^']*'/) {|s| "\"" + s[0,s.length-2].gsub(/./,'b') + "\""}
+	return minus_single_quotes.gsub(/\/[^\/]*\//) {|s| "\/" + s[0,s.length-2].gsub(/./,'b') + "\/"}
+end
+
+def pre_symbolize(src)
+
+	hash_of_symbols = Hash.new
+
+	src.each do |line|
+		neutralized = neutralize_literals(line)
+		matches = neutralized.scan(/\.([$_A-Za-z][A-Za-z0-9$_]*)/)
+		matches && matches.map {|array| array[0]}.each do |symbol_name|
+			hash_of_symbols[symbol_name] = hash_of_symbols[symbol_name] ? hash_of_symbols[symbol_name] + 1 : 1
+		end
+	end
+
+	ones_to_replace = []
+	hash_of_symbols.each {|name,count|
+		unsymbolized_cost = count * (name.length + 1)
+		symbolized_cost = (4 + 1.25 + 4 + name.length) + (count * 3.25)
+		#puts unsymbolized_cost.to_s + " vrs " + symbolized_cost.to_s
+		if [symbolized_cost,unsymbolized_cost].min == symbolized_cost
+			#puts "will symbolize " + name
+			ones_to_replace.push(name)
+		else
+			#puts "willnt symbolize " + name
+		end
+	}
+
+	return src.map do |line|
+		resultant_line = line
+		ones_to_replace.each do |symbol_name|
+			resultant_line = resultant_line.gsub(Regexp.new('\.'+symbol_name+'\\b'),'[$'+symbol_name+']')
+		end
+		resultant_line
+	end
+
+end
+
 def symbolize(src)
 	symbols = [] # holds 'symbols' found in js
 	codeLines = [] # holds every line, to be written out later
 	results = []
 
-	src.each do |line|
+	pre_symbolize(src).each do |line|
 		matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
 		matches && matches.map {|array| array[0]}.each do |symbol|
 			symbols.push(symbol) # record any symbols in the array
