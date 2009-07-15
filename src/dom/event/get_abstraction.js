@@ -21,7 +21,8 @@
 		get_button: curry_with_this_dot_event($$_dom_event_get_button),
 		get_key: curry_with_this_dot_event($$_dom_event_get_key),
 		get_mouse_coordinates: curry_with_this_dot_event($$_dom_event_get_mouse_coordinates),
-		get_related_target: curry_with_this_dot_event($$_dom_event_get_related_target),
+		get_related_mouseover_target: curry_with_this_dot_event($$_dom_event_get_related_mouseover_target),
+		get_related_mouseout_target: curry_with_this_dot_event($$_dom_event_get_related_mouseout_target),
 		get_target: curry_with_this_dot_event($$_dom_event_get_target),
 		prevent_default: curry_with_this_dot_event($$_dom_event_prevent_default),
 		cancel: curry_with_this_dot_event($$_dom_event_cancel)
