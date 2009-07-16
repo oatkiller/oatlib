@@ -48,7 +48,7 @@
 		return consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
 	};
 	add_delegate_handler_by_type = $$_dom_event.add_delegate_handler_by_type = function (type) {
-		$$_dom_event_add_listener($$document.body,type,delegate_handler[$$_o$curry](type));
+		$$_dom_event_add_listener(document.body,type,delegate_handler[$$_o$curry](type));
 	};
 	get_or_create_array_of_delegates_by_type = $$_dom_event.get_or_create_array_of_delegates_by_type = function (type) {
 		if (!delegates.hasOwnProperty(type)) {
