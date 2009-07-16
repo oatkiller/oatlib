@@ -1,5 +1,5 @@
 //= require <dom/reference>
-$$_dom_unhide_node = $$_dom.unhide_node = function (node) {
+$$_dom_unhide = $$_dom.unhide = function (node) {
 	node.style.display = emptyString;
 	return node;
 };

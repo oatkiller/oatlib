@@ -1,6 +1,6 @@
 //= require <dom/reference>
-$$_dom_find_node_position = $$_dom.find_node_position = function (node) {
-	var sum_of_x = sum_of_y = 0;
+$$_dom_find_position = $$_dom.find_position = function (node) {
+	var sum_of_x = 0, sum_of_y = sum_of_x;
 	if (node.offsetParent) {
 		do {
 			sum_of_x += node.offsetLeft;
