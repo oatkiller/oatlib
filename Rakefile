@@ -21,7 +21,6 @@ def sprocketize(load_path, sources)
     :source_files => sources
   )
 
-  #secretary.concatenation.save_to(File.join(LIBRARY_ROOT, destination))
   secretary.concatenation.to_s.split(/\n/)
 end
 
@@ -47,21 +46,26 @@ def pre_symbolize(src)
 	hash_of_symbols.each {|name,count|
 		unsymbolized_cost = count * (name.length + 1)
 		symbolized_cost = (4 + 1 + 4 + name.length) + (count * 3)
-		#puts unsymbolized_cost.to_s + " vrs " + symbolized_cost.to_s
 		if [symbolized_cost,unsymbolized_cost].min == symbolized_cost
-			#puts "will symbolize " + name
 			ones_to_replace.push(name)
 		else
-			#puts "willnt symbolize " + name
 		end
 	}
 
 	return src.map do |line|
-		resultant_line = line
+		replaced_line = line
 		ones_to_replace.each do |symbol_name|
-			resultant_line = resultant_line.gsub(Regexp.new('\.'+symbol_name+'\\b'),'[$'+symbol_name+']')
+			replaced_line = replaced_line.gsub(Regexp.new('\.'+symbol_name+'\\b'),'[$'+symbol_name+']')
 		end
-		resultant_line
+
+		matches = line.scan(/('[^']+'|\/[^\/]+\/|"[^"]+")/)
+		neutralized_line = neutralize_literals(replaced_line)
+		count = -1
+		neutralized_line.gsub(/('b+'|\/b+\/|"b+")/) {|literal| 
+			count += 1
+			matches[count]
+		}
+
 	end
 
 end
