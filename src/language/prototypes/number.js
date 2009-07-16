@@ -1,1 +1,1 @@
-$$_language_prototypes_number = $$Number.prototype;
+$$_language_prototypes_number = Number.prototype;

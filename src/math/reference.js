@@ -1,1 +1,1 @@
-$$_math = o[$math] = {};
+$$_math = o.math = {};

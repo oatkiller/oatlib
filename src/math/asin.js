@@ -1,1 +1,1 @@
-$$_asin = $$Math.asin;
+$$_asin = Math.asin;

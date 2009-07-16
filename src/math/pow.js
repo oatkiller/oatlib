@@ -1,1 +1,1 @@
-$$_pow = $$Math.pow;
+$$_pow = Math.pow;

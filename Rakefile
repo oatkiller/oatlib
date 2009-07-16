@@ -25,9 +25,9 @@ def sprocketize(load_path, sources)
 end
 
 def neutralize_literals(line)
-	minus_double_quotes = line.gsub(/"[^"]*"/) {|s| "\"" + s[0,s.length-2].gsub(/./,'b') + "\""}
-	minus_single_quotes = minus_double_quotes.gsub(/'[^']*'/) {|s| "\"" + s[0,s.length-2].gsub(/./,'b') + "\""}
-	return minus_single_quotes.gsub(/\/[^\/]*\//) {|s| "\/" + s[0,s.length-2].gsub(/./,'b') + "\/"}
+	line.gsub(/('[^']+'|\/[^\/]+\/|"[^"]+")/) {|literal|
+		literal[0,1] + literal[0,literal.length - 2].gsub(/./,'b') + literal[literal.length - 1,1]
+	}
 end
 
 def handle_constants(src)
@@ -35,7 +35,7 @@ def handle_constants(src)
 
 	src.each do |line|
 		neutralized = neutralize_literals(line)
-		matches = neutralized.scan(/\b(true|false|window|document|null|undefined|Array|Function|Object|Date|Number|Boolean|parseInt|parseFloat|Math)\b/)
+		matches = neutralized.scan(/\b(true|RegExp|false|window|document|null|String|undefined|Array|Function|Object|Date|Number|Boolean|parseInt|parseFloat|Math)\b/)
 		matches && matches.map {|array| array[0]}.each do |symbol_name|
 			hash_of_symbols[symbol_name] = hash_of_symbols[symbol_name] ? hash_of_symbols[symbol_name] + 1 : 1
 		end
@@ -57,7 +57,7 @@ def handle_constants(src)
 			replaced_line = replaced_line.gsub(Regexp.new('\\b'+symbol_name+'\\b'),'$$'+symbol_name)
 		end
 
-		matches = line.scan(/('[^']+'|\/[^\/]+\/|"[^"]+")/)
+		matches = line.scan(/('[^']+'|\/[^\/]+\/|"[^"]+")/).map {|array| array[0]}
 		neutralized_line = neutralize_literals(replaced_line)
 		count = -1
 		neutralized_line.gsub(/('b+'|\/b+\/|"b+")/) {|literal| 
@@ -74,13 +74,14 @@ def pre_symbolize(but_src)
 	hash_of_symbols = Hash.new
 	src = handle_constants(but_src)
 
-	handle_constants(src).each do |line|
+	src.each do |line|
 		neutralized = neutralize_literals(line)
 		matches = neutralized.scan(/\.([$_A-Za-z][A-Za-z0-9$_]*)/)
 		matches && matches.map {|array| array[0]}.each do |symbol_name|
 			hash_of_symbols[symbol_name] = hash_of_symbols[symbol_name] ? hash_of_symbols[symbol_name] + 1 : 1
 		end
 	end
+	
 
 	ones_to_replace = []
 	hash_of_symbols.each {|name,count|
@@ -93,13 +94,19 @@ def pre_symbolize(but_src)
 	}
 
 	return src.map do |line|
+		#puts 'processing line: ' + line
 		replaced_line = line
+		#puts 'about to process ' + ones_to_replace.length.to_s + ' symbols'
 		ones_to_replace.each do |symbol_name|
+			#puts 'replacing ' + symbol_name + ' instances found in line'
 			replaced_line = replaced_line.gsub(Regexp.new('\.'+symbol_name+'\\b'),'[$'+symbol_name+']')
 		end
 
 		matches = line.scan(/('[^']+'|\/[^\/]+\/|"[^"]+")/)
+		#puts 'looking for matches. . . ' + matches.length.to_s + ' found'
 		neutralized_line = neutralize_literals(replaced_line)
+		#puts 'neutralizing the line'
+		#puts 'neutered line: ' + neutralized_line
 		count = -1
 		neutralized_line.gsub(/('b+'|\/b+\/|"b+")/) {|literal| 
 			count += 1
@@ -217,6 +224,7 @@ end
 task :build_all do
 	desc "gets every js file in source and builds it all"
 	modules = get_files_under_path(File.join(LIBRARY_ROOT,'src')).map {|x| x.sub(/\.js$/,' ') }.join
+	puts "building modules: " + modules
 	Rake::Task['build'].invoke(modules)
 	Rake::Task['minify'].invoke
 end

@@ -1,1 +1,1 @@
-$$_cos = $$Math.cos;
+$$_cos = Math.cos;

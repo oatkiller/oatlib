@@ -38,7 +38,7 @@
 			format(that.getUTCDate()),'T',
 			format(that.getUTCHours()),':',
 			format(that.getUTCMinutes()),':',
-			format(that.getUTCSeconds()),'Z') : $$null;
+			format(that.getUTCSeconds()),'Z') : null;
 	});
 
 	$$_store($$_language_prototypes_string,$toJSON,valueOf);
@@ -82,13 +82,13 @@
 
 		switch (typeof value) {
 			case $string: return quote(value);
-			case $number: return isFinite(value) ? $$String(value) : $null; // JSON numbers must be finite. Encode non-finite numbers as null.
+			case $number: return isFinite(value) ? String(value) : $null; // JSON numbers must be finite. Encode non-finite numbers as null.
 			case $boolean:
-			case $null: return $$String(value); // If the value is a boolean or null, convert it to a string. Note: typeof null does not produce 'null'. The case is included here in the remote chance that this gets fixed someday.
+			case $null: return String(value); // If the value is a boolean or null, convert it to a string. Note: typeof null does not produce 'null'. The case is included here in the remote chance that this gets fixed someday.
 			case $object: if (!value) { return $null; } // Due to a blunder in javascript, typeof null is 'object', so watch out for that case. If the type is 'object', we might be dealing with an object or an array or null.
 				gap += indent;
 				partial = []; // Make an array to hold the partial results of stringifying this object value.
-				if ($$Object.prototype.toString.apply(value) === '[object Array]') { // Is the value an array?
+				if (Object.prototype.toString.apply(value) === '[object Array]') { // Is the value an array?
 					length = value.length;
 					// The value is an array. Stringify every element. Use null as a placeholder for non-JSON values.
 					for (i = 0; i < length; i += 1) {

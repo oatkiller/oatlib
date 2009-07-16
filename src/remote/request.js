@@ -33,7 +33,7 @@
 	defaultHeaders = {'User-Agent': 'XMLHTTP/1.0'};
 
 	defaultOptions.method = $GET;
-	defaultOptions.async = $$true;
+	defaultOptions.async = true;
 
 	$$_remote_request = $$_remote.request = function (responseOptions) {
 		// merge default headers and specified headers
@@ -57,12 +57,12 @@
 			myAjax.setRequestHeader(headerLabel,headerValue);
 		});
 		// start the ajax. pass either specified post data or null
-		myAjax.send(options.post || $$null);
+		myAjax.send(options.post || null);
 		// pass back a masked version 
 		return $$_mask(myAjax,{
 			abort: function () {
 				call(options.onAbort);
-				myAjax.onreadystatechange = $$null;
+				myAjax.onreadystatechange = null;
 				myAjax.abort();
 			}
 		});

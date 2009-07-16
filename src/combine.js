@@ -19,6 +19,6 @@
 	}));
 	//
 	// curries combinator with a test that takes every property, including ones on the subject arguments __proto__
-	$$_super_combine = o.super_combine = combinator[$$_o$curry](iterator[$$_o$curry](function () {return $$true;}));
+	$$_super_combine = o.super_combine = combinator[$$_o$curry](iterator[$$_o$curry](function () {return true;}));
 
 })();

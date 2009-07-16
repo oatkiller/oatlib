@@ -1,1 +1,1 @@
-$$_return_true = function () {return $$true;};
+$$_return_true = function () {return true;};

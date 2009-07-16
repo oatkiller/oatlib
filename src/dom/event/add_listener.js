@@ -10,13 +10,13 @@ $$_dom_event_add_listener = $$_dom_event.add_listener = function (node,type,fn,b
 		return fn.call(this,e,$$_dom_event_get_abstraction(e));
 	},
 	args = [node,type,wrapped_fn,bubble];
-	$$_dom_event_add_handler.apply($$null,args);
+	$$_dom_event_add_handler.apply(null,args);
 
 	// register event for removal at page unload
 	$$_dom_event_events_to_remove.push(args);
 	return function () {
 		// remove the args from the array of args scheduled from remove. 
 		// then remove them args :)
-		return $$_dom_event_remove_handler.apply($$null,args);
+		return $$_dom_event_remove_handler.apply(null,args);
 	};
 };

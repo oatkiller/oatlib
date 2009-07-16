@@ -7,7 +7,7 @@
 	var fn = function () {
 		// try a few ways to create a xmlhttp ajax object. when one works return the object it produced. also redefine this fn to the lucky fn that worked
 		// if this fn returns false. then i dunno how to ajax on this browser.
-		var ajaxObject = $$false,
+		var ajaxObject = false,
 		// ms uses this differently in different version of ie
 		activeXFn = function (versionString) {
 			return new ActiveXObject(versionString);
@@ -35,7 +35,7 @@
 				return ajaxObject;
 			} catch (e) {
 				// you failed, throw away any ajax object we almost got.
-				ajaxObject = $$false;
+				ajaxObject = false;
 			}
 		}
 		$$_error('ajax not supported');

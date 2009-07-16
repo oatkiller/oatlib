@@ -1,1 +1,1 @@
-$$_abs = $$Math.abs;
+$$_abs = Math.abs;

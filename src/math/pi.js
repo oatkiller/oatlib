@@ -1,1 +1,1 @@
-$$_pi = $$Math.PI;
+$$_pi = Math.PI;

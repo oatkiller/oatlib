@@ -1,2 +1,2 @@
-$$_language_prototypes_date = $$Date.prototype;
+$$_language_prototypes_date = Date.prototype;
 

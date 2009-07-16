@@ -23,15 +23,15 @@
 		var result,
 		filtered_delegates = delegates[$$_o$filter](function (delegate) {
 			if (!delegate.test(node,e,oe)) {
-				return $$true;
+				return true;
 			} else {
 				oe.delegate_target = node;
 				result = delegate.action(e,oe);
-				return $$false;
+				return false;
 			}
 		}),
 		new_node = node.parentNode;
-		return filtered_delegates.length && new_node ? arguments.callee(filtered_delegates,new_node,e,oe) : $$true;
+		return filtered_delegates.length && new_node ? arguments.callee(filtered_delegates,new_node,e,oe) : true;
 	};
 	delegates = $$_dom_event.delegates = $$_dom_event.delegates = [];
 	garbage_collect_delegates_by_type = function (type) {

@@ -1,1 +1,1 @@
-$$_language_prototypes_boolean = $$Boolean.prototype;
+$$_language_prototypes_boolean = Boolean.prototype;

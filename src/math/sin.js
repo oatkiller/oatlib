@@ -1,1 +1,1 @@
-$$_sin = $$Math.sin;
+$$_sin = Math.sin;

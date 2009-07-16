@@ -1,1 +1,1 @@
-$$_language_prototypes_function = $$Function.prototype;
+$$_language_prototypes_function = Function.prototype;
