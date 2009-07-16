@@ -69,9 +69,10 @@ def handle_constants(src)
 
 end
 
-def pre_symbolize(src)
+def pre_symbolize(but_src)
 
 	hash_of_symbols = Hash.new
+	src = handle_constants(but_src)
 
 	handle_constants(src).each do |line|
 		neutralized = neutralize_literals(line)
