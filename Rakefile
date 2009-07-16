@@ -30,11 +30,50 @@ def neutralize_literals(line)
 	return minus_single_quotes.gsub(/\/[^\/]*\//) {|s| "\/" + s[0,s.length-2].gsub(/./,'b') + "\/"}
 end
 
+def handle_constants(src)
+	hash_of_symbols = Hash.new
+
+	src.each do |line|
+		neutralized = neutralize_literals(line)
+		matches = neutralized.scan(/\b(true|false|window|document|null|undefined|Array|Function|Object|Date|Number|Boolean|parseInt|parseFloat|Math)\b/)
+		matches && matches.map {|array| array[0]}.each do |symbol_name|
+			hash_of_symbols[symbol_name] = hash_of_symbols[symbol_name] ? hash_of_symbols[symbol_name] + 1 : 1
+		end
+	end
+
+	ones_to_replace = []
+	hash_of_symbols.each {|name,count|
+		unsymbolized_cost = count * name.length
+		symbolized_cost = 4 + name.length + count
+		if [symbolized_cost,unsymbolized_cost].min == symbolized_cost
+			ones_to_replace.push(name)
+		else
+		end
+	}
+
+	return src.map do |line|
+		replaced_line = line
+		ones_to_replace.each do |symbol_name|
+			replaced_line = replaced_line.gsub(Regexp.new('\\b'+symbol_name+'\\b'),'$$'+symbol_name)
+		end
+
+		matches = line.scan(/('[^']+'|\/[^\/]+\/|"[^"]+")/)
+		neutralized_line = neutralize_literals(replaced_line)
+		count = -1
+		neutralized_line.gsub(/('b+'|\/b+\/|"b+")/) {|literal| 
+			count += 1
+			matches[count]
+		}
+
+	end
+
+end
+
 def pre_symbolize(src)
 
 	hash_of_symbols = Hash.new
 
-	src.each do |line|
+	handle_constants(src).each do |line|
 		neutralized = neutralize_literals(line)
 		matches = neutralized.scan(/\.([$_A-Za-z][A-Za-z0-9$_]*)/)
 		matches && matches.map {|array| array[0]}.each do |symbol_name|
