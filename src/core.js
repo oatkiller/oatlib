@@ -19,3 +19,4 @@ this[namespace] = o = {};
 o.toString = function () {
 	return namespace;
 };
+o.qname = $$_qname;
