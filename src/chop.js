@@ -1,5 +1,5 @@
 //= require <language/prototypes/array>
 $$_o$chop = $$_store($$_language_prototypes_array,$chop,function () {
-	this[$length]--;
+	this.length--;
 	return this;
 });

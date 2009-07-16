@@ -1,1 +1,1 @@
-$$_language_prototypes_object = $$Object[$prototype];
+$$_language_prototypes_object = $$Object.prototype;

@@ -10,7 +10,7 @@
 
 	var defaultOptions = {},
 	handler = function (ajax,options,call) {
-		if (ajax[$readyState] === 4) {
+		if (ajax.readyState === 4) {
 			var status = ajax[$status];
  			// for some status code classes
 			[500,400,200][$$_o$each](function (statusCode) {
@@ -22,22 +22,22 @@
 			});
 			// if status is in the 300,400,500 class, its a failure
 			if (status > 299) {
-				call(options[$onFailure]);
+				call(options.onFailure);
 			} else if (status > 199) {
 			// if its in the 200-299 range, its a success!
-				call(options[$onSuccess]);
+				call(options.onSuccess);
 			}
-			call(options[$onComplete]);
+			call(options.onComplete);
 		}
 	},
 	defaultHeaders = {'User-Agent': 'XMLHTTP/1.0'};
 
-	defaultOptions[$method] = $GET;
-	defaultOptions[$async] = $$true;
+	defaultOptions.method = $GET;
+	defaultOptions.async = $$true;
 
-	$$_remote_request = $$_remote[$request] = function (responseOptions) {
+	$$_remote_request = $$_remote.request = function (responseOptions) {
 		// merge default headers and specified headers
-		var headers = $$_combine({},defaultHeaders,responseOptions[$headers]),
+		var headers = $$_combine({},defaultHeaders,responseOptions.headers),
  		// create a new object with default options and specified options smushed together
 		options = $$_combine({},defaultOptions,responseOptions),
 		// get a new ajax from xmlhttp
@@ -47,23 +47,23 @@
 			fn && fn(myAjax,options);
 		};
 		// put the merged headers into the options object
-		options[$headers] = headers;
+		options.headers = headers;
 		// set 1t event handler
-		myAjax[$onreadystatechange] = handler[$$_o$curry](myAjax,options,call);
+		myAjax.onreadystatechange = handler[$$_o$curry](myAjax,options,call);
 		// 'open' initializes the ajax with the mandatory stuff
-		myAjax[$open](options[$method],options[$url],options[$async]);
+		myAjax.open(options.method,options.url,options.async);
 		// for each thing in the headers object, add it
-		options[$headers] && $$_for_each(options[$headers],function (headerValue,headerLabel) {
-			myAjax[$setRequestHeader](headerLabel,headerValue);
+		options.headers && $$_for_each(options.headers,function (headerValue,headerLabel) {
+			myAjax.setRequestHeader(headerLabel,headerValue);
 		});
 		// start the ajax. pass either specified post data or null
-		myAjax[$send](options[$post] || $$null);
+		myAjax.send(options.post || $$null);
 		// pass back a masked version 
 		return $$_mask(myAjax,{
 			abort: function () {
-				call(options[$onAbort]);
-				myAjax[$onreadystatechange] = $$null;
-				myAjax[$abort]();
+				call(options.onAbort);
+				myAjax.onreadystatechange = $$null;
+				myAjax.abort();
 			}
 		});
 	};

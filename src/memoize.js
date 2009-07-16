@@ -10,12 +10,12 @@
 		var that = this;
 		return function () {
 			var key = join(arguments);
-			return memo[$hasOwnProperty](key) ? memo[key] : (memo[key] = that[$apply](this,arguments));
+			return memo.hasOwnProperty(key) ? memo[key] : (memo[key] = that.apply(this,arguments));
 		};
 	};
 
 	$$_o$memoize = $$_store($$_language_prototypes_function,$memoize,fn);
-	$$_memoize = o[$memoize] = $$_take(fn);
-	$$_memoize[$toString] = $$_K[$$_o$curry]($$_o$memoize);
+	$$_memoize = o.memoize = $$_take(fn);
+	$$_memoize.toString = $$_K[$$_o$curry]($$_o$memoize);
 	
 })();

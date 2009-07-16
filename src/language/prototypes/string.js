@@ -1,2 +1,2 @@
-$$_language_prototypes_string = $$String[$prototype];
+$$_language_prototypes_string = $$String.prototype;
 

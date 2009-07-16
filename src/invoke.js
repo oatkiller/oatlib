@@ -1,3 +1,3 @@
-$$_invoke = o[$invoke] = function (n) {
+$$_invoke = o.invoke = function (n) {
 	return n();
 };

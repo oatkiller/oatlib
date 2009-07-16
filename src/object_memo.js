@@ -1,6 +1,6 @@
-$$_object_memo = o[$object_memo] = function (propertyName,calculate) {
+$$_object_memo = o.object_memo = function (propertyName,calculate) {
 	return function () {
 		var that = this;
-		return that[$hasOwnProperty](propertyName) ? that[propertyName] : (that[propertyName] = calculate[$apply](that,arguments));
+		return that.hasOwnProperty(propertyName) ? that[propertyName] : (that[propertyName] = calculate.apply(that,arguments));
 	};
 };

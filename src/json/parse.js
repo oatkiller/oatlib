@@ -2,7 +2,7 @@
 (function () {
 	var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 
-	$$_json_parse = $$_json[$parse] = function (text, reviver) {
+	$$_json_parse = $$_json.parse = function (text, reviver) {
 
 	// The parse method takes a text and an optional reviver function, and returns
 	// a JavaScript value if the text is a valid JSON text.
@@ -15,7 +15,7 @@
 				var k, v, value = holder[key];
 				if (value && typeof value === $object) {
 					for (k in value) {
-						if ($$_hasOwnProperty[$call](value, k)) {
+						if ($$_hasOwnProperty.call(value, k)) {
 							v = walk(value, k);
 							if (v !== $$undefined) {
 								value[k] = v;
@@ -31,11 +31,11 @@
 
 			// Parsing happens in four stages. In the first stage, we replace certain Unicode characters with escape sequences. JavaScript handles many characters incorrectly, either silently deleting them, or treating them as line endings.
 
-			cx[$lastIndex] = 0;
-			if (cx[$test](text)) {
-					text = text[$replace](cx, function (a) {
+			cx.lastIndex = 0;
+			if (cx.test(text)) {
+					text = text.replace(cx, function (a) {
 							return '\\u' +
-									('0000' + a[$charCodeAt](0)[$toString](16))[$slice](-4);
+									('0000' + a.charCodeAt(0).toString(16)).slice(-4);
 					});
 			}
 
@@ -52,7 +52,7 @@
 	// we look to see that the remaining characters are only whitespace or ']' or
 	// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
-			if (/^[\],:{}\s]*$/[$test](text[$replace](/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')[$replace](/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')[$replace](/(?:^|:|,)(?:\s*\[)+/g,emptyString))) {
+			if (/^[\],:{}\s]*$/[$test](text[$replace](/\\(?:["\\\/bfnrt]|u.-9a-fA-F{4})/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')[$replace](/(?:^|:|,)(?:\s*\[)+/g,emptyString))) {
 
 	// In the third stage we use the eval function to compile the text into a
 	// JavaScript structure. The '{' operator is subject to a syntactic ambiguity

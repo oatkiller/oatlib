@@ -1,1 +1,1 @@
-$$_language_prototypes_array = $$Array[$prototype];
+$$_language_prototypes_array = $$Array.prototype;

@@ -22,10 +22,10 @@
 				return new XMLHttpRequest();
 			}
 		];
-		while (fns[$length] !== 0) {
+		while (fns.length !== 0) {
 			try {
 				// tear an fn right out from under that array
-				var anFn = fns[$shift]();
+				var anFn = fns.shift();
 				// try and work it
 				ajaxObject = anFn();
 
@@ -38,11 +38,11 @@
 				ajaxObject = $$false;
 			}
 		}
-		o[$error]('ajax not supported');
+		$$_error('ajax not supported');
 	};
 
-	$$_remote_ajax = $$_remote[$ajax] = function () {
-		return fn[$apply](this,arguments);
+	$$_remote_ajax = $$_remote.ajax = function () {
+		return fn.apply(this,arguments);
 	};
 
 })();

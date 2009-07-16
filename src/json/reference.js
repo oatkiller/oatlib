@@ -1,1 +1,1 @@
-$$_json = o[$json] = {};
+$$_json = o.json = {};

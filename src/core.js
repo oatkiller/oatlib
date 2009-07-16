@@ -16,6 +16,6 @@ $$_store = function (obj,name,payload) {
 	return (o[name] = qname);
 };
 this[namespace] = o = {};
-o[$toString] = function () {
+o.toString = function () {
 	return namespace;
 };

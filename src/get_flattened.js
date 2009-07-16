@@ -7,12 +7,12 @@
 
 	var fn = function (memo,iterator) {
 		return this[$$_o$inject]([],function (a,b) {
-			return a[$concat](b);
+			return a.concat(b);
 		});
 	};
 
 	$$_o$get_flattened = $$_store($$_language_prototypes_array,$get_flattened,fn);
-	$$_get_flattened = o[$get_flattened] = $$_take(fn);
-	$$_get_flattened[$toString] = $$_K[$$_o$curry]($$_o$get_flattened);
+	$$_get_flattened = o.get_flattened = $$_take(fn);
+	$$_get_flattened.toString = $$_K[$$_o$curry]($$_o$get_flattened);
 		
 })();

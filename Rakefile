@@ -46,7 +46,7 @@ def pre_symbolize(src)
 	ones_to_replace = []
 	hash_of_symbols.each {|name,count|
 		unsymbolized_cost = count * (name.length + 1)
-		symbolized_cost = (4 + 1.25 + 4 + name.length) + (count * 3.25)
+		symbolized_cost = (4 + 1 + 4 + name.length) + (count * 3)
 		#puts unsymbolized_cost.to_s + " vrs " + symbolized_cost.to_s
 		if [symbolized_cost,unsymbolized_cost].min == symbolized_cost
 			#puts "will symbolize " + name

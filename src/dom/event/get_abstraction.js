@@ -13,7 +13,7 @@
 (function () {
  	var curry_with_this_dot_event = function (fn) {
 		return function () {
-			return fn[$call](this,this[$event]);
+			return fn.call(this,this.event);
 		};
 	},
 	getter = $$_builder({
@@ -27,7 +27,7 @@
 		prevent_default: curry_with_this_dot_event($$_dom_event_prevent_default),
 		cancel: curry_with_this_dot_event($$_dom_event_cancel)
 	});
-	$$_dom_event_get_abstraction = $$_dom_event[$get_abstraction] = function (e) {
+	$$_dom_event_get_abstraction = $$_dom_event.get_abstraction = function (e) {
 		return getter({event: $$_dom_event_get_event(e)});
 	};
 })();
