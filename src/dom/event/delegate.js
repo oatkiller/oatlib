@@ -58,12 +58,12 @@
 		return delegates[type];
 	};
 	$$_dom_event_delegate = $$_dom_event.delegate = function (options) {
-		var type = options.type,
+		var type = options.type || 'click',
 		array_of_delegates = get_or_create_array_of_delegates_by_type(type),
 		delegate_object = {
 			test: options.test,
 			action: options.action,
-			ancestor: options.ancestor
+			ancestor: options.ancestor || document.body
 		};
 		array_of_delegates.push(delegate_object);
 		return function () {
