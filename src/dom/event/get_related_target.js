@@ -5,7 +5,7 @@
 
  // muahahah :)
 	var fn = function (e) {
-		return (fn = e.relatedTarget ? $$_get_object_property[$$_o$rcurry]($relatedTarget) : $$_get_object_property[$$_o$rcurry](property)).apply(this,arguments);
+		return (fn = e.relatedTarget ? $$_get_object_property[o.rcurry]($relatedTarget) : $$_get_object_property[o.rcurry](property)).apply(this,arguments);
 	};
 
 	$$_dom_event[fn_name] = function () {

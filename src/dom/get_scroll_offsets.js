@@ -19,7 +19,7 @@
 				y: document.documentElement.scrollTop,
 				x: document.documentElement.scrollLeft
 			};
-		} : $$_error[$$_o$curry]('couldnt get scroll offsets')).apply(this,arguments);
+		} : $$_error[o.curry]('couldnt get scroll offsets')).apply(this,arguments);
 	};
 	$$_dom_get_scroll_offsets = $$_dom.get_scroll_offsets = function () {
 		return fn.apply(this.arguments);

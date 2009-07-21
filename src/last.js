@@ -8,5 +8,5 @@
 	};
 	$$_o$last = $$_store($$_language_prototypes_array,$last,fn);
 	$$_last = o.last = $$_take(fn);
-	$$_last.toString = $$_K[$$_o$curry]($$_o$last);
+	$$_last.toString = $$_K[o.curry]($$_o$last);
 })();

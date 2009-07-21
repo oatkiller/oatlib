@@ -21,7 +21,7 @@
 	};
 	consider_delegates_for_node = $$_dom_event.consider_delegates_for_node = function (delegates,node,e,oe) {
 		var result,
-		filtered_delegates = delegates[$$_o$filter](function (delegate) {
+		filtered_delegates = delegates[o.filter](function (delegate) {
 			if (!delegate.test(node,e,oe)) {
 				return true;
 			} else {
@@ -35,7 +35,7 @@
 	};
 	delegates = $$_dom_event.delegates = $$_dom_event.delegates = [];
 	garbage_collect_delegates_by_type = function (type) {
-		return delegates[type] = delegates[type][$$_o$filter](function (delegate) {
+		return delegates[type] = delegates[type][o.filter](function (delegate) {
 			return $ancestor in delegate;
 		});
 	};
@@ -48,7 +48,7 @@
 		return consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
 	};
 	add_delegate_handler_by_type = $$_dom_event.add_delegate_handler_by_type = function (type) {
-		$$_dom_event_add_listener(document.body,type,delegate_handler[$$_o$curry](type));
+		$$_dom_event_add_listener(document.body,type,delegate_handler[o.curry](type));
 	};
 	get_or_create_array_of_delegates_by_type = $$_dom_event.get_or_create_array_of_delegates_by_type = function (type) {
 		if (!delegates.hasOwnProperty(type)) {

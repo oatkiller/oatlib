@@ -13,7 +13,7 @@
 		if (ajax.readyState === 4) {
 			var status = ajax[$status];
  			// for some status code classes
-			[500,400,200][$$_o$each](function (statusCode) {
+			[500,400,200][o.each](function (statusCode) {
  				// if the status code is in that class
 				if (status >= statusCode) {
  					// if the options array has one for it, run it
@@ -49,7 +49,7 @@
 		// put the merged headers into the options object
 		options.headers = headers;
 		// set 1t event handler
-		myAjax.onreadystatechange = handler[$$_o$curry](myAjax,options,call);
+		myAjax.onreadystatechange = handler[o.curry](myAjax,options,call);
 		// 'open' initializes the ajax with the mandatory stuff
 		myAjax.open(options.method,options.url,options.async);
 		// for each thing in the headers object, add it

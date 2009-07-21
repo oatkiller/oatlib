@@ -12,7 +12,7 @@
 		} : (document.body && (document.body.clientWidth || document.body.clientHeight)) ? function () {
 			//IE 4 compatible
 			return {width: document.body.clientWidth, height: document.body.clientHeight};
-		} : $$_error[$$_o$curry]("can't get window size")).apply(this,arguments);
+		} : $$_error[o.curry]("can't get window size")).apply(this,arguments);
 	};
 
 	$$_dom_get_window_size = $$_dom.get_window_size = function () {

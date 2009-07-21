@@ -30,6 +30,15 @@ def neutralize_literals(line)
 	}
 end
 
+# frickt
+def handle_prototypal_references(src)
+	return src.map { |line|
+		line.gsub(/\[o\.([^\]]*)\]/) {|thing|
+			'[$$_o$' + $1.gsub(/\./,'_') + ']'
+		}
+	}
+end
+
 def handle_constants(src)
 	hash_of_symbols = Hash.new
 
@@ -72,7 +81,7 @@ end
 def pre_symbolize(but_src)
 
 	hash_of_symbols = Hash.new
-	src = handle_constants(but_src)
+	src = handle_prototypal_references(handle_constants(but_src))
 
 	src.each do |line|
 		neutralized = neutralize_literals(line)

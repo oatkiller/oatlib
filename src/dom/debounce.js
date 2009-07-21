@@ -6,6 +6,6 @@ $$_dom_debounce = $$_dom.debounce = function (fn,threshold) {
 	threshold = threshold || 50;
 	return function () {
 		timer && $$_dom_clear_timeout(timer);
-		timer = $$_dom_set_timeout(fn[$$_o$bind](arguments),threshold);
+		timer = $$_dom_set_timeout(fn[o.bind](arguments),threshold);
 	};
 };

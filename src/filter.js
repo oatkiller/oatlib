@@ -16,6 +16,6 @@
 
 	$$_o$filter = $$_store($$_language_prototypes_array,$filter,fn);
 	$$_filter = o.filter = $$_take(fn);
-	$$_filter.toString = $$_K[$$_o$curry]($$_o$filter);
+	$$_filter.toString = $$_K[o.curry]($$_o$filter);
 
 })();

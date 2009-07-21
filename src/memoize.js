@@ -16,6 +16,6 @@
 
 	$$_o$memoize = $$_store($$_language_prototypes_function,$memoize,fn);
 	$$_memoize = o.memoize = $$_take(fn);
-	$$_memoize.toString = $$_K[$$_o$curry]($$_o$memoize);
+	$$_memoize.toString = $$_K[o.curry]($$_o$memoize);
 	
 })();

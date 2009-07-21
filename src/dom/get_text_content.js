@@ -5,7 +5,7 @@
 
 
  	var fn = function (node) {
-		return (fn = $$_dom_get_text_content = $$_dom.get_text_content =  $innerText in node ? $$_get_object_property[$$_o$rcurry]($innerText) : $$_get_object_property[$$_o$rcurry]($textContent)).apply(this,arguments);
+		return (fn = $$_dom_get_text_content = $$_dom.get_text_content =  $innerText in node ? $$_get_object_property[o.rcurry]($innerText) : $$_get_object_property[o.rcurry]($textContent)).apply(this,arguments);
 	};
 
 	$$_dom_get_text_content = $$_dom.get_text_content = function () {
