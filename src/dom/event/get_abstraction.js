@@ -4,6 +4,7 @@
 //= require <dom/event/get_button>
 //= require <dom/event/get_key>
 //= require <dom/event/get_mouse_coordinates>
+//= require <dom/event/get_element_from_point>
 //= require <dom/event/get_related_target>
 //= require <dom/event/get_target>
 //= require <dom/event/prevent_default>
@@ -21,6 +22,7 @@
 		get_button: curry_with_this_dot_event($$_dom_event_get_button),
 		get_key: curry_with_this_dot_event($$_dom_event_get_key),
 		get_mouse_coordinates: curry_with_this_dot_event($$_dom_event_get_mouse_coordinates),
+		get_element_from_point: curry_with_this_dot_event($$_dom_event_get_element_from_point),
 		get_related_mouseover_target: curry_with_this_dot_event($$_dom_event_get_related_mouseover_target),
 		get_related_mouseout_target: curry_with_this_dot_event($$_dom_event_get_related_mouseout_target),
 		get_target: curry_with_this_dot_event($$_dom_event_get_target),
