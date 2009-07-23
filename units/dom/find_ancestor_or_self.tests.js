@@ -21,7 +21,6 @@ tests.find_ancestor_or_self = [
 			Assert.isFalse(o.dom.find_ancestor_or_self(my_em,function (n) {
 				return n === my_div;
 			},my_div));
-
 		},
 		'test checks self': function () {
 			var my_div = document.createElement('div');
