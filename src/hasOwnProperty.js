@@ -1,2 +1,3 @@
 //= require <language/prototypes/object>
-$$_hasOwnProperty = $$_language_prototypes_object.hasOwnProperty;
+//= require <take>
+$$_hasOwnProperty = $$_take($$_language_prototypes_object.hasOwnProperty);

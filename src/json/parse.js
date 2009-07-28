@@ -1,12 +1,13 @@
 //= require <json/reference>
-$$_json_stringify = $$_json.parse = function (text, reviver) {
+//= require <hasOwnProperty>
+$$_json_parse = $$_json.parse = function (text, reviver) {
 
 // The parse method takes a text and an optional reviver function, and returns
 // a JavaScript value if the text is a valid JSON text.
 
-				var j;
-
-				function walk(holder, key) {
+				var j,
+				cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+				walk = function (holder, key) {
 
 // The walk method is used to recursively walk the resulting structure so
 // that modifications can be made.
@@ -14,7 +15,7 @@ $$_json_stringify = $$_json.parse = function (text, reviver) {
 						var k, v, value = holder[key];
 						if (value && typeof value === 'object') {
 								for (k in value) {
-										if (Object.hasOwnProperty.call(value, k)) {
+										if ($$_hasOwnProperty(value, k)) {
 												v = walk(value, k);
 												if (v !== undefined) {
 														value[k] = v;
@@ -25,7 +26,7 @@ $$_json_stringify = $$_json.parse = function (text, reviver) {
 								}
 						}
 						return reviver.call(holder, key, value);
-				}
+				};
 
 
 // Parsing happens in four stages. In the first stage, we replace certain

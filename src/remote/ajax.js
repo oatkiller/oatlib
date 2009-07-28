@@ -7,7 +7,7 @@
 	var fn = function () {
 		// try a few ways to create a xmlhttp ajax object. when one works return the object it produced. also redefine this fn to the lucky fn that worked
 		// if this fn returns false. then i dunno how to ajax on this browser.
-		var ajaxObject = false,
+		var ajax_object = false,
 		// ms uses this differently in different version of ie
 		activeXFn = function (versionString) {
 			return new ActiveXObject(versionString);
@@ -25,17 +25,17 @@
 		while (fns.length !== 0) {
 			try {
 				// tear an fn right out from under that array
-				var anFn = fns.shift();
+				var an_fn = fns.shift();
 				// try and work it
-				ajaxObject = anFn();
+				ajax_object = an_fn();
 
 				// redefine ajax as this fn for future uses. this way we dont go through all this crazy stuff each time we run a piece of ajax
-				fn = anFn;
+				fn = an_fn;
 				// quit trying cause this one rox
-				return ajaxObject;
+				return ajax_object;
 			} catch (e) {
 				// you failed, throw away any ajax object we almost got.
-				ajaxObject = false;
+				ajax_object = false;
 			}
 		}
 		$$_error('ajax not supported');

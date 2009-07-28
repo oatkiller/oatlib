@@ -6,6 +6,8 @@ $$_dom_find_position = $$_dom.find_position = function (node) {
 	return {
 		y: rect.top + offests.y,
 		x: rect.left + offests.x,
+		get_height: function () {return rect.bottom - rect.top;},
+		get_width: function () {return rect.right - rect.left;},
 		rect: rect
 	};
 };
