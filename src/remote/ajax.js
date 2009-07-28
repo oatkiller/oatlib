@@ -9,14 +9,14 @@
 		// if this fn returns false. then i dunno how to ajax on this browser.
 		var ajax_object = false,
 		// ms uses this differently in different version of ie
-		activeXFn = function (versionString) {
-			return new ActiveXObject(versionString);
+		active_x_fn = function (version_string) {
+			return new ActiveXObject(version_string);
 		},
 		fns = [
 			// ms style one
-			activeXFn[o.curry]('Msxml2.XMLHTTP'),
+			active_x_fn[o.curry]('Msxml2.XMLHTTP'),
 			// ms style two
-			activeXFn[o.curry]('Microsoft.XMLHTTP'),
+			active_x_fn[o.curry]('Microsoft.XMLHTTP'),
 			// netscrapters style
 			function () {
 				return new XMLHttpRequest();
@@ -30,7 +30,7 @@
 				ajax_object = an_fn();
 
 				// redefine ajax as this fn for future uses. this way we dont go through all this crazy stuff each time we run a piece of ajax
-				fn = an_fn;
+				$$_remote_ajax = $$_remote.ajax = fn = an_fn;
 				// quit trying cause this one rox
 				return ajax_object;
 			} catch (e) {
