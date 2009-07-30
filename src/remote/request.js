@@ -33,7 +33,11 @@
 			call(options.on_complete);
 		}
 	},
-	default_headers = {};
+	default_headers = {
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'X-Requested-With': 'XMLHttpRequest',
+		'Accept': 'application/json, text/javascript, */*' 
+	};
 
 	$$_remote_request = $$_remote.request = function (response_options) {
 		// merge default headers and specified headers
@@ -59,7 +63,7 @@
 			my_ajax.setRequestHeader(header_label,header_value);
 		});
 		// start the ajax. pass either specified post data or null
-		my_ajax.send(options.post || null);
+		my_ajax.send(options.body || null);
 		// pass back a masked version 
 		return $$_mask(my_ajax,{
 			abort: function () {

@@ -20,13 +20,12 @@
 		});
 	};
 	consider_delegates_for_node = $$_dom_event.consider_delegates_for_node = function (delegates,node,e,oe) {
-		var result,
-		filtered_delegates = delegates[o.filter](function (delegate) {
+		var filtered_delegates = delegates[o.filter](function (delegate) {
 			if (!delegate.test(node,e,oe)) {
 				return true;
 			} else {
 				oe.delegate_target = node;
-				result = delegate.action(e,oe);
+				delegate.action(e,oe);
 				return false;
 			}
 		}),
