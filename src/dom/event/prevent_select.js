@@ -1,23 +1,22 @@
 //= require <dom/event/reference>
 //= require <dom/event/get_abstraction>
 //= require <dom/find_ancestor_or_self>
-$$_dom_event_prevent_select = $$_dom_event.prevent_select = function (test) {
+o.dom.event.prevent_select = function (test) {
 	var body = document.body;
 	body.onselectstart = function (e) {
-		var oe = $$_dom_event_get_abstraction(e),
+		var oe = o.dom.event.get_abstraction(e),
 		target = oe.get_target(),
-		draggable = $$_dom_find_ancestor_or_self(target,function (node) {
+		draggable = o.dom.find_ancestor_or_self(target,function (node) {
 			return test(node,e,oe);
 		});
 		return draggable ? false : true;
 	};
-	$$_dom_event_delegate({
+	o.dom.event.delegate({
 		ancestor: body,
-		type: $mousedown,
+		type: 'mousedown',
 		test: test,
 		action: function (e,oe) {
 			oe.prevent_default();
 		}
 	});
 };
-

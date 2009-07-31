@@ -2,10 +2,10 @@
 //= require <dom/find_position>
 //= require <dom/get_style>
 //= require <curry>
-$$_dom_absolutize = $$_dom.absolutize = function (node) {
+o.dom.absolutize = function (node) {
 	
 	// get position 
-	var position = $$_dom_find_position(node),
+	var position = o.dom.find_position(node),
 	offset_width = node.offsetWidth,
 	offset_height = node.offsetHeight;
 

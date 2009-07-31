@@ -1,10 +1,10 @@
 //= require <dom/reference>
 //= require <regex>
 //= require <string>
-$$_dom_add_class_name = $$_dom.add_class_name = function (element,className) {
-	var current_className = element.className;
-	if (!$$_regex($$_string('(^|\\s+)',className,'(\\s+|$)')).test(current_className)) {
-		element.className = [className,current_className].join(current_className ? ' ' : emptyString);
+o.dom.add_class_name = function (element,class_name) {
+	var current_class_name = element.className;
+	if (!o.regex(o.string('(^|\\s+)',class_name,'(\\s+|$)')).test(current_class_name)) {
+		element.className = [class_name,current_class_name].join(current_class_name ? ' ' : empty_string);
 	}
 	return element;
 };

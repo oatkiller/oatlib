@@ -3,20 +3,21 @@
 //= require <rcurry>
 //= require <filter>
 //= require <dom/array>
+//= require <is_not_false>
 //= require <dom/is_tag_name>
 //= require <dom/find_ancestor_or_self>
 //= require <dom/event/delegate>
-$$_dom_get_form_value_obj = $$_dom.get_form_value_obj = function (form_node) {
+o.dom.get_form_value_obj = function (form_node) {
 	var pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
-		return memo.concat($$_dom_array(form_node.getElementsByTagName(tag_name)));
+		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
 	})[o.map](function (node) {
 		var result = {};
 		if (node.name !== '') { // they must have a name
 			result.key = node.name;
-		} else if ($$_dom_is_tag_name(node,'OPTION')) { // its an option, so the name is on the select isntead
+		} else if (o.dom.is_tag_name(node,'OPTION')) { // its an option, so the name is on the select isntead
 
 			// find the select
-			var select = $$_dom_find_ancestor_or_self(node,$$_dom_is_tag_name[o.rcurry]('SELECT'));
+			var select = o.dom.find_ancestor_or_self(node,o.dom.is_tag_name[o.rcurry]('SELECT'));
 
 			// set key to the selects name.
 			if ('name' in select) {
@@ -41,9 +42,8 @@ $$_dom_get_form_value_obj = $$_dom.get_form_value_obj = function (form_node) {
 		} else {
 			return false;
 		}
-	})[o.filter](function (x) {
-		return x !== false;
-	});
+	})[o.filter](o.is_not_false);
+
 	var last_submit_element_clicked = form_node.last_submit_element_clicked;
 	if (last_submit_element_clicked.name !== '' && last_submit_element_clicked.value !== '') {
 		pairs.push({
@@ -54,9 +54,9 @@ $$_dom_get_form_value_obj = $$_dom.get_form_value_obj = function (form_node) {
 	return pairs;
 };
 
-$$_dom_event_add_listener(document,'click',function (e,oe) {
+o.dom.event.add_listener(document,'click',function (e,oe) {
 	var target = oe.get_target();
-	if (($$_dom_is_tag_name(target,'INPUT') || $$_dom_is_tag_name(target,'BUTTON')) && (target.type === 'submit')) {
+	if ((o.dom.is_tag_name(target,'INPUT') || .dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit')) {
 		target.form.last_submit_element_clicked = target;
 	}
 });

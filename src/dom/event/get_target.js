@@ -8,10 +8,10 @@
 		return target.nodeType !== 3 ? target : target.parentNode;
 	},
 	fn = function (e) {
-		return (fn = e.target ? base_fn[o.curry]($target) : base_fn[o.curry]($srcElement)).apply(this,arguments);
+		return (fn = o.dom.event.get_target =  e.target ? base_fn[o.curry]('target') : base_fn[o.curry]('srcElement')).apply(this,arguments);
 	};
 
-	$$_dom_event_get_target = $$_dom_event.get_target = function () {
+	o.dom.event.get_target = function () {
 		return fn.apply(this,arguments);
 	};
 

@@ -1,1 +1,1 @@
-$$_remote = o.remote = {};
+o.remote = {};

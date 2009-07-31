@@ -1,1 +1,1 @@
-$$_cartesian = o.cartesian = {};
+o.cartesian = {};

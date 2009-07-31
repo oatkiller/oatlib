@@ -1,4 +1,4 @@
 //= require <join>
-$$_string = o.string = function () {
-	return $$_join.call(arguments,emptyString);
+o.string = function () {
+	return o.join.call(arguments,empty_string);
 };

@@ -1,10 +1,9 @@
 //= require <each>
 //= require <indexOf>
-//= require <language/prototypes/array>
-$$_o$unique = $$_store($$_language_prototypes_array,$unique,function () {
+o.store(Array,'unique',function () {
 	var uniques = [];
-	this[o.each](function (raElement) {
-		uniques[o.indexOf](raElement) === -1 && uniques.push(raElement);
+	this[o.each](function (ra_element) {
+		uniques[o.indexOf](ra_element) === -1 && uniques.push(ra_element);
 	});
 	return uniques;
 });

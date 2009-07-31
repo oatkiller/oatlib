@@ -1,2 +1,2 @@
-//= require <language/prototypes/array>
-$$_join = $$_language_prototypes_array.join;
+//= require <take>
+o.join = o.take(Array.prototype.join);

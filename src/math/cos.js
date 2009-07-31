@@ -1,1 +1,0 @@
-$$_cos = Math.cos;

@@ -1,5 +1,4 @@
-//= require <language/prototypes/array>
-$$_o$every = $$_store($$_language_prototypes_array,$every,function (fn) {
+o.store(Array,'every',function (fn) {
 	var length = this.length, i = 0;
 	for (; i < length; i++) {
 		if (!fn.call(this,this[i],this)) {

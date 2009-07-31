@@ -1,1 +1,0 @@
-$$_floor = Math.floor;

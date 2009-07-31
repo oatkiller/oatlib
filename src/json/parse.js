@@ -1,6 +1,6 @@
 //= require <json/reference>
 //= require <hasOwnProperty>
-$$_json_parse = $$_json.parse = function (text, reviver) {
+o.json.parse = function (text, reviver) {
 
 // The parse method takes a text and an optional reviver function, and returns
 // a JavaScript value if the text is a valid JSON text.
@@ -15,7 +15,7 @@ $$_json_parse = $$_json.parse = function (text, reviver) {
 						var k, v, value = holder[key];
 						if (value && typeof value === 'object') {
 								for (k in value) {
-										if ($$_hasOwnProperty(value, k)) {
+										if (o.hasOwnProperty(value, k)) {
 												v = walk(value, k);
 												if (v !== undefined) {
 														value[k] = v;
@@ -75,5 +75,5 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
 // If the text is not JSON parseable, then a SyntaxError is thrown.
 
-				throw new SyntaxError('JSON.parse');
-		};
+		throw new SyntaxError('JSON.parse');
+};

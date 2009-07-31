@@ -1,1 +1,1 @@
-$$_K = function (e) {return e;};
+o.K = function (e) {return e;};

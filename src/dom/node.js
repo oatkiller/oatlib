@@ -1,4 +1,4 @@
 //= require <dom/fragment>
-$$_dom_node = $$_dom.node = function (html) {
-	return $$_dom_fragment(html).childNodes[0];
+o.dom.node = function (html) {
+	return o.dom.fragment(html).childNodes[0];
 };

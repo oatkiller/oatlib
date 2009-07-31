@@ -2,4 +2,4 @@
 //= require <dom/event/register>
 //= require <curry>
 // this does the actual dom level remove
-$$_dom_event_remove_handler = $$_dom_event.remove_handler = $$_dom_event_register[o.curry](false);
+o.dom.event.remove_handler = o._om_event_register[o.curry](false);

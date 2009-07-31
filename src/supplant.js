@@ -1,5 +1,4 @@
-//= require <language/prototypes/string>
-$$_o$supplant = $$_store($$_language_prototypes_string,$supplant,function (o) {
+o.store(String,'supplant',function (o) {
 	return this.replace(/{([^{}]*)}/g,
 		function (a,b) {
 			var r = o[b];

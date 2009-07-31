@@ -30,7 +30,7 @@
 				ajax_object = an_fn();
 
 				// redefine ajax as this fn for future uses. this way we dont go through all this crazy stuff each time we run a piece of ajax
-				$$_remote_ajax = $$_remote.ajax = fn = an_fn;
+				o.remote.ajax = fn = an_fn;
 				// quit trying cause this one rox
 				return ajax_object;
 			} catch (e) {
@@ -38,10 +38,10 @@
 				ajax_object = false;
 			}
 		}
-		$$_error('ajax not supported');
+		o.error('ajax not supported');
 	};
 
-	$$_remote_ajax = $$_remote.ajax = function () {
+	o.remote.ajax = function () {
 		return fn.apply(this,arguments);
 	};
 

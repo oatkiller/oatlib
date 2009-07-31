@@ -1,10 +1,9 @@
 //= require <array>
 //= require <concat>
-//= require <language/prototypes/function>
-$$_o$rcurry = $$_store($$_language_prototypes_function,$rcurry,function () {
+o.store(Function,'rcurry',function () {
 	var that = this,
-	oldArguments = $$_array(arguments);
+	old_arguments = o.array(arguments);
 	return function () {
-		return that.apply(this,$$_concat.call($$_array(arguments),oldArguments));
+		return that.apply(this,o.concat.call(o.array(arguments),old_arguments));
 	};
 });

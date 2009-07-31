@@ -2,13 +2,13 @@
 //= require <injector>
 (function () {
  
-  var singleBuilder = function (prototype) { // takes a prototype and produces a function which takes a properties object and produces an instance
+  var single_builder = function (prototype) { // takes a prototype and produces a function which takes a properties object and produces an instance
     return function (properties) {
-      return new ($$_constructor(prototype))(properties);
+      return new (o.constructor(prototype))(properties);
     };
 	};
 	
 	// takes one or more prototypes and returns a function which takes a properties object and produces an instance. the prototypes will all be linked, one at a time, into the instance. last arg is top proto
-	$$_builder = o.builder = $$_injector(function () {return singleBuilder({});},function (aSingleBuilder,aPrototype) {return singleBuilder(aSingleBuilder(aPrototype));});
+	o.builder = o.injector(function () {return single_builder({});},function (a_single_builder,a_prototype) {return single_builder(a_single_builder(a_prototype));});
 
 })();

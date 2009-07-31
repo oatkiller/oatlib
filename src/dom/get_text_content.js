@@ -5,10 +5,10 @@
 
 
  	var fn = function (node) {
-		return (fn = $$_dom_get_text_content = $$_dom.get_text_content =  $innerText in node ? $$_get_object_property[o.rcurry]($innerText) : $$_get_object_property[o.rcurry]($textContent)).apply(this,arguments);
+		return (fn = o.dom.get_text_content = 'innerText' in node ? o.get_object_property[o.rcurry]('innerText') : o.get_object_property[o.rcurry]('textContent')).apply(this,arguments);
 	};
 
-	$$_dom_get_text_content = $$_dom.get_text_content = function () {
+	o.dom.get_text_content = function () {
 		return fn.apply(this,arguments);
 	};
 

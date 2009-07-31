@@ -1,1 +1,0 @@
-$$_sqrt = Math.sqrt;

@@ -1,8 +1,8 @@
 //= require <remote/reference>
 //= require <string>
-$$_remote_query_string = function (obj) {
+o.remote.query_string = function (obj) {
 	return obj[o.inject]([],function (memo,pair) {
-		memo.push($$_string(encodeURIComponent(pair.key),'=',encodeURIComponent(pair.value)));
+		memo.push(o.string(encodeURIComponent(pair.key),'=',encodeURIComponent(pair.value)));
 		return memo;
 	}).join('&');
 };

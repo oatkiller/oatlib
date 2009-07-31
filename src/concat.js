@@ -1,2 +1,2 @@
-//= require <language/prototypes/array>
-$$_concat = $$_language_prototypes_array.concat;
+//= require <take>
+o.concat = o.take(Array.prototype.concat);

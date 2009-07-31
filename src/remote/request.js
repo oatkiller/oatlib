@@ -39,13 +39,13 @@
 		'Accept': 'application/json, text/javascript, */*' 
 	};
 
-	$$_remote_request = $$_remote.request = function (response_options) {
+ 	o.remote.request = function (response_options) {
 		// merge default headers and specified headers
-		var headers = $$_combine({},default_headers,response_options.headers),
+		var headers = o.combine({},default_headers,response_options.headers),
  		// create a new object with default options and specified options smushed together
-		options = $$_combine({},default_options,response_options),
+		options = o.combine({},default_options,response_options),
 		// get a new ajax from xmlhttp
-		my_ajax = $$_remote_ajax(),
+		my_ajax = o.remote.ajax(),
 		// define a fn to call callbacks with the ajax and options objicts
 		call = function (fn) {
 			fn && fn(my_ajax,options);
@@ -59,13 +59,13 @@
 		// 'open' initializes the ajax with the mandatory stuff
 		my_ajax.open(options.method,options.url,options.async);
 		// for each thing in the headers object, add it
-		options.headers && $$_for_each(options.headers,function (header_value,header_label) {
+		options.headers && o.for_each(options.headers,function (header_value,header_label) {
 			my_ajax.setRequestHeader(header_label,header_value);
 		});
 		// start the ajax. pass either specified post data or null
 		my_ajax.send(options.body || null);
 		// pass back a masked version 
-		return $$_mask(my_ajax,{
+		return o.mask(my_ajax,{
 			abort: function () {
 				call(options.on_abort);
 				my_ajax.onreadystatechange = null;

@@ -1,15 +1,15 @@
 //= require <dom/reference>
 //= require <dom/class_name_test_regex>
-$$_dom_remove_class_name = $$_dom.remove_class_name = function (element,className) {
+o.dom.remove_class_name = function (element,class_name) {
 	element.className = element.className.replace(
-		$$_dom_class_name_test_regex(className),
+		o.dom.class_name_test_regex(class_name),
 		'$1$2'
 	).replace(
 		/\s+/g,
 		' '
 	).replace(
 		/(^\s|\s$)/g,
-		emptyString
+		empty_string
 	);
 	return element;
 };

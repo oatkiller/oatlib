@@ -1,4 +1,4 @@
 //= require <slice>
-$$_array = o.array = function (arrayLike) {
-	return $$_slice.apply(arrayLike);
+o.array = function (array_like) {
+	return o.slice(array_like);
 };

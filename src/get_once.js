@@ -1,7 +1,7 @@
-$$_get_once = o.get_once = function (methodName,calculate) {
+o.get_once = function (method_name,calculate) {
 	return function () {
 		var value = calculate.apply(this,arguments);
-		this[methodName] = function () {
+		this[method_name] = function () {
 			return value;
 		};
 		return value;

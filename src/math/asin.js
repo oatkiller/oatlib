@@ -1,1 +1,0 @@
-$$_asin = Math.asin;

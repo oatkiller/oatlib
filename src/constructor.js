@@ -1,8 +1,8 @@
 //= require <array>
 //= require <super_combine>
-$$_constructor = o.constructor = function (prototype) { // produces a new generic object constructor function
+o.constructor = function (prototype) { // produces a new generic object constructor function
 	var fn = function () {
-		return $$_super_combine.apply(null,[this].concat($$_array(arguments)));
+		return o.super_combine.apply(null,[this].concat(o.array(arguments)));
 	};
 	fn.prototype = prototype;
   return fn;

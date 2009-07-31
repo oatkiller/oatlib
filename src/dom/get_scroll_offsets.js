@@ -4,7 +4,7 @@
 
 (function () {
 	var fn = function () {
-		return (fn = $$_dom_get_scroll_offsets = $$_dom.get_scroll_offsets =  typeof window.pageYOffset === 'number' ? function () {
+		return (fn = o.dom_get_scroll_offsets = typeof window.pageYOffset === 'number' ? function () {
 			return {
 				y: window.pageYOffset,
 				x: window.pageXOffset
@@ -19,9 +19,9 @@
 				y: document.documentElement.scrollTop,
 				x: document.documentElement.scrollLeft
 			};
-		} : $$_error[o.curry]('couldnt get scroll offsets')).apply(this,arguments);
+		} : o.error[o.curry]('couldnt get scroll offsets')).apply(this,arguments);
 	};
-	$$_dom_get_scroll_offsets = $$_dom.get_scroll_offsets = function () {
+	o.dom.get_scroll_offsets = function () {
 		return fn.apply(this.arguments);
 	};
 })();

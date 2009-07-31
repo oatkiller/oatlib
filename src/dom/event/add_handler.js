@@ -2,4 +2,4 @@
 //= require <dom/event/register>
 //= require <curry>
 // this does the actual dom level add
-$$_dom_event_add_handler = $$_dom_event.add_handler = $$_dom_event_register[o.curry](true);
+o.dom.event.add_handler = o.dom.event.register[o.curry](true);

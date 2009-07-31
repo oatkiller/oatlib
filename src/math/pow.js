@@ -1,1 +1,0 @@
-$$_pow = Math.pow;

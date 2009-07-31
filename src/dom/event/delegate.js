@@ -13,13 +13,12 @@
 	add_delegate_handler_by_type,
 	get_or_create_array_of_delegates_by_type;
 
-
-	filter_delegates_by_descendant = $$_dom_event.filter_delegates_by_descendant = function (delegates,descendant) {
-		return $$_filter(delegates,function (delegate) {
-			return $$_dom_contains(delegate.ancestor,descendant);
+	filter_delegates_by_descendant = o.dom.event.filter_delegates_by_descendant = function (delegates,descendant) {
+		return o.filter(delegates,function (delegate) {
+			return o.dom_contains(delegate.ancestor,descendant);
 		});
 	};
-	consider_delegates_for_node = $$_dom_event.consider_delegates_for_node = function (delegates,node,e,oe) {
+	consider_delegates_for_node = o.dom.event.consider_delegates_for_node = function (delegates,node,e,oe) {
 		var filtered_delegates = delegates[o.filter](function (delegate) {
 			if (!delegate.test(node,e,oe)) {
 				return true;
@@ -32,22 +31,22 @@
 		new_node = node.parentNode;
 		return filtered_delegates.length && new_node ? arguments.callee(filtered_delegates,new_node,e,oe) : true;
 	};
-	delegates = $$_dom_event.delegates = $$_dom_event.delegates = [];
+	delegates = o.dom.event.delegates = [];
 	garbage_collect_delegates_by_type = function (type) {
 		return delegates[type] = delegates[type][o.filter](function (delegate) {
-			return $ancestor in delegate;
+			return 'ancestor' in delegate;
 		});
 	};
  	delegate_handler = $$_dom_event.delegate_handler = function (type,e,oe) {
 		garbage_collect_delegates_by_type(type);
 		var delegates_by_type = delegates[type],
-		current_target = oe[$get_target](),
+		current_target = oe.get_target(),
 		delegates_by_descendant;
 		delegates_by_descendant = filter_delegates_by_descendant(delegates_by_type,current_target);
 		return consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
 	};
 	add_delegate_handler_by_type = $$_dom_event.add_delegate_handler_by_type = function (type) {
-		$$_dom_event_add_listener(document.body,type,delegate_handler[o.curry](type));
+		o.dom.event.add_listener(document.body,type,delegate_handler[o.curry](type));
 	};
 	get_or_create_array_of_delegates_by_type = $$_dom_event.get_or_create_array_of_delegates_by_type = function (type) {
 		if (!delegates.hasOwnProperty(type)) {
@@ -56,7 +55,7 @@
 		}
 		return delegates[type];
 	};
-	$$_dom_event_delegate = $$_dom_event.delegate = function (options) {
+	o.dom.event.delegate = function (options) {
 		var type = options.type || 'click',
 		array_of_delegates = get_or_create_array_of_delegates_by_type(type),
 		delegate_object = {

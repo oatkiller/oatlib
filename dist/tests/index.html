@@ -25,21 +25,22 @@
 		<script src="../oatlib.debug.js"></script>
 		<script>
 			Assert = YAHOO.util.Assert; 
-			tests = {};
+			tests = [];
+			test = function (fn) {
+				tests.push(fn);
+			};
 		</script>
 		<script src="units.js"></script>
 		<script>
 
 			var oatlibSuite = new YAHOO.tool.TestSuite('oatlib2');
-			for (var propertyName in tests) {
-				if (tests.hasOwnProperty(propertyName)) {
-					var suite = new YAHOO.tool.TestSuite(propertyName),
-					cases = tests[propertyName];
-					for (var i = 0, length = cases.length; i < length; i++) {
-						suite.add(new YAHOO.tool.TestCase(cases[i]));
-					}
-					oatlibSuite.add(suite);
+			for (var i = 0, length = tests.length; i < length; i++) {
+				var suite = new YAHOO.tool.TestSuite(propertyName),
+				cases = tests[propertyName];
+				for (var i = 0, length = cases.length; i < length; i++) {
+					suite.add(new YAHOO.tool.TestCase(cases[i]));
 				}
+				oatlibSuite.add(suite);
 			}
 
 	    var oLogger = new YAHOO.tool.TestLogger(); 

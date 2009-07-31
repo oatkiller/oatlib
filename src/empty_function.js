@@ -1,1 +1,1 @@
-$$_empty_function = function () {};
+o.empty_function = function () {};

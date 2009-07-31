@@ -1,1 +1,0 @@
-$$_abs = Math.abs;

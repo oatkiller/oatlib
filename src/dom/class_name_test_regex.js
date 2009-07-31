@@ -1,6 +1,7 @@
 //= require <memoize>
 //= require <regex>
 //= require <string>
-$$_dom_class_name_test_regex = $$_memoize(function (className) {
-	return $$_regex($$_string('(^|\\s+)',className,'(\\s+|$)'));
+
+o.dom.class_name_test_regex = o.memoize(function (class_name) {
+	return o.regex(o.string('(^|\\s+)',class_name,'(\\s+|$)'));
 });
