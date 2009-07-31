@@ -1,21 +1,19 @@
-if (!('indexOf' in Array.prototype)) {
-	o.store(Array,'indexOf',function (element) {
+o.store(Array,'indexOf',Array.prototype.indexOf || function (element) {
 
-		var that = this,
-		length = that.length,
-		from = arguments[1] || 0;
+	var that = this,
+	length = that.length,
+	from = arguments[1] || 0;
 
-		if (from < 0) {
-			from += length;
+	if (from < 0) {
+		from += length;
+	}
+
+	for (; from < length; from++) {
+		if (that.hasOwnProperty(from) && that[from] === element) {
+			return from;
 		}
+	}
 
-		for (; from < length; from++) {
-			if (that.hasOwnProperty(from) && that[from] === element) {
-				return from;
-			}
-		}
+	return -1;
 
-		return -1;
-
-	});
-}
+});

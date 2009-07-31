@@ -1,6 +1,5 @@
 //= require <each>
-//= require <rcurry>
-//= require <invoke>
+//= require <indexOf>
 o.application_event = function () {
 	return {
 		bees: [],
@@ -13,7 +12,9 @@ o.application_event = function () {
 	 	},
 		fire: function (payload) {
 			var that = this;
-			that.bees[o.each](o.invoke[o.rcurry](payload));
+			that.bees[o.each](function (bee) {
+				bee.call(that,payload);
+			});
 		}
 	};
 };

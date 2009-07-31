@@ -1,4 +1,4 @@
-o.store(Array.prototype,'map',function (fn) {
+o.store(Array,'map',Array.prototype.map || function (fn) {
 	var that = this,
 	length = that.length,
 	response = new Array(length), i = 0;

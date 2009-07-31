@@ -25,22 +25,25 @@
 		<script src="../oatlib.debug.js"></script>
 		<script>
 			Assert = YAHOO.util.Assert; 
-			tests = [];
-			test = function (fn) {
-				tests.push(fn);
+			var cases = [],
+			test = function (obj) {
+				cases.push(obj);
 			};
+			o = window['http://oatlab.com/oatlib/v2'];
 		</script>
 		<script src="units.js"></script>
 		<script>
 
 			var oatlibSuite = new YAHOO.tool.TestSuite('oatlib2');
-			for (var i = 0, length = tests.length; i < length; i++) {
-				var suite = new YAHOO.tool.TestSuite(propertyName),
-				cases = tests[propertyName];
-				for (var i = 0, length = cases.length; i < length; i++) {
-					suite.add(new YAHOO.tool.TestCase(cases[i]));
+			for (var i = 0, length = cases.length; i < length; i++) {
+				var test_case = cases[i];
+				for (var property_name in test_case) {
+					if (property_name !== 'name' && property_name !== 'setUp' && property_name !== 'tearDown' && property_name !== '_should' && typeof test_case[property_name] === 'function') {
+						test_case['test '+property_name] = test_case[property_name];
+						delete test_case[property_name];	
+					}
 				}
-				oatlibSuite.add(suite);
+				oatlibSuite.add(new YAHOO.tool.TestCase(cases[i]));
 			}
 
 	    var oLogger = new YAHOO.tool.TestLogger(); 
