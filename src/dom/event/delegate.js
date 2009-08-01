@@ -37,7 +37,7 @@
 			return 'ancestor' in delegate;
 		});
 	};
- 	delegate_handler = $$_dom_event.delegate_handler = function (type,e,oe) {
+ 	delegate_handler = o.dom.event.delegate_handler = function (type,e,oe) {
 		garbage_collect_delegates_by_type(type);
 		var delegates_by_type = delegates[type],
 		current_target = oe.get_target(),
@@ -45,10 +45,10 @@
 		delegates_by_descendant = filter_delegates_by_descendant(delegates_by_type,current_target);
 		return consider_delegates_for_node(delegates_by_descendant,current_target,e,oe);
 	};
-	add_delegate_handler_by_type = $$_dom_event.add_delegate_handler_by_type = function (type) {
+	add_delegate_handler_by_type = o.dom.event.add_delegate_handler_by_type = function (type) {
 		o.dom.event.add_listener(document.body,type,delegate_handler[o.curry](type));
 	};
-	get_or_create_array_of_delegates_by_type = $$_dom_event.get_or_create_array_of_delegates_by_type = function (type) {
+	get_or_create_array_of_delegates_by_type = o.dom.event.get_or_create_array_of_delegates_by_type = function (type) {
 		if (!delegates.hasOwnProperty(type)) {
 			add_delegate_handler_by_type(type);
 			delegates[type] = [];

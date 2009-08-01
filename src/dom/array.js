@@ -1,6 +1,7 @@
 //= require <dom/reference>
 //= require <array>
 //= require <map>
+//= require <K>
 
 (function () {
 

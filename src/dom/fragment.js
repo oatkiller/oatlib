@@ -16,7 +16,7 @@
 		}).apply(this,arguments);
 	};
 
-	o.dom_fragment = function () {
+	o.dom.fragment = function () {
 		return fn.apply(this,arguments);
 	};
 })();

@@ -1,6 +1,6 @@
 test({
-	name: 'every',
-	'every': function () {
+	name: 'find',
+	'works': function () {
 		var answer = [
 			{id: 1, value: false},
 			{id: 2, value: false},

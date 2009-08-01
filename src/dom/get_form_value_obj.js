@@ -1,6 +1,7 @@
 //= require <dom/reference>
 //= require <inject>
 //= require <rcurry>
+//= require <each>
 //= require <filter>
 //= require <dom/array>
 //= require <is_not_false>
@@ -8,11 +9,12 @@
 //= require <dom/find_ancestor_or_self>
 //= require <dom/event/delegate>
 o.dom.get_form_value_obj = function (form_node) {
-	var pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
+	var result = {},
+	pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
 		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
 	})[o.map](function (node) {
 		var result = {};
-		if (node.name !== '') { // they must have a name
+		if (node.name !== undefined && node.name.length) { // they must have a name
 			result.key = node.name;
 		} else if (o.dom.is_tag_name(node,'OPTION')) { // its an option, so the name is on the select isntead
 
@@ -51,12 +53,15 @@ o.dom.get_form_value_obj = function (form_node) {
 			value: last_submit_element_clicked.value
 		});
 	}
-	return pairs;
+	pairs[o.each](function (obj) {
+		result[obj.key] = obj.value;
+	});
+	return result;
 };
 
 o.dom.event.add_listener(document,'click',function (e,oe) {
 	var target = oe.get_target();
-	if ((o.dom.is_tag_name(target,'INPUT') || .dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit')) {
+	if ((o.dom.is_tag_name(target,'INPUT') || o.dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit')) {
 		target.form.last_submit_element_clicked = target;
 	}
 });

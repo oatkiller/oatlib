@@ -1,8 +1,11 @@
 //= require <remote/reference>
 //= require <string>
+//= require <for_each>
+
 o.remote.query_string = function (obj) {
-	return obj[o.inject]([],function (memo,pair) {
-		memo.push(o.string(encodeURIComponent(pair.key),'=',encodeURIComponent(pair.value)));
-		return memo;
-	}).join('&');
+	var ra = [];
+	o.for_each(obj,function (value,key) {
+		ra.push(o.string(encodeURIComponent(key),'=',encodeURIComponent(value)));
+	});
+	return ra.join('&');
 };

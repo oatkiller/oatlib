@@ -250,8 +250,8 @@ test({
 	}
 });
 test({
-	name: 'every',
-	'every': function () {
+	name: 'find',
+	'works': function () {
 		var answer = [
 			{id: 1, value: false},
 			{id: 2, value: false},
@@ -584,5 +584,230 @@ test({
 		Assert.areSame(my_array[0],new_data[0]);
 		Assert.areSame(my_array[1],new_data[1]);
 		Assert.areSame(my_array[2],new_data[2]);
+	}
+});
+test({
+	name: 'absolutize',
+	'works': function () {
+		var found_position = null;
+		o.dom.find_position = function (my_node) {
+			found_position = my_node;
+			return {
+				y: 10,
+				x: 20
+			};
+		};
+		node = document.createElement('div');
+		node.style.width = '13px';
+		node.style.height = '13px';
+		var position = o.dom.absolutize(node);
+		Assert.areSame(position.y,10);
+		Assert.areSame(position.x,20);
+		Assert.areSame(node,found_position);
+		Assert.areSame(node.style.position,'absolute');
+		Assert.areSame(node.parentNode,document.body);
+		Assert.areSame(node.style.top,'10px');
+		Assert.areSame(node.style.left,'20px');
+	}
+});
+test({
+	name: 'addClassName',
+	setUp: function () {
+		this.element = {
+			className: ''
+		};
+	},
+	'no class name': function () {
+		o.dom.add_class_name(this.element,'foo');
+		Assert.areSame(this.element.className,'foo');
+	},
+	'some class names': function () {
+		this.element.className = 'asdew asdf duck';
+		o.dom.add_class_name(this.element,'foo');
+		Assert.areSame('foo asdew asdf duck',this.element.className);
+	},
+	'exists already': function () {
+		this.element.className = 'foo asdf';
+		o.dom.add_class_name(this.element,'foo');
+		Assert.areSame('foo asdf',this.element.className);
+	}
+});
+test({
+	name: 'domarray',
+	'domArray': function () {
+			var tmpDiv = document.createElement('div'), cells, myRa;
+			tmpDiv.innerHTML = '<table><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
+			cells = tmpDiv.childNodes[0].childNodes[0].childNodes[0].cells;
+			myRa = o.dom.array(cells);
+			Assert.isNotUndefined(myRa.push);
+	}
+});
+test({
+	name: 'class_name_test_regex',
+	'works': function () {
+		Assert.areSame(o.dom.class_name_test_regex('nubs').source,'(^|\\s+)nubs(\\s+|$)');
+	}
+});
+test({
+	name: 'clear_opacity',
+	'works': function () {
+		var node = {
+			style: {
+				opacity: 'blah'
+			}
+		};
+		o.dom.clear_opacity(node);
+		Assert.areSame(node.style.opacity,'');
+	},
+	'worksonwindows': function () {
+		var node = {
+			style: {
+				filter: 'asdf'
+			}
+		};
+		o.dom.clear_opacity(node);
+		Assert.areSame(node.style.filter,'');
+	}
+});
+test({
+	name: 'contains',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span></span>';
+		var my_span = my_div.firstChild;
+		Assert.isTrue(o.dom.contains(my_div,my_span));
+	}
+});
+test({
+	name: 'dom_find',
+	'should return node if test of node returns true': function () {
+		var node = {},
+		test = function () {return true;};
+		Assert.areSame(o.dom.find(function(){},node,test),node);
+
+	}
+});
+test({
+	name: 'find_ancestor_or_self',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span></span>';
+		var my_span = my_div.firstChild;
+		Assert.isNull(o.dom.find_ancestor_or_self(my_span,function (n) {
+			return false;
+		},my_div));
+	},
+	'checks self': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span><em></em></span>';
+		var my_span = my_div.firstChild,
+		my_em = my_span.firstChild;
+		Assert.areSame(o.dom.find_ancestor_or_self(my_em,function (n) {
+			return n === my_em;
+		},my_div),my_em);
+	}
+});
+test({
+	name: 'find_descendant_or_self',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span><b></b></span>';
+		Assert.areSame('B',o.dom.find_descendant_or_self(my_div,function (node) {
+			return node.tagName && node.tagName === 'B';
+		}).tagName);
+	},
+	'checks self': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span><b></b></span>';
+		Assert.areSame(o.dom.find_descendant_or_self(my_div,function (node) {
+			return node.tagName && node.tagName === 'DIV';
+		}).tagName,'DIV');
+	}
+});
+test({
+	name: 'first_result',
+	'works': function () {
+		var answer = [
+			{id: 1, value: true},
+			{id: 2, value: true},
+			{id: 3, value: false},
+			{id: 4, value: false}
+		][o.first_result](function (obj) {return !obj.value;});
+		Assert.areSame(answer,true);
+	}
+});
+
+test({
+	name: 'find_following_sibling_or_self',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span></span><p></p><b></b>';
+		var my_span = my_div.firstChild;
+		Assert.areSame('B',o.dom.find_following_sibling_or_self(my_span,function (n) {
+			return n.tagName && n.tagName === 'B';
+		}).tagName);
+	}
+});
+test({
+	name: 'find_preceding_sibling_or_self',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span></span><p></p><b></b>';
+		var my_b = my_div.lastChild;
+		Assert.areSame('SPAN',o.dom.find_preceding_sibling_or_self(my_b,function (n) {
+			return n.tagName && n.tagName === 'SPAN';
+		}).tagName);
+	}
+});
+test({
+	name: 'fragment',
+	'fragment': function () {
+		var stuff = o.dom.fragment('well<div>nope</div> har');
+		Assert.areSame(3,stuff.childNodes.length,'fragment didnt get childnodes');
+	}
+});
+test({
+	name: 'get_form_value_obj',
+	'works': function () {
+		var tmp_div = document.createElement('div');
+		tmp_div.innerHTML = '<form method="get" action="index.html" id="my_form" onsubmit="return false;"><fiedset><input name="a" value="1" type="password" /><input name="b" value="2" type="hidden" /><input name="c" value="3" type="submit" id="push_it" /><select name="d"><optgroup label="nope"><option value="4">asdf</option></optgroup></select></fieldset></form>';
+		document.body.appendChild(tmp_div);
+		YAHOO.util.UserAction.click(document.getElementById('push_it'));
+		var value_obj = o.dom.get_form_value_obj(document.getElementById('my_form'));
+		console.log(value_obj);
+		Assert.areSame('1',value_obj.a);
+		Assert.areSame('2',value_obj.b);
+		Assert.areSame('3',value_obj.c);
+		Assert.areSame('4',value_obj.d);
+
+	}
+});
+test({
+	name: 'get scroll offsets',
+	'runs': function () {
+		o.dom.get_scroll_offsets();
+	}
+});
+test({
+	name: 'get_style',
+	'runs': function () {
+		o.dom.get_style(document.body,'margin');
+	}
+});
+test({
+	name: 'get_text_content',
+	'get_text_content': function () {
+		var tmpDiv = document.createElement('div'), cells, myRa;
+		tmpDiv.innerHTML = '<table><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
+		cells = tmpDiv.childNodes[0].childNodes[0].childNodes[0].cells;
+		myRa = o.dom.array(cells);
+		Assert.isNotUndefined(myRa.push);
+	}
+});
+test({
+	name: 'get_window_size',
+	'runs': function () {
+		o.dom.get_window_size();
+		o.dom.get_window_size();
 	}
 });

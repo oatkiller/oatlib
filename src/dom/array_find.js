@@ -1,8 +1,11 @@
 //= require <dom/reference>
-//= require <find>
+//= require <first_result>
 //= require <curry>
 
 o.dom.array_find = function (iterate,node,test) {
-	return (test.call(this,node) && node) || o.dom.array(iterate(node))[o.find](arguments.callee[o.curry](iterate,test));
+	var callee = arguments.callee;
+	return (test.call(this,node) && node) || o.dom.array(iterate(node))[o.first_result](function (descendant_node) {
+		return callee(iterate,descendant_node,test);
+	});
 };
 
