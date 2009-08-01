@@ -34,6 +34,15 @@
 		<script src="units.js"></script>
 		<script>
 
+			var correct_for_names = function (obj) {
+				for each (var inner_obj in obj) {
+					for (var propertyname in inner_obj) {
+						inner_obj['test '+property_name] = inner_obj[property_name];
+						delete inner_obj[property_name];
+					}
+				}
+			};
+
 			var oatlibSuite = new YAHOO.tool.TestSuite('oatlib2');
 			for (var i = 0, length = cases.length; i < length; i++) {
 				var test_case = cases[i];
@@ -43,7 +52,8 @@
 						delete test_case[property_name];	
 					}
 				}
-				oatlibSuite.add(new YAHOO.tool.TestCase(cases[i]));
+				test_case._should && correct_for_names(test_case._should);
+				oatlibSuite.add(new YAHOO.tool.TestCase(test_case));
 			}
 
 	    var oLogger = new YAHOO.tool.TestLogger(); 

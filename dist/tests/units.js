@@ -224,7 +224,7 @@ test({
 	name: 'error',
 	_should: {
 		error: {
-			'test that error throws an error?': true
+			'that error throws an error?': true
 		}
 	},
 	'that error throws an error?': function () {
@@ -768,13 +768,16 @@ test({
 });
 test({
 	name: 'get_form_value_obj',
+	tearDown: function () {
+		this.tmp_div.parentNode.removeChild(this.tmp_div);
+	},
 	'works': function () {
-		var tmp_div = document.createElement('div');
+		var tmp_div;
+		this.tmp_div = tmp_div = document.createElement('div');
 		tmp_div.innerHTML = '<form method="get" action="index.html" id="my_form" onsubmit="return false;"><fiedset><input name="a" value="1" type="password" /><input name="b" value="2" type="hidden" /><input name="c" value="3" type="submit" id="push_it" /><select name="d"><optgroup label="nope"><option value="4">asdf</option></optgroup></select></fieldset></form>';
 		document.body.appendChild(tmp_div);
 		YAHOO.util.UserAction.click(document.getElementById('push_it'));
 		var value_obj = o.dom.get_form_value_obj(document.getElementById('my_form'));
-		console.log(value_obj);
 		Assert.areSame('1',value_obj.a);
 		Assert.areSame('2',value_obj.b);
 		Assert.areSame('3',value_obj.c);
@@ -809,5 +812,228 @@ test({
 	'runs': function () {
 		o.dom.get_window_size();
 		o.dom.get_window_size();
+	}
+});
+test({
+	name: 'has_class_name',
+	setUp: function () {
+		this.element = document.createElement('div');
+		document.body.appendChild(this.element);
+	},
+	tearDown: function () {
+		try {
+			document.body.removeChild(this.element);
+		} catch (e) {}
+	},
+	'element with several classes, finding first class': function () {
+		this.element.className = 'foo bar gaz lulz';
+		Assert.isTrue(o.dom.has_class_name(this.element,'foo'));
+	},
+	'element with one class, finding it': function () {
+		this.element.className = 'bar';
+		Assert.isTrue(o.dom.has_class_name(this.element,'bar'));
+	},
+	'element with several classes, finding second class': function () {
+		this.element.className = 'bar lulz goat';
+		Assert.isTrue(o.dom.has_class_name(this.element,'lulz'));
+	},
+	'element with a classname, not finding a classname which is a substring of the elements class': function () {
+		this.element.className = 'asdfnubzasdf';
+		Assert.isFalse(o.dom.has_class_name(this.element,'nubz'));
+	}
+});
+test({
+	name: 'hide',
+	'works': function () {
+		var node = {
+			style: {
+				display: ''
+			}
+		};
+		var result = o.dom.hide(node);
+		Assert.areSame('none',node.style.display);
+		Assert.areSame(node,result);
+	}
+});
+test({
+	name: 'insert_after',
+	setUp: function () {
+		this.tmp_div = document.createElement('div');
+		this.tmp_div.innerHTML = '<p></p><b></b><p></p>';
+		this.payload = document.createElement('span');
+	},
+	tearDown: function () {
+		delete this.tmp_div;
+		delete this.payload;
+	},
+	'not last child': function () {
+		o.dom.insert_after(this.tmp_div.childNodes[1],this.payload);
+		Assert.areSame(this.tmp_div.childNodes[2],this.payload);
+	},
+	'last child': function () {
+		o.dom.insert_after(this.tmp_div.childNodes[2],this.payload);
+		Assert.areSame(this.tmp_div.childNodes[3],this.payload);
+	}
+	});
+test({
+	name: 'insert_before',
+	setUp: function () {
+		this.tmp_div = document.createElement('div');
+		this.tmp_div.innerHTML = '<p></p><b></b><p></p>';
+		this.payload = document.createElement('span');
+	},
+	tearDown: function () {
+		delete this.tmp_div;
+		delete this.payload;
+	},
+	'works': function () {
+		o.dom.insert_before(this.tmp_div.childNodes[1],this.payload);
+		Assert.areSame(this.tmp_div.childNodes[1],this.payload);
+	}
+});
+test({
+	name: 'is_tag_name',
+	'works': function () {
+		var tmp_div = document.createElement('div');
+		Assert.isTrue(o.dom.is_tag_name(tmp_div,'DIV'));
+	},
+	'doest error on document': function () {
+		Assert.isFalse(o.dom.is_tag_name(document,'anything'));
+	},
+	'doest error on window': function () {
+		Assert.isFalse(o.dom.is_tag_name(window,'anything'));
+	},
+	'doest error on text node': function () {
+		Assert.isFalse(o.dom.is_tag_name(document.createTextNode('asdf'),'anything'));
+	}
+});
+test({
+	name: 'node',
+	'works': function () {
+		var myNode = o.dom.node('something');
+		Assert.areSame(3,myNode.nodeType,'node failed to get node');
+	}
+});
+test({
+	name: 'parse_pixel_value',
+	_should: {
+		error: {
+			'doesnt work': true
+		}
+	},
+	'works': function () {
+		Assert.areSame(12,o.dom.parse_pixel_value('12px'));
+	},
+	'doesnt work': function () {
+		o.dom.parse_pixel_value('12');
+	}
+});
+test({
+	name: 'prepend_child',
+	setUp: function () {
+		this.tmp_div = document.createElement('div');
+		this.tmp_div.innerHTML = '<p></p><b></b><p></p>';
+		this.payload = document.createElement('span');
+	},
+	tearDown: function () {
+		delete this.tmp_div;
+		delete this.payload;
+	},
+	'has children': function () {
+		o.dom.prepend_child(this.tmp_div,this.payload);
+		Assert.areSame(this.tmp_div.childNodes[0],this.payload);
+	},
+	'has no children': function () {
+		this.tmp_div.innerHTML = '';
+		o.dom.prepend_child(this.tmp_div,this.payload);
+		Assert.areSame(this.tmp_div.childNodes[0],this.payload);
+	}
+});
+test({
+	name: 'remove',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<span></span>';
+		var result = o.dom.remove(my_div.childNodes[0]);
+		Assert.areSame(0,my_div.childNodes.length);
+		Assert.areSame('SPAN',result.tagName);
+	}
+});
+test({
+	name: 'removeClassName',
+	setUp: function () {
+		this.element = document.createElement('div');
+		document.body.appendChild(this.element);
+	},
+	tearDown: function () {
+		try {
+			document.body.removeChild(this.element);
+		} catch (e) {}
+	},
+	'remove className': function () {
+		var myElement;
+		var setupElement = function () {
+			myElement = document.createElement('div');
+			myElement.className = 'foo bar woot';
+		};
+
+		setupElement();
+		o.dom.remove_class_name(myElement,'foo');
+		Assert.areSame('bar woot',myElement.className,'1');
+		setupElement();
+		o.dom.remove_class_name(myElement,'bar');
+		Assert.areSame('foo woot',myElement.className,'2');
+		setupElement();
+		o.dom.remove_class_name(myElement,'woot');
+		Assert.areSame('foo bar',myElement.className,'3');
+	}
+});
+test({
+	name: 'unhide',
+	'works': function () {
+		var my_div = document.createElement('div');
+		my_div.style.display = 'none';
+		var result = o.dom.unhide(my_div);
+		Assert.areSame(my_div,result);
+		Assert.areSame('',my_div.style.display);
+	}
+});
+test({
+	name: 'add_listener',
+	'runs': function () {
+		var ran = false,
+		that = this;
+		o.dom.event.add_listener(document.body,'click',function () {
+			ran = true;
+		},true);
+		YAHOO.util.UserAction.click(document.body);
+		this.wait(function () {
+			Assert.isTrue(ran);
+		},10);
+	}
+});
+test({
+	name: 'cancel',
+	works: function () {
+		var my_div = document.createElement('div');
+		my_div.innerHTML = '<p><span><b></b></span></p>';
+		var p = my_div.getElementsByTagName('p')[0],
+		span = my_div.getElementsByTagName('span')[0],
+		b = my_div.getElementsByTagName('b')[0];
+
+		var failed = false;
+
+		p.onclick = function () {
+			failed = true;
+		};
+
+		span.onclick = function (e) {
+			o.dom.event.cancel(o.dom.event.get_event(e));
+		};
+
+	 	YAHOO.util.UserAction.click(b);
+		this.wait(function () {
+			Assert.isFalse(failed);
+		},10);
 	}
 });

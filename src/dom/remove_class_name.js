@@ -9,7 +9,7 @@ o.dom.remove_class_name = function (element,class_name) {
 		' '
 	).replace(
 		/(^\s|\s$)/g,
-		empty_string
+		''
 	);
 	return element;
 };
