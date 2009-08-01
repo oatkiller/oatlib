@@ -1,5 +1,5 @@
 //= require <dom/event/reference>
-(function () {
+(o.dom.event.setup_get_button = function () {
 	var fn = function (e) {
 		return (fn = e.which ?  function (e) {
 			return e.which === 3 ? 'right' : 'left';

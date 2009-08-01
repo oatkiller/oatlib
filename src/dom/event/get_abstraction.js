@@ -18,19 +18,24 @@
 			return fn.call(this,this.event);
 		};
 	},
-	getter = o.builder({
-		get_event: curry_with_this_dot_event(o.dom.event.get_event),
-		get_button: curry_with_this_dot_event(o.dom.event.get_button),
-		get_key: curry_with_this_dot_event(o.dom.event.get_key),
-		get_mouse_coordinates: curry_with_this_dot_event(o.dom.event.get_mouse_coordinates),
-		get_element_from_point: curry_with_this_dot_event(o.dom.event.get_element_from_point),
-		get_related_mouseover_target: curry_with_this_dot_event(o.dom.event.get_related_mouseover_target),
-		get_related_mouseout_target: curry_with_this_dot_event(o.dom.event.get_related_mouseout_target),
-		get_target: curry_with_this_dot_event(o.dom.event.get_target),
-		prevent_default: curry_with_this_dot_event(o.dom.event.prevent_default),
-		cancel: curry_with_this_dot_event(o.dom.event.cancel)
+	prototype = {
+		get_event: o.dom.event.get_event,
+		get_button: o.dom.event.get_button,
+		get_key: o.dom.event.get_key,
+		get_mouse_coordinates: o.dom.event.get_mouse_coordinates,
+		get_element_from_point: o.dom.event.get_element_from_point,
+		get_related_mouseover_target: o.dom.event.get_related_mouseover_target,
+		get_related_mouseout_target: o.dom.event.get_related_mouseout_target,
+		get_target: o.dom.event.get_target,
+		prevent_default: o.dom.event.prevent_default,
+		cancel: o.dom.event.cancel
+	},
+	my_builder;
+	o.for_each(prototype,function (value,key) {
+		prototype[key] = curry_with_this_dot_event(value);
 	});
+	my_builder = o.builder(prototype);
 	o.dom.event.get_abstraction = function (e) {
-		return getter({event: o.dom.event.get_event(e)});
+		return my_builder({event: o.dom.event.get_event(e)});
 	};
 })();

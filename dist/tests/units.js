@@ -1037,3 +1037,382 @@ test({
 		},10);
 	}
 });
+test({
+	name: 'delegate',
+	tearDown: function () {
+		document.body.removeChild(this.my_div);
+	},
+	'works': function () {
+		var my_div;
+	 	this.my_div = my_div	= document.createElement('div');
+		my_div.innerHTML = '<span><em></em></span>';
+		document.body.appendChild(my_div);
+		var em = my_div.getElementsByTagName('em')[0];
+		var worked = false;
+		var cancel_it = o.dom.event.delegate({
+			ancestor: my_div,
+			test: function (n) {
+				return n.tagName !== undefined && n.tagName === 'SPAN';
+			},
+			action: function (e,oe) {
+				worked = true;
+			}
+		});
+		YAHOO.util.UserAction.click(em);
+		var that = this;
+		this.wait(function () {
+			Assert.isTrue(worked);
+			worked = false;
+			cancel_it();
+			YAHOO.util.UserAction.click(em);
+			that.wait(function () {
+				Assert.isFalse(worked);
+			},10);
+		},10);
+	}
+});
+test({
+	name: 'get_abstraction',
+	'that get_abstraction returns an obj with the passed obj as its .event and that it has all the objs in its roto that its supposed to': function () {
+		var e = {
+			its: 'me'
+		},
+		abstraction = o.dom.event.get_abstraction(e);
+		Assert.isTrue('get_event' in abstraction);
+		Assert.isFalse(abstraction.hasOwnProperty('get_event'))
+		Assert.areSame(abstraction.get_event(),e);
+	}
+});
+test({
+	name: 'get_button',
+	setUp: function () {
+		o.dom.event.setup_get_button();
+	},
+	'test get_button should return right if which is set to 3': function () {
+		var e = {
+			which: 3,
+			button: 0
+		};
+		Assert.areSame(o.dom.event.get_button(e),'right');
+	},
+	'test get_button should return left if which is set to not 3': function () {
+		var e = {
+			which: 2,
+			button: 0
+		};
+		Assert.areSame(o.dom.event.get_button(e),'left');
+	},
+	'test get_button should return right if button is set to 2 and which isnt exist': function () {
+		var e = {
+			button: 2
+		};
+		Assert.areSame(o.dom.event.get_button(e),'right');
+	},
+	'test get_button should return left if button is set to not 2 and which isnt exist': function () {
+		var e = {
+			button: 1
+		};
+		Assert.areSame(o.dom.event.get_button(e),'left');
+	}
+});
+test({
+	name: 'get_element_from_point',
+	'does right one way': function () {
+		var payload,
+		my_payload = {
+			clientX: 1,
+			clientY: 3
+		};
+		o.dom.event.setup_get_element_from_point({
+			elementFromPoint: function (x,y) {
+				payload = {
+					x: x,
+					y: y
+				};
+			}
+		});
+		o.dom.event.get_element_from_point(my_payload);
+		Assert.areSame(payload.x,my_payload.x);
+		Assert.areSame(payload.y,my_payload.y);
+	},
+	'does right one way': function () {
+		var payload,
+		my_payload = {
+			pageX: 1,
+			pageY: 3
+		};
+		o.dom.event.setup_get_element_from_point({
+			elementFromPoint: function (x,y) {
+				payload = {
+					x: x,
+					y: y
+				};
+			}
+		});
+		o.dom.event.get_element_from_point(my_payload);
+		Assert.areSame(payload.x,my_payload.x);
+		Assert.areSame(payload.y,my_payload.y);
+	}
+});
+test({
+	name: 'get_event',
+	'test get_event should return event if passed one': function () {
+		var obj = {};
+		var fn = o.dom.event.get_event;
+		var result = fn(obj);
+		result = fn(obj);
+		Assert.areSame(result,obj);
+	}, // makes it testable
+	'test get_event should return window.event else': function () {
+		var my_window = {
+			event: {}
+		};
+		o.dom.event.setup_get_event(my_window);
+
+		var fn = o.dom.event.get_event;
+
+		var result = fn();
+
+		Assert.areSame(result,my_window.event);
+	}
+});
+test({
+	name: 'get_key',
+	'get_key returns keyCode for key if avail': function () {
+		var obj = {keyCode: 1, which: 2};
+		var fn = o.dom.event.get_key;
+		var result = fn(obj).key;
+		Assert.areSame(result,1);
+	},
+	'get_key returns which for key if keyCode is not avail': function () {
+		var obj = {which: 2};
+		var fn = o.dom.event.get_key;
+		var result = fn(obj).key;
+		Assert.areSame(result,2);
+	}
+});
+test({
+	name: 'get_mouse_coordinates',
+	'should return pageX and pageY if they are on the e': function () {
+		var e = {
+			pageX: 3,
+			pageY: 2,
+			clientX: 9,
+			clientY: 10
+		},
+		result = o.dom.event.get_mouse_coordinates(e);
+		Assert.areSame(result.x,3);
+		Assert.areSame(result.y,2);
+	},
+	'otherwise should return clientX to document.body.scrollLeft + document.documentElement.scrollLeft, etc': function () {
+		var my_document = {
+			body: {
+				scrollLeft: 18,
+				scrollTop: 49
+			},
+			documentElement: {
+				scrollLeft: 21,
+				scrollTop: 91
+			}
+		},
+		e = {
+			clientX: 13,
+		 	clientY: 8
+		};
+		o.dom.event.setup_get_mouse_coordinates(my_document);
+		var result = o.dom.event.get_mouse_coordinates(e);
+		Assert.areSame(my_document.body.scrollLeft + my_document.documentElement.scrollLeft + e.clientX,result.x);
+		Assert.areSame(my_document.body.scrollTop + my_document.documentElement.scrollTop + e.clientY,result.y);
+	}
+});
+test({
+	name: 'get_related_mouseover_target',
+	setUp: function () {
+		o.dom.event.setup_get_related_target();
+	},
+	'test get_related_mouseover_target should return fromElement if relatedTarget isnt avail': function () {
+		var fromElement = {},
+		e = {fromElement: fromElement},
+		fn = o.dom.event.get_related_mouseover_target,
+		result = fn(e);
+		Assert.areSame(result,fromElement);
+	},
+	'test get_related_mouseover_target should return relatedTarget if avail': function () {
+		var relatedTarget = {},
+		fromElement = {},
+		e = {relatedTarget: relatedTarget, fromElement: fromElement},
+		fn = o.dom.event.get_related_mouseover_target,
+		result = fn(e);
+		Assert.areSame(relatedTarget,result);
+	}
+});
+test({
+	name: 'get_target',
+	setUp: function () {
+		o.dom.event.setup_get_target();
+	},
+	'get_target should return e.target if it exists': function () {
+		var target = {},
+		obj = {target: target},
+		fn = o.dom.event.get_target,
+		result = fn(obj);
+		result = fn(obj);
+		Assert.areSame(result,target);
+	},
+	'get_target should return e.srcElement if target doesnt exist': function () {
+		var target = {},
+		obj = {srcElement: target},
+		fn = o.dom.event.get_target,
+		result = fn(obj);
+		result = fn(obj);
+		Assert.areSame(result,target);
+	}
+});
+test({
+	name: 'prevent_default',
+	setUp: function () {
+		o.dom.event.setup_prevent_default();
+	},
+	'should work with preventDefault': function () {
+		var called_prevent_default = false,
+		e = {
+			preventDefault: function () {
+				called_prevent_default = true;
+			}
+		};
+		o.dom.event.prevent_default(e);
+		Assert.isTrue(called_prevent_default);
+	},
+	'should work with returnValue': function () {
+		var e = {
+			returnValue: true
+		};
+		o.dom.event.prevent_default(e);
+		Assert.isFalse(e.returnValue);
+	}
+});
+test({
+	name: 'prevent_select',
+	'runs': function () {
+		o.dom.event.prevent_select(function () {return true;});
+	}
+});
+test({
+	name: 'request',
+	testBasic: function () {
+		var myRequest = o.remote.ajax();
+		Assert.isTrue('abort' in myRequest,'request return had no abort method');
+		Assert.isTrue('abort' in myRequest,'request return had no abort method or property');
+		Assert.isTrue('getAllResponseHeaders' in myRequest,'request return had no getAllResponseHeaders method or property');
+		Assert.isTrue('getResponseHeader' in myRequest,'request return had no getResponseHeader method or property');
+		Assert.isTrue('open' in myRequest,'request return had no open method or property');
+		Assert.isTrue('send' in myRequest,'request return had no send method or property');
+		Assert.isTrue('setRequestHeader' in myRequest,'request return had no setRequestHeader method or property');
+	}
+});
+test({
+	name: 'xmlhttp-helper',
+	_should: {
+		ignore: {
+			testRequestHeaders: true,
+			testPost: true
+		}
+	},
+	testBasic: function () {
+		var that = this;
+		o.remote.request({
+			url: 'ajaxtest.xml',
+			on_complete: function (responseObj) {
+				Assert.isTrue(responseObj !== null && responseObj !== false,'no response obj');
+				that.resume();
+			}
+		});
+		this.wait();
+	},
+	testRequestHeaders: function () {
+		var that = this;
+		o.remote.request({
+			url: 'ajaxtest.xml',
+			headers: {
+				'Accept': 'text/*, text/html, text/html;level=1, */*'
+			},
+			on_complete: function (responseObj) {
+				Assert.isTrue(responseObj !== null && responseObj !== false,'no response obj');
+				that.resume();
+			}
+		});
+		this.wait();
+	},
+	testAbort: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'ajaxtest.xml',
+			on_complete: function (responseObj) {
+				Assert.fail('failed to abort');
+				that.resume();
+			}
+		});
+		myRequest.abort();
+	},
+	testStatusText: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'ajaxtest.xml',
+			on_complete: function (responseObj) {
+				Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
+				that.resume();
+			}
+		});
+		this.wait();
+	},
+	testOnSuccess: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'ajaxtest.xml',
+			on_success: function (responseObj,options) {
+				that.resume();
+				delete options.on_complete;
+			},
+			on_complete: function () {
+				Assert.fail('completed before success');
+			}
+		});
+		this.wait();
+	},
+	testOnFailure: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'asdfasdfasdfa',
+			on_failure: function (responseObj,options) {
+				that.resume();
+				delete options.on_complete;
+			},
+			on_complete: function () {
+				Assert.fail('completed before success');
+			}
+		});
+		this.wait();
+	},
+	testPost: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'ajaxtest.xml',
+			post: 'some vars, etc',
+			on_success: function (responseObj) {
+				that.resume();
+			}
+		});
+		this.wait();
+	},
+	testResponseXML: function () {
+		var that = this;
+		var myRequest = o.remote.request({
+			url: 'ajaxtest.xml',
+			on_success: function (responseObj) {
+				Assert.areSame(responseObj.responseXML.childNodes[0].nodeName.toLowerCase(),'root','didnt get root object from xml');
+				that.resume();
+			}
+		});
+		this.wait();
+	}
+});

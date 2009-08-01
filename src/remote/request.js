@@ -20,7 +20,7 @@
  				// if the status code is in that class
 				if (status >= status_code) {
  					// if the options array has one for it, run it
-					call(options[$$_string('on_',(status_code / 100) >>> 1,'xx')]);
+					call(options[o.string('on_',(status_code / 100) >>> 1,'xx')]);
 				}
 			});
 			// if status is in the 300,400,500 class, its a failure
