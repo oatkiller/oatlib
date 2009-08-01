@@ -9,8 +9,7 @@
 //= require <dom/find_ancestor_or_self>
 //= require <dom/event/delegate>
 o.dom.get_form_value_obj = function (form_node) {
-	var result = {},
-	pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
+	var pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
 		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
 	})[o.map](function (node) {
 		var result = {};
@@ -53,10 +52,7 @@ o.dom.get_form_value_obj = function (form_node) {
 			value: last_submit_element_clicked.value
 		});
 	}
-	pairs[o.each](function (obj) {
-		result[obj.key] = obj.value;
-	});
-	return result;
+	return pairs;
 };
 
 o.dom.event.add_listener(document,'click',function (e,oe) {
@@ -65,3 +61,4 @@ o.dom.event.add_listener(document,'click',function (e,oe) {
 		target.form.last_submit_element_clicked = target;
 	}
 });
+

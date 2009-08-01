@@ -1,6 +1,4 @@
 //= require <cartesian/reference>
-//= require <math/sqrt>
-//= require <math/pow>
 o.cartesian.distance = function (x1,y1,x2,y2) {
 	return Math.sqrt(
 		Math.pow(
