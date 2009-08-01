@@ -10,7 +10,7 @@
 //= require <dom/event/prevent_default>
 //= require <dom/event/cancel>
 //= require <curry>
-//= require <array>
+//= require <for_each>
 
 (function () {
  	var curry_with_this_dot_event = function (fn) {

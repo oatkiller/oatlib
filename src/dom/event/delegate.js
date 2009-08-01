@@ -1,5 +1,6 @@
 //= require <curry>
 //= require <filter>
+//= require <update>
 //= require <dom/event/reference>
 //= require <dom/event/add_listener>
 //= require <dom/contains>
