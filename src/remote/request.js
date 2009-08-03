@@ -2,7 +2,6 @@
 //= require <combine>
 //= require <curry>
 //= require <each>
-//= require <for_each>
 //= require <mask>
 //= require <remote/ajax>
 //= require <string>
@@ -59,7 +58,7 @@
 		// 'open' initializes the ajax with the mandatory stuff
 		my_ajax.open(options.method,options.url,options.async);
 		// for each thing in the headers object, add it
-		options.headers && o.for_each(options.headers,function (header_value,header_label) {
+		options.headers && o.each(options.headers,function (header_value,header_label) {
 			my_ajax.setRequestHeader(header_label,header_value);
 		});
 		// start the ajax. pass either specified post data or null

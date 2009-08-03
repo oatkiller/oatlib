@@ -12,7 +12,7 @@ o.application_event = function () {
 	 	},
 		multi_subscribe: function (hash) {
 		 	var that = this;
-			o.for_each(hash,function (fn,key) {
+			o.each(hash,function (fn,key) {
 				that.subscribe(fn[o.before](function (data) {
 					return data.type === key;
 				}));

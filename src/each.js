@@ -1,6 +1,9 @@
+//= require <hasOwnProperty>
 o.store(Array,'each',function (fn) {
-	var that = this, i = 0, length = that.length;
-	for (; i < length; i++) {
-		fn.call(that, that[i], i, that);
+	var i = 0, property_name;
+	for (property_name in this) {
+		if (o.hasOwnProperty(this,property_name)) {
+			fn.call(this, this[property_name], property_name, this);
+		}
 	}
 });

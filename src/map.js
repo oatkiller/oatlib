@@ -1,8 +1,9 @@
 //= require <hasOwnProperty>
+//= require <take>
 
 (function () {
 
-	var fn = function (fn) {
+	var fn = o.take(function (fn) {
 		var response = this.splice !== undefined ? [] : {},
 		property_name;
 
@@ -18,5 +19,9 @@
 	// i want the native map implementation if that avail, but only for the version that sits on array prototype. for the take version i always want my own implementation because it needs to work for objects that dont have length or nueric properties etc
 	o.store(Array,'map',Array.prototype.map || fn);
 	o.map = fn;
+	var qname = o.qname('map');
+	o.map.toString = function () {
+		return qname;
+	};
 
 })();

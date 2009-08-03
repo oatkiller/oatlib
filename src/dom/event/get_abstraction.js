@@ -10,7 +10,6 @@
 //= require <dom/event/prevent_default>
 //= require <dom/event/cancel>
 //= require <curry>
-//= require <for_each>
 
 (function () {
  	var curry_with_this_dot_event = function (fn) {
@@ -31,7 +30,7 @@
 		cancel: o.dom.event.cancel
 	},
 	my_builder;
-	o.for_each(prototype,function (value,key) {
+	o.each(prototype,function (value,key) {
 		prototype[key] = curry_with_this_dot_event(value);
 	});
 	my_builder = o.builder(prototype);
