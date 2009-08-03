@@ -22,7 +22,7 @@
 	// try the node and its ancestors against the delegates
 	consider_delegates_for_node = o.dom.event.consider_delegates_for_node = function (delegates,node,e,oe) {
 		var filtered_delegates = delegates[o.filter](function (delegate) {
-			if (!delegate.test(node,e,oe)) {
+			if (!delegate.test(node)) {
 				return true;
 			} else {
 				oe.delegate_target = node;

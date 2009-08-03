@@ -50,6 +50,14 @@ test({
 	}
 });
 test({
+	name: 'are_same',
+	'works': function () {
+		Assert.isTrue(o.are_same(1,1));
+		Assert.isTrue(o.are_same(1,1,1));
+		Assert.isFalse(o.are_same({},{}));
+	}
+});
+test({
 	name: 'array',
 	setUp: function () {o = window['http://oatlab.com/oatlib/v2'];},
 	'works': function () {
@@ -59,6 +67,23 @@ test({
 		Assert.areSame(ra[1],'b');
 		Assert.areSame(ra[2],'c');
 		Assert.areSame(ra.length,3);
+	}
+});
+test({
+	name: 'before',
+	'works': function () {
+		var payload = {},
+		got_this = false;
+		my_fn = (function (type,payload) {
+			got_this = payload;
+		})[o.before](function (type) {
+			return type === 'on_drop';
+		});
+
+		my_fn('blah',payload);
+		Assert.isFalse(got_this);
+		my_fn('on_drop',payload);
+		Assert.areSame(payload,got_this);
 	}
 });
 test({

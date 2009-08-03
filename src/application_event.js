@@ -10,10 +10,19 @@ o.application_event = function () {
 				bees.splice(bees[o.indexOf](fn),1);
 			};
 	 	},
-		fire: function (payload) {
-			var that = this;
+		multi_subscribe: function (hash) {
+		 	var that = this;
+			o.for_each(hash,function (fn,key) {
+				that.subscribe(fn[o.before](function (data) {
+					return data.type === key;
+				}));
+			});
+	 	},
+		fire: function () {
+			var that = this,
+			args = arguments;
 			that.bees[o.each](function (bee) {
-				bee.call(that,payload);
+				bee.apply(that,args);
 			});
 		}
 	};
