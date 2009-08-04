@@ -1,8 +1,10 @@
+//= require <hasOwnProperty>
 o.store(Array,'every',function (fn) {
-	var length = this.length, i = 0;
-	for (; i < length; i++) {
-		if (!fn.call(this,this[i],this)) {
-			return false;
+	for (var property_name in this) {
+		if (o.hasOwnProperty(this,property_name)) {
+			if (!fn.call(this,this[property_name],property_name)) {
+				return false;
+			}
 		}
 	}
 	return true;

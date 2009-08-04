@@ -1,6 +1,6 @@
 test({
 	name: 'get_flattened',
-	'getFlattened': function () {
+	'works for arrays': function () {
 		var source = [1,2,[3,4],[5],6],
 		result = source[o.get_flattened](),
 		expected_result = [1,2,3,4,5,6] 

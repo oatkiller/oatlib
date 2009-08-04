@@ -1,7 +1,11 @@
+//= require <hasOwnProperty>
 o.store(Array,'first_result',function (fn) {
-	for (var i = 0, that = this, length = that.length, result; i < length; i++) {
-		if (result = fn.call(that,that[i])) {
-			return result;
+	var property_name, result;
+	for (property_name in this) {
+		if (o.hasOwnProperty(this,property_name)) {
+			if (result = fn.call(this,this[property_name],this)) {
+				return result;
+			}
 		}
 	}
 });

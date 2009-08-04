@@ -15,7 +15,7 @@
 	get_or_create_array_of_delegates_by_type;
 
 	filter_delegates_by_descendant = o.dom.event.filter_delegates_by_descendant = function (delegates,descendant) {
-		return o.filter(delegates,function (delegate) {
+		return delegates[o.filter](function (delegate) {
 			return o.dom.contains(delegate.ancestor,descendant);
 		});
 	};
