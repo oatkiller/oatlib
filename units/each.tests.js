@@ -22,7 +22,16 @@ test({
 		Assert.areSame(2,src.a);
 		Assert.areSame(4,src.b);
 		Assert.areSame(6,src.c);
-
-
+	},
+	'can break': function () {
+		var count = 0,
+		ra = [1,2,3,4];
+		ra[o.each](function (element) {
+			count++;
+			if (element === 3) {
+				return o.each_break;
+			}
+		});
+		Assert.areSame(3,count);
 	}
 });

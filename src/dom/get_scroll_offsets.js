@@ -4,7 +4,7 @@
 
 (function () {
 	var fn = function () {
-		return (fn = o.dom_get_scroll_offsets = typeof window.pageYOffset === 'number' ? function () {
+		return (fn = o.dom.get_scroll_offsets = typeof window.pageYOffset === 'number' ? function () {
 			return {
 				y: window.pageYOffset,
 				x: window.pageXOffset

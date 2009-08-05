@@ -13,7 +13,8 @@ test({
 
 		var get_obj_by_key = function (key) {
 			var the_one;
-			for each (var obj in ra) {
+			for (var property_name in ra) {
+				var obj = ra[property_name];
 				if (obj.key === key) {
 					return obj;
 				}
