@@ -1,5 +1,6 @@
 //= require <each>
 //= require <indexOf>
+//= require <before>
 o.application_event = function () {
 	return {
 		bees: [],

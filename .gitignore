@@ -3,3 +3,6 @@
 oatlib.debug.js
 oatlib.min.js
 plugins
+units/test.tests.js
+src/test.js
+dist/tests/test.html

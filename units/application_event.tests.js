@@ -37,5 +37,44 @@ test({
 		this.event.fire('nubs');
 		Assert.areSame(called,other_called);
 		Assert.areSame(called,'nubs');
+	},
+	'multisubscribe works': function () {
+		var a = 0, b = a, c = a;
+		this.event.multi_subscribe({
+			a: function (data) {a+=data.value;},
+			b: function (data) {b+=data.value;},
+			c: function (data) {c+=data.value;}
+		});
+		Assert.areSame(0,a);
+		Assert.areSame(0,b);
+		Assert.areSame(0,c);
+		this.event.fire({
+			type: 'a',
+			value: 1
+		});
+		Assert.areSame(1,a);
+		Assert.areSame(0,b);
+		Assert.areSame(0,c);
+		this.event.fire({
+			type: 'a',
+			value: 9
+		});
+		Assert.areSame(10,a);
+		Assert.areSame(0,b);
+		Assert.areSame(0,c);
+		this.event.fire({
+			type: 'b',
+			value: 3
+		});
+		Assert.areSame(10,a);
+		Assert.areSame(3,b);
+		Assert.areSame(0,c);
+		this.event.fire({
+			type: 'c',
+			value: 6
+		});
+		Assert.areSame(10,a);
+		Assert.areSame(3,b);
+		Assert.areSame(6,c);
 	}
 });
