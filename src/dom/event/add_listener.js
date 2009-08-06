@@ -5,13 +5,11 @@
 //= require <splice>
 //= require <bind>
 o.dom.event.add_listener = function (node,type,fn,bubble) {
-
 	var wrapped_fn = function (e) {
 		return fn.call(this,e,o.dom.event.get_abstraction(e));
 	},
 	args = [node,type,wrapped_fn,bubble];
 	o.dom.event.add_handler.apply(null,args);
-
 	// register event for removal at page unload
 	o.dom.event.events_to_remove.push(args);
 	return function () {
