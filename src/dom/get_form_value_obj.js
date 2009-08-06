@@ -46,7 +46,7 @@ o.dom.get_form_value_obj = function (form_node) {
 	})[o.filter](o.is_not_false);
 
 	var last_submit_element_clicked = form_node.last_submit_element_clicked;
-	if (last_submit_element_clicked.name !== '' && last_submit_element_clicked.value !== '') {
+	if (last_submit_element_clicked && last_submit_element_clicked.name !== '' && last_submit_element_clicked.value !== '') {
 		pairs.push({
 			key: last_submit_element_clicked.name,
 			value: last_submit_element_clicked.value
@@ -57,7 +57,7 @@ o.dom.get_form_value_obj = function (form_node) {
 
 o.dom.event.add_listener(document,'click',function (e,oe) {
 	var target = oe.get_target();
-	if ((o.dom.is_tag_name(target,'INPUT') || o.dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit')) {
+	if ((o.dom.is_tag_name(target,'INPUT') || o.dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit') && target.form && target.form.last_submit_element_clicked) {
 		target.form.last_submit_element_clicked = target;
 	}
 });
