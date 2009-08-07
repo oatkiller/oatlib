@@ -13,6 +13,7 @@
 	},
 	handler = function (ajax,options,call) {
 		if (ajax.readyState === 4) {
+			call(options.on_complete);
 			var status = ajax.status;
  			// for some status code classes
 			[500,400,200][o.each](function (status_code) {
@@ -29,7 +30,6 @@
 			// if its in the 200-299 range, its a success!
 				call(options.on_success);
 			}
-			call(options.on_complete);
 		}
 	},
 	default_headers = {
