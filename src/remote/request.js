@@ -2,6 +2,7 @@
 //= require <combine>
 //= require <curry>
 //= require <each>
+//= require <empty_function>
 //= require <mask>
 //= require <remote/ajax>
 //= require <string>
@@ -44,7 +45,7 @@
  		// create a new object with default options and specified options smushed together
 		options = o.combine({},default_options,response_options),
 		// get a new ajax from xmlhttp
-		my_ajax = o.remote.ajax(),
+		my_ajax = options.ajax || o.remote.ajax(),
 		// define a fn to call callbacks with the ajax and options objicts
 		call = function (fn) {
 			fn && fn(my_ajax,options);
@@ -62,15 +63,11 @@
 			my_ajax.setRequestHeader(header_label,header_value);
 		});
 		// start the ajax. pass either specified post data or null
-		my_ajax.send(options.body || null);
-		// pass back a masked version 
-		return o.mask(my_ajax,{
-			abort: function () {
-				call(options.on_abort);
-				my_ajax.onreadystatechange = null;
-				my_ajax.abort();
-			}
-		});
+
+		!options.dont_send && my_ajax.send(options.body || null);
+
+		// pass back the thing
+		return my_ajax;
 	};
 
 })();

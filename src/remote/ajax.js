@@ -14,6 +14,7 @@
 		},
 		fns = [
 			// ms style one
+			active_x_fn[o.curry]('Msxml3.XMLHTTP'),
 			active_x_fn[o.curry]('Msxml2.XMLHTTP'),
 			// ms style two
 			active_x_fn[o.curry]('Microsoft.XMLHTTP'),
