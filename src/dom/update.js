@@ -1,9 +1,7 @@
 //= require <dom/reference>
-//= require <dom/remove>
+//= require <dom/empty>
 o.dom.update = function (node,fragment) {
-	while (node.childNodes.length) {
-		o.dom.remove(node.firstChild);
-	};
+	o.dom.empty(node);
 	node.appendChild(fragment);
 	return node;
 };
