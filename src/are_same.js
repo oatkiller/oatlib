@@ -6,7 +6,7 @@
 (function () {
  	var fail = {},
 	are_objects_or_arrays = function (ra) {
-		return o.contains.apply(null,[['object','array']].concat(ra[o.map](o.type_of)))
+		return o.contains.apply(null,[['object','array']].concat(ra[o.map](o.type_of)));
 	};
 	o.are_same = function () {
 		var callee = arguments.callee;
