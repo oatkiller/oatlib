@@ -1,15 +1,17 @@
-
-// For kicks
-
 deepEq = (function () {
   var FAIL = {};
   return function (/* arg1, arg2, ... */) {
-    if (!arguments.length) {
+    if (arguments.length <= 1) {
       return true;
     }
-    var result = Array.prototype.slice.call (arguments).reduce (function (prev, curr) {
+    var args = Array.prototype.slice.call (arguments),
+		callee = arguments.callee;
+    var result = args.reduce (function (prev, curr) {
       if (prev == FAIL) {
         return FAIL;
+      }
+      if (prev === curr) {
+        return curr;
       }
       var areObjs = prev !== null 
         && curr !== null 
@@ -22,19 +24,15 @@ deepEq = (function () {
           }
         }
         for (var x in prev) {
-          if (!deepEq (curr [x], prev [x])) {
+          if (!callee (curr [x], prev [x])) {
             return FAIL;
           }
         }
         return curr;
       }
-      else {
-        return prev === curr
-          ? curr
-          : FAIL
-          ;
-      }
+      return FAIL;
     });
     return result != FAIL;
   };
 }) ();
+

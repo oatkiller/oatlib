@@ -1,5 +1,8 @@
 test({
 	name: 'deepEq',
+	'true with all the same string': function () {
+		Assert.isTrue(deepEq('[object Object]','[object Object]','[object Object]'),'[object Object]s');
+	},
 	'false when first obj has more properties': function () {
 		Assert.isFalse(deepEq({x: 1, y: 2}, {x: 1}),'dissimilar objs should return false');
 	},
