@@ -1,6 +1,7 @@
 //= require <array>
 //= require <every>
 //= require <type_of>
+
 o.are_same = function (first) {
 	var args = o.array(arguments);
 	return args.length < 2 ? true : args[o.every](function (element) {

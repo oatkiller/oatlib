@@ -1,28 +1,28 @@
 test({
-	name: 'are_same',
+	name: 'deep_eq',
 	'works with one param passed': function () {
-		Assert.isTrue(o.are_same(false),'just one param');
+		Assert.isTrue(o.deep_eq(false),'just one param');
 	},
 	'works with no params': function () {
-		Assert.isTrue(o.are_same(),'no params');
+		Assert.isTrue(o.deep_eq(),'no params');
 	},
 	'works with two numbers': function () {
-		Assert.isTrue(o.are_same(1,1));
+		Assert.isTrue(o.deep_eq(1,1));
 	},
 	'works with three numbers': function () {
-		Assert.isTrue(o.are_same(1,1,1));
+		Assert.isTrue(o.deep_eq(1,1,1));
 	},
 	'works with two empty objs': function () {
-		Assert.isTrue(o.are_same({},{}));
+		Assert.isTrue(o.deep_eq({},{}));
 	},
 	'works with two dissimilar objs': function () {
-		Assert.isFalse(o.are_same({a:1},{a:2}),'not similar objects should false');
+		Assert.isFalse(o.deep_eq({a:1},{a:2}),'not similar objects should false');
 	},
 	'works with two similar objs': function () {
-		Assert.isTrue(o.are_same({a:1},{a:1}),'similar objects should true');
+		Assert.isTrue(o.deep_eq({a:1},{a:1}),'similar objects should true');
 	},
 	'works with a bunch of HUGE CRAZY similar objs': function () {
-		Assert.isTrue(o.are_same(
+		Assert.isTrue(o.deep_eq(
 			{
 				a: 1,
 				b: 2,
@@ -101,7 +101,7 @@ test({
 		));
 	},
 	'work with TWO CRAZY HUGE dissimilar objs': function () {
-		Assert.isFalse(o.are_same(
+		Assert.isFalse(o.deep_eq(
 			{
 				a: 1,
 				b: 2,
