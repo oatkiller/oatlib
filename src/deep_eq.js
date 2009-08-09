@@ -1,13 +1,12 @@
-deepEq = (function () {
+var deepEq = (function () {
   var FAIL = {};
-  return function (/* arg1, arg2, ... */) {
+  var deepEq = function (/* arg1, arg2, ... */) {
     if (arguments.length <= 1) {
       return true;
     }
-    var args = Array.prototype.slice.call (arguments),
-		callee = arguments.callee;
+    var args = Array.prototype.slice.call (arguments);
     var result = args.reduce (function (prev, curr) {
-      if (prev == FAIL) {
+      if (prev === FAIL) {
         return FAIL;
       }
       if (prev === curr) {
@@ -24,7 +23,7 @@ deepEq = (function () {
           }
         }
         for (var x in prev) {
-          if (!callee (curr [x], prev [x])) {
+         if (!deepEq (curr [x], prev [x])) {
             return FAIL;
           }
         }
@@ -32,7 +31,7 @@ deepEq = (function () {
       }
       return FAIL;
     });
-    return result != FAIL;
+    return result !== FAIL;
   };
+  return deepEq;
 }) ();
-

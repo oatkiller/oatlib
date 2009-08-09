@@ -5,7 +5,8 @@
 
 o.are_same = function (first) {
 	// convert arguments to an array
-	var args = o.array(arguments);
+	var args = o.array(arguments),
+	callee = arguments.callee;
 	// if the there are less than 2 args, return true
 	return args.length < 2 ? true : args[o.every](function (element) {
 		// otherwise, if every element is the same as the first, return true
@@ -32,7 +33,7 @@ o.are_same = function (first) {
 			}) && o.every(first,function (first,property_name) {
 			// ... all the args properties are the same as the properties of the first arg, return true
 				return args[o.every](function (other) {
-					return o.are_same(first,other[property_name]);
+					return callee(first,other[property_name]);
 				});
 			});
 		})();
