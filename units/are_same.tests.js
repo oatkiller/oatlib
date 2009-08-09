@@ -1,12 +1,12 @@
 test({
 	name: 'are_same',
 	'works': function () {
-	/*
+		Assert.isTrue(o.are_same(false),'just one param');
+		Assert.isTrue(o.are_same(),'no params');
 		Assert.isTrue(o.are_same(1,1));
 		Assert.isTrue(o.are_same(1,1,1));
 		Assert.isTrue(o.are_same({},{}));
 		Assert.isFalse(o.are_same({a:1},{a:2}),'not similar objects should false');
-		*/
 		Assert.isTrue(o.are_same({a:1},{a:1}),'similar objects should true');
 		Assert.isTrue(o.are_same(
 			{

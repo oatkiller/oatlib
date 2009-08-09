@@ -3,7 +3,7 @@
 //= require <type_of>
 o.are_same = function (first) {
 	var args = o.array(arguments);
-	return args[o.every](function (element) {
+	return args.length < 2 ? true : args[o.every](function (element) {
 		return first === element;
 	}) || (function () {
 		return args[o.every](function (element) {
