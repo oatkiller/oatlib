@@ -61,9 +61,6 @@ test({
 			on_success: function (responseObj,options) {
 				that.resume();
 				delete options.on_complete;
-			},
-			on_complete: function () {
-				Assert.fail('completed before success');
 			}
 		});
 		this.wait();
@@ -75,9 +72,6 @@ test({
 			on_failure: function (responseObj,options) {
 				that.resume();
 				delete options.on_complete;
-			},
-			on_complete: function () {
-				Assert.fail('completed before success');
 			}
 		});
 		this.wait();

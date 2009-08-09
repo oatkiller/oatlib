@@ -8,7 +8,7 @@
 //= require <dom/is_tag_name>
 //= require <dom/find_ancestor_or_self>
 //= require <dom/event/delegate>
-o.dom.get_form_value_obj = function (form_node) {
+o.dom.query_string_obj_from_form = function (form_node) {
 	var pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
 		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
 	})[o.map](function (node) {
@@ -57,8 +57,7 @@ o.dom.get_form_value_obj = function (form_node) {
 
 o.dom.event.add_listener(document,'click',function (e,oe) {
 	var target = oe.get_target();
-	if ((o.dom.is_tag_name(target,'INPUT') || o.dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit') && target.form && target.form.last_submit_element_clicked) {
+	if ((o.dom.is_tag_name(target,'INPUT') || o.dom.is_tag_name(target,'BUTTON')) && (target.type === 'submit') && target.form) {
 		target.form.last_submit_element_clicked = target;
 	}
 });
-

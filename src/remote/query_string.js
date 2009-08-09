@@ -1,9 +1,6 @@
 //= require <remote/reference>
-//= require <string>
-//= require <inject>
-o.remote.query_string = function (obj) {
-	return obj[o.inject]([],function (memo,pair) {
-		memo.push(o.string(encodeURIComponent(pair.key),'=',encodeURIComponent(pair.value)));
-		return memo;
-	}).join('&');
+//= require <remote/query_string_obj_from_hash>
+//= require <remote/query_string_from_obj>
+o.remote.query_string_from_hash = function (hash) {
+	return o.remote.query_string(o.remote.query_string_obj_from_hash(hash));
 };

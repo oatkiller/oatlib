@@ -1,5 +1,4 @@
 //= require <hasOwnProperty>
-//= require <is_array>
 
 (function () {
  	o.store(Array,'filter',function (fn) {
