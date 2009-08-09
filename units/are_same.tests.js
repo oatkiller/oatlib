@@ -1,5 +1,11 @@
 test({
 	name: 'are_same',
+	'false when first obj has more properties': function () {
+		Assert.isFalse(o.are_same({x: 1, y: 2}, {x: 1}),'dissimilar objs should return false');
+	},
+	'false when second obj has more properties': function () {
+		Assert.isFalse(o.are_same({x: 1}, {x: 1, y: 2}),'dis similar objs should return false');
+	},
 	'works with one param passed': function () {
 		Assert.isTrue(o.are_same(false),'just one param');
 	},
