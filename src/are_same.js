@@ -1,5 +1,6 @@
 //= require <array>
 //= require <every>
+//= require <each>
 //= require <type_of>
 
 o.are_same = function (first) {
@@ -15,9 +16,21 @@ o.are_same = function (first) {
 			var type = o.type_of(element);
 			return type === 'object' || type === 'array';
 		}) && (function () {
-			args.shift();
+			var number_of_properties = null;
+			// every arg has the same number of properties
+			return o.every(args,function (arg) {
+				var my_number_of_properties = 0;
+				o.each(arg,function () {
+					my_number_of_properties++;
+				});
+				if (number_of_properties === null) {
+					number_of_properties = my_number_of_properties;
+					return true;
+				} else {
+					return number_of_properties === my_number_of_properties;
+				}
+			}) && o.every(first,function (first,property_name) {
 			// ... all the args properties are the same as the properties of the first arg, return true
-			return o.every(first,function (first,property_name) {
 				return args[o.every](function (other) {
 					return o.are_same(first,other[property_name]);
 				});

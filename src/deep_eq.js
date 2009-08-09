@@ -1,4 +1,6 @@
+
 // For kicks
+
 deepEq = (function () {
   var FAIL = {};
   return function (/* arg1, arg2, ... */) {
