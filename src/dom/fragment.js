@@ -1,11 +1,11 @@
 //= require <dom/reference>
 //= require <dom/array>
-//= require <injector>
+//= require <reducer>
 
 (function () {
 	var create_element = document.createElement,
 	fn = function () {
-		var get_fragment_from_nodes = o.injector(function () {return document.createDocumentFragment();},function (fragment,node) {
+		var get_fragment_from_nodes = o.reducer(function () {return document.createDocumentFragment();},function (fragment,node) {
 			fragment.appendChild(node);
 			return fragment;
 		}),

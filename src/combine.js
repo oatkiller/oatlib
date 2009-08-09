@@ -1,4 +1,4 @@
-//= require <inject>
+//= require <reduce>
 //= require <curry>
 (function () {
 
@@ -11,7 +11,7 @@
 		return result_obj;
 	},
 	combinator = function (an_iterator,result_obj) { // combines any number of objects
-		return o.slice(arguments,2)[o.inject](result_obj,an_iterator);
+		return o.slice(arguments,2)[o.reduce](an_iterator,result_obj);
 	};
 
 	o.combine = combinator[o.curry](iterator[o.curry](function (an_obj,property_name) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype

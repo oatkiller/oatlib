@@ -1,5 +1,5 @@
 //= require <dom/reference>
-//= require <inject>
+//= require <reduce>
 //= require <rcurry>
 //= require <each>
 //= require <filter>
@@ -9,9 +9,9 @@
 //= require <dom/find_ancestor_or_self>
 //= require <dom/event/delegate>
 o.dom.query_string_obj_from_form = function (form_node) {
-	var pairs = ['INPUT','TEXTAREA','OPTION'][o.inject]([],function (memo,tag_name) {
+	var pairs = ['INPUT','TEXTAREA','OPTION'][o.reduce](function (memo,tag_name) {
 		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
-	})[o.map](function (node) {
+	},[])[o.map](function (node) {
 		var result = {};
 		if (node.name !== undefined && node.name.length) { // they must have a name
 			result.key = node.name;
