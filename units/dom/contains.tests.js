@@ -1,5 +1,5 @@
 test({
-	name: 'contains',
+	name: 'dom.contains',
 	'works': function () {
 		// cant really unit test this as its written so this is a functional / integration tests. its still likely to catch any bugs cause this is a really thin method
 		var my_div = document.createElement('div');

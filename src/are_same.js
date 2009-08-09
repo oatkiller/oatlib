@@ -1,37 +1,37 @@
 //= require <array>
+//= require <reduce>
+//= require <contains>
+//= require <map>
+//= require <type_of>
 (function () {
- 	var FAIL = {};
+ 	var fail = {},
+	are_objects_or_arrays = function (ra) {
+		return o.contains.apply(null,[['object','array']].concat(ra[o.map](o.type_of)))
+	};
 	o.are_same = function () {
-		if (arguments.length < 2) {
-			return true;
-		}
-		var args = o.array(arguments);
-		var result = args[o.reduce](function (previous,current) {
-			if (previous === FAIL) {
-				return FAIL;
+		var callee = arguments.callee;
+		return arguments.length < 2 ? true : o.array(arguments)[o.reduce](function (previous,current) {
+			if (previous === fail) {
+				return fail;
 			}
 			if (previous === current) {
 				return current;
 			}
-			var are_objs = previous !== null 
-				&& current !== null 
-				&& typeof previous === 'object'
-				&& typeof current === 'object'
-			if (are_objs) {
+
+			if (are_objects_or_arrays([previous,current])) {
 				for (var x in current) {
 					if (!(x in previous)) {
-						return FAIL;
+						return fail;
 					}
 				}
 				for (var x in previous) {
-				 if (!o.are_same(current[x],previous[x])) {
-						return FAIL;
+				 if (!callee(current[x],previous[x])) {
+						return fail;
 					}
 				}
 				return current;
 			}
-			return FAIL;
-	});
-		return result !== FAIL;
+			return fail;
+		}) !== fail;
 	};
 })();
