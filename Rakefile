@@ -127,22 +127,23 @@ def pre_symbolize(but_src)
 end
 
 def symbolize(src)
-	symbols = [] # holds 'symbols' found in js
-	codeLines = [] # holds every line, to be written out later
-	results = []
+	#symbols = [] # holds 'symbols' found in js
+	#codeLines = [] # holds every line, to be written out later
+	#results = []
+	results = src
 
 	#pre_symbolize(src).each do |line|
-	src.each do |line|
-		matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
-		matches && matches.map {|array| array[0]}.each do |symbol|
-			symbols.push(symbol) # record any symbols in the array
-		end
-		codeLines.push(line) # record every line for use later
-	end
+##src.each do |line|
+##	matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
+##	matches && matches.map {|array| array[0]}.each do |symbol|
+##		symbols.push(symbol) # record any symbols in the array
+##	end
+##	codeLines.push(line) # record every line for use later
+##end
 
 	results.push('(function () {')
-	results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"empty_string = '';"].join())
-	results.concat(codeLines)
+	#results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"empty_string = '';"].join())
+	#results.concat(codeLines)
 	results.push('}).apply(this);')
 
 	return results
