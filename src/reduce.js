@@ -1,11 +1,14 @@
-//= require <first_index>
 //= require <hasOwnProperty>
 o.store(Array,'reduce',function (fn) {
-	var length = this.length, i = this[o.first_index](), memo = arguments.length > 1 ? arguments[1] : this[i];
+	var length = this.length, i = 0, memo;
+	if (arguments.length > 1) {
+		memo = arguments[1];
+	} else {
+		memo = this[i];
+		i++;
+	}
 	for (; i < length; i++) {
-		if (o.hasOwnProperty(this,i)) {
-			memo = fn.call(null, memo, this[i], i, this);
-		}
+		memo = fn.call(null, memo, this[i], i, this);
 	}
 	return memo;
 });

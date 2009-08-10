@@ -90,6 +90,12 @@ test({
 });
 test({
 	name: 'are_same',
+	'true in this weirder case in ie': function () {
+		Assert.isFalse(o.are_same(2,undefined));
+	},
+	'true in this weird case in ie': function () {
+		Assert.isFalse(o.are_same({y: 2},{}));
+	},
 	'true with all the same string': function () {
 		Assert.isTrue(o.are_same('[object Object]','[object Object]','[object Object]'),'[object Object]s');
 	},
@@ -112,7 +118,8 @@ test({
 		Assert.isTrue(o.are_same(1,1,1));
 	},
 	'works with two empty objs': function () {
-		Assert.isTrue(o.are_same({},{}));
+		var result = o.are_same({},{});
+		Assert.isTrue(result);
 	},
 	'works with two dissimilar objs': function () {
 		Assert.isFalse(o.are_same({a:1},{a:2}),'not similar objects should false');
@@ -285,10 +292,14 @@ test({
 	'works': function () {
 		var ra = o.array({length: 3, '0': 'a', '1': 'b', '2': 'c'});
 		Assert.isNotUndefined(ra.push);
-		Assert.areSame(ra[0],'a');
-		Assert.areSame(ra[1],'b');
-		Assert.areSame(ra[2],'c');
-		Assert.areSame(ra.length,3);
+		Assert.areSame('a',ra[0]);
+		Assert.areSame('b',ra[1]);
+		Assert.areSame('c',ra[2]);
+		Assert.areSame(3,ra.length);
+	},
+	'how does ie handle array elements with a value of undefined?': function () {
+		Assert.areSame(1,[undefined].length,'language is broken');
+		Assert.areSame(1,o.array([undefined]).length,'slice is broken?');
 	}
 });
 test({
@@ -440,6 +451,7 @@ test({
 	'works': function () {
 		Assert.isTrue([1,2,3][o.contains](1));
 		Assert.isFalse([1,2,3][o.contains](0));
+		Assert.isTrue(['a','b'][o.contains]('a','b'));
 	}
 });
 test({
@@ -1383,16 +1395,6 @@ test({
 	}
 });
 test({
-	name: 'first_index',
-	'works': function () {
-		Assert.areSame(0,[][o.first_index](),'empty array');
-		Assert.areSame(0,[1][o.first_index](),'array with an item');
-		var weird_array = [1,2,3];
-		delete weird_array[0];
-		Assert.areSame(1,weird_array[o.first_index](),'weird array');
-	}
-});
-test({
 	name: 'first_result',
 	'works for arrays': function () {
 		var answer = [
@@ -1721,12 +1723,24 @@ test({
 	name: 'reduce',
 	'works': function () {
 		Assert.areSame(6,[0, 1, 2, 3][o.reduce](function (a,b) {return a + b;}));
-		var flattened = [[0,1], [2,3], [4,5]].reduce(function(a,b) {
+		var flattened = [[0,1], [2,3], [4,5]][o.reduce](function(a,b) {
 			return a.concat(b);
 		}, []);
 		for (var i = 0; i <= 5; i++) {
 			Assert.areSame(i,flattened[i]);
 		}
+	},
+	'fine grain': function () {
+		var expected_previous = [0,1],
+		expected_current = [1,2],
+		count = 0;
+		[0,1,2][o.reduce](function (previous,current) {
+			Assert.areSame(expected_previous[count],previous);
+			Assert.areSame(expected_current[count],current);
+			count++;
+			return current;
+		});
+		Assert.areSame(2,count);
 	}
 });
 test({

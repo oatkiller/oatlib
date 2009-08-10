@@ -25,7 +25,8 @@
 					}
 				}
 				for (property_name in previous) {
-				 if (!callee(current[property_name],previous[property_name])) {
+					var these_are_same = callee(current[property_name],previous[property_name]);
+				 	if (!these_are_same) {
 						return fail;
 					}
 				}

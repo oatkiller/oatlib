@@ -1,5 +1,11 @@
 test({
 	name: 'are_same',
+	'true in this weirder case in ie': function () {
+		Assert.isFalse(o.are_same(2,undefined));
+	},
+	'true in this weird case in ie': function () {
+		Assert.isFalse(o.are_same({y: 2},{}));
+	},
 	'true with all the same string': function () {
 		Assert.isTrue(o.are_same('[object Object]','[object Object]','[object Object]'),'[object Object]s');
 	},
@@ -22,7 +28,8 @@ test({
 		Assert.isTrue(o.are_same(1,1,1));
 	},
 	'works with two empty objs': function () {
-		Assert.isTrue(o.are_same({},{}));
+		var result = o.are_same({},{});
+		Assert.isTrue(result);
 	},
 	'works with two dissimilar objs': function () {
 		Assert.isFalse(o.are_same({a:1},{a:2}),'not similar objects should false');
