@@ -9,7 +9,7 @@
 		return o.contains.apply(null,[['object','array']].concat(ra[o.map](o.type_of)));
 	};
 	o.are_same = function () {
-		var callee = arguments.callee;
+		var callee = arguments.callee, property_name;
 		return arguments.length < 2 ? true : o.array(arguments)[o.reduce](function (previous,current) {
 			if (previous === fail) {
 				return fail;
@@ -19,13 +19,13 @@
 			}
 
 			if (are_objects_or_arrays([previous,current])) {
-				for (var x in current) {
-					if (!(x in previous)) {
+				for (property_name in current) {
+					if (!(property_name in previous)) {
 						return fail;
 					}
 				}
-				for (var x in previous) {
-				 if (!callee(current[x],previous[x])) {
+				for (property_name in previous) {
+				 if (!callee(current[property_name],previous[property_name])) {
 						return fail;
 					}
 				}

@@ -22,6 +22,6 @@
 		} : o.error[o.curry]('couldnt get scroll offsets')).apply(this,arguments);
 	};
 	o.dom.get_scroll_offsets = function () {
-		return fn.apply(this.arguments);
+		return fn.apply(this,arguments);
 	};
 })();

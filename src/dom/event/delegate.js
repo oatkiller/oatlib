@@ -7,14 +7,6 @@
 //= require <combine>
 (function () {
 
- 	var filter_delegates_by_descendant,
-	consider_delegates_for_node,
-	delegates,
-	garbage_collect_delegates_by_type,
-	delegate_handler,
-	add_delegate_handler_by_type,
-	get_or_create_array_of_delegates_by_type;
-
 	var filter_delegates_by_descendant = function (delegates,descendant) {
 		return delegates[o.filter](function (delegate) {
 			return o.dom.contains(delegate.ancestor,descendant);
@@ -41,7 +33,7 @@
 		delegates[type][o.update](delegates[type][o.filter](function (delegate) {
 			return 'ancestor' in delegate;
 		}));
-	};
+	},
 	// the event handler for all delegates. gets curried with type.
  	delegate_handler = function (type,e,oe) {
 		garbage_collect_delegates_by_type(type);

@@ -3,8 +3,7 @@
 //= require <reducer>
 
 (function () {
-	var create_element = document.createElement,
-	fn = function () {
+	var fn = function () {
 		var get_fragment_from_nodes = o.reducer(function () {return document.createDocumentFragment();},function (fragment,node) {
 			fragment.appendChild(node);
 			return fragment;

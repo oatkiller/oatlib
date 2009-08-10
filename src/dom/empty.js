@@ -3,6 +3,6 @@
 o.dom.empty = function (node) {
 	while (node.childNodes.length) {
 		o.dom.remove(node.firstChild);
-	};
+	}
 	return node;
 };
