@@ -34,27 +34,28 @@
 		<script src="units.js"></script>
 		<script>
 
-			var correct_for_names = function (obj) {
-				for (obj_property_name in obj) {
-					inner_obj = obj[obj_property_name];
-					for (var inner_obj_property_name in inner_obj) {
-						inner_obj['test '+inner_obj_property_name] = inner_obj[inner_obj_property_name];
-						delete inner_obj[inner_obj_property_name];
-					}
-				}
-			};
-
+			// blech
 			var oatlibSuite = new YAHOO.tool.TestSuite('oatlib2');
 			for (var i = 0, length = cases.length; i < length; i++) {
-				var test_case = cases[i];
+				var modified_case = {}, test_case = cases[i];
 				for (var property_name in test_case) {
-					if (property_name !== 'name' && property_name !== 'setUp' && property_name !== 'tearDown' && property_name !== '_should' && typeof test_case[property_name] === 'function') {
-						test_case['test '+property_name] = test_case[property_name];
-						delete test_case[property_name];	
+					if (property_name !== 'name' && property_name !== 'setUp' && property_name !== 'tearDown' && property_name !== '_should') {
+						modified_case['test '+property_name] = test_case[property_name];
+					} else if (property_name === '_should') {
+						var should = test_case._should, modified_should;
+					 	modified_should	= modified_case._should = {};
+						for (var should_property_name in should) {
+							var should_property = should[should_property_name], modified_should_property;
+							modified_should_property = modified_should[should_property_name] = {};
+							for (var test_toggle in should_property) {
+								modified_should_property['test '+test_toggle] = should_property[test_toggle];
+							}
+						}
+					} else {
+						modified_case[property_name] = test_case[property_name];
 					}
 				}
-				test_case._should && correct_for_names(test_case._should);
-				oatlibSuite.add(new YAHOO.tool.TestCase(test_case));
+				oatlibSuite.add(new YAHOO.tool.TestCase(modified_case));
 			}
 
 	    var oLogger = new YAHOO.tool.TestLogger(); 
