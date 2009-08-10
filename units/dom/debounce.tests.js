@@ -19,5 +19,5 @@ test({
 		this.wait(function () {
 			Assert.isTrue(worked);
 		},60);
-	},
+	}
 });

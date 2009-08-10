@@ -6,7 +6,7 @@ test({
 	'qname': function () {
 		var sample_name = 'butt';
 		Assert.areSame(o+':::'+sample_name,o.qname(sample_name));
-	},
+	}
 });
 test({
 	name: 'application_event',
@@ -610,7 +610,7 @@ test({
 		this.wait(function () {
 			Assert.isTrue(worked);
 		},60);
-	},
+	}
 });
 test({
 	name: 'empty',
@@ -1517,7 +1517,7 @@ test({
 		Assert.isTrue(o.is_not_false('asdf'));
 		Assert.isFalse(o.is_not_false(false));
 		Assert.isTrue(o.is_not_false(null));
-	},
+	}
 });
 test({
 	name: 'parse',

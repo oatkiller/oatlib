@@ -6,5 +6,5 @@ test({
 	'qname': function () {
 		var sample_name = 'butt';
 		Assert.areSame(o+':::'+sample_name,o.qname(sample_name));
-	},
+	}
 });
