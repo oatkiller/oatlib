@@ -7,4 +7,5 @@ o.store(Array,'find',function (fn) {
 			}
 		}
 	}
+	return null;
 });

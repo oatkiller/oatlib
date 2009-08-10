@@ -5,7 +5,7 @@ test({
 			{key: 'a',value: 1},
 			{key: 'a',value: 1},
 			{key: 'b',value: 2},
-			{key: 'c',value: 3},
+			{key: 'c',value: 3}
 		]));
 	}
 });

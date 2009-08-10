@@ -12,9 +12,14 @@ o.toString = function () {
 	return namespace;
 };
 
+o.array = function (array_like) {
+	return Array.prototype.slice.call(array_like);
+};
+
 o.take = function (fn) {
 	return function () {
-		return fn.apply(arguments[0],Array.prototype.slice.call(arguments,1));
+		var args = o.array(arguments);
+		return fn.apply(args.shift(),args);
 	};
 };
 

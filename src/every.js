@@ -1,11 +1,12 @@
 //= require <hasOwnProperty>
+//= require <iterate>
 o.store(Array,'every',function (fn) {
-	for (var property_name in this) {
-		if (o.hasOwnProperty(this,property_name)) {
-			if (!fn.call(this,this[property_name],property_name)) {
-				return false;
-			}
+	var result = true, that = this;
+	o.iterate(this,function (element,i) {
+		if (fn.call(this,element,i,that) === false) {
+			result = false;
+			return o.iterate_break;
 		}
-	}
-	return true;
+	});
+	return result;
 });

@@ -6,6 +6,6 @@ o.store(Array,'contains',function () {
 	return o.array(arguments)[o.every](function (value) {
 		return that[o.find](function (element) {
 			return element === value;
-		});
+		}) !== null;
 	});
 });

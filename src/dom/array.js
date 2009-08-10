@@ -1,7 +1,6 @@
 //= require <dom/reference>
 //= require <array>
-//= require <map>
-//= require <K>
+//= require <iterate>
 
 (function () {
 
@@ -13,7 +12,11 @@
 			fn = o.dom.array = o.array;
 		} catch (e) {
 			fn = o.dom.array = function (array_like) {
-				return o.map(array_like,o.K);
+				var my_array = [];
+				o.iterate(array_like,function (element) {
+					my_array.push(element);
+				});
+				return my_array;
 			};
 		}
 		return fn.apply(null,arguments);

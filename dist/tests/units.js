@@ -1014,6 +1014,11 @@ test({
 		var stuff = o.dom.fragment('well<div>nope</div> har');
 		Assert.areSame(3,stuff.childNodes.length,'fragment didnt get childnodes');
 	}
+	/* doesnt work in ie
+	'style node': function () {
+		var stuff = o.dom.fragment('<style></style>');
+		Assert.areSame(1,stuff.childNodes.length,'fragment didnt get childnodes');
+	}*/
 });
 test({
 	name: 'get scroll offsets',
@@ -1268,31 +1273,6 @@ test({
 	}
 });
 test({
-	name: 'set_css',
-	'works': function () {
-		var tmp_div = document.createElement('div');
-		tmp_div.className = 'oh-hellz-yah-woot';
-		document.body.appendChild(tmp_div);
-		Assert.areSame(0,tmp_div.offsetHeight);
-		var remove = o.dom.set_css('.oh-hellz-yah-woot {height: 100px;}');
-		this.wait(function () {
-			Assert.areSame(100,tmp_div.offsetHeight);
-			remove();
-		},10);
-	},
-	'delete works': function () {
-		var tmp_div = document.createElement('div');
-		tmp_div.className = 'oh-hellz-yah-woot';
-		document.body.appendChild(tmp_div);
-		Assert.areSame(0,tmp_div.offsetHeight);
-		var delete_them = o.dom.set_css('.oh-hellz-yah-woot {height: 100px;}');
-		delete_them();
-		this.wait(function () {
-			Assert.areSame(0,tmp_div.offsetHeight,'couldnt delete');
-		},10);
-	}
-});
-test({
 	name: 'unhide',
 	'works': function () {
 		var my_div = document.createElement('div');
@@ -1367,10 +1347,12 @@ test({
 test({
 	name: 'every',
 	'works for arrays': function () {
-		var answer = [1,true,'yes',undefined][o.every](function (a) {return a;});
-		Assert.isFalse(answer);
 		answer = [1,true,'yes',2][o.every](function (a) {return a;});
 		Assert.isTrue(answer);
+	},
+	'works for arrays with undefined in them': function () {
+		var answer = [1,true,'yes',false][o.every](function (a) {return a;});
+		Assert.isFalse(answer);
 	}
 });
 test({
@@ -1782,7 +1764,7 @@ test({
 			{key: 'a',value: 1},
 			{key: 'a',value: 1},
 			{key: 'b',value: 2},
-			{key: 'c',value: 3},
+			{key: 'c',value: 3}
 		]));
 	}
 });
