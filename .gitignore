@@ -6,3 +6,4 @@ plugins
 units/test.tests.js
 src/test.js
 dist/tests/test.html
+*.svn

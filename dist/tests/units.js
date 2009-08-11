@@ -959,6 +959,17 @@ test({
 	}
 });
 test({
+	name: 'find_descendants',
+	'works': function () {
+		var tmp_div = document.createElement('div');
+		tmp_div.innerHTML = '<span></span><b></b><strong></strong><p></p>';
+		var results = o.dom.find_descendants(tmp_div,function (node) {
+			return node.tagName === 'DIV' || node.tagName === 'B' || node.tagName === 'STRONG';
+		});
+		Assert.areSame(3,results.length);
+	}
+});
+test({
 	name: 'find_descendant_or_self',
 	'works': function () {
 		var my_div = document.createElement('div');
@@ -973,17 +984,6 @@ test({
 		Assert.areSame(o.dom.find_descendant_or_self(my_div,function (node) {
 			return node.tagName && node.tagName === 'DIV';
 		}).tagName,'DIV');
-	}
-});
-test({
-	name: 'find_descendants',
-	'works': function () {
-		var tmp_div = document.createElement('div');
-		tmp_div.innerHTML = '<span></span><b></b><strong></strong><p></p>';
-		var results = o.dom.find_descendants(tmp_div,function (node) {
-			return node.tagName === 'DIV' || node.tagName === 'B' || node.tagName === 'STRONG';
-		});
-		Assert.areSame(3,results.length);
 	}
 });
 test({
