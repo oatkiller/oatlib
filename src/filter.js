@@ -1,17 +1,10 @@
-//= require <hasOwnProperty>
-
-(function () {
- 	o.store(Array,'filter',function (fn) {
-		var property_name, element, results = [];
-		for (property_name in this) {
-			if (o.hasOwnProperty(this,property_name)) {
-				element = this[property_name];
-				if (fn.call(this,element,property_name,this)) {
-					results.push(element);
-				}
-			}
+//= require <each>
+o.store(Array,'filter',function (fn) {
+	var results = [];
+	o.each(this,function (element,property_name,that) {
+		if (fn.call(that,element,property_name,that)) {
+			results.push(element);
 		}
-		return results;
 	});
-
-})();
+	return results;
+});
