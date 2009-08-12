@@ -1,6 +1,7 @@
 //= require <dom/reference>
 //= require <reduce>
 //= require <rcurry>
+//= require <map>
 //= require <each>
 //= require <filter>
 //= require <dom/array>
@@ -12,13 +13,16 @@ o.dom.query_string_obj_from_form = function (form_node) {
 	var pairs = ['INPUT','TEXTAREA','OPTION'][o.reduce](function (memo,tag_name) {
 		return memo.concat(o.dom.array(form_node.getElementsByTagName(tag_name)));
 	},[])[o.map](function (node) {
-		var result = {};
+		var result = {node: node};
 		if (node.name !== undefined && node.name.length) { // they must have a name
 			result.key = node.name;
 		} else if (o.dom.is_tag_name(node,'OPTION')) { // its an option, so the name is on the select isntead
 
 			// find the select
 			var select = o.dom.find_ancestor_or_self(node,o.dom.is_tag_name[o.rcurry]('SELECT'));
+
+			// node should be the select instead o the option
+			result.node = select;
 
 			// set key to the selects name.
 			if ('name' in select) {
@@ -49,7 +53,8 @@ o.dom.query_string_obj_from_form = function (form_node) {
 	if (last_submit_element_clicked && last_submit_element_clicked.name !== '' && last_submit_element_clicked.value !== '') {
 		pairs.push({
 			key: last_submit_element_clicked.name,
-			value: last_submit_element_clicked.value
+			value: last_submit_element_clicked.value,
+			node: last_submit_element_clicked
 		});
 	}
 	return pairs;
