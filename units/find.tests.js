@@ -7,6 +7,6 @@ test({
 			{id: 3, value: true},
 			{id: 4, value: false}
 		][o.find](function (obj) {return obj.value;});
-		Assert.areSame(answer.id,3);
+		Assert.areSame(3,answer.id);
 	}
 });
