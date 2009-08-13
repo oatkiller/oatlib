@@ -218,6 +218,7 @@ end
 task :build_tests, [:module_string] => [:build] do |t, args|
 	desc "pass a list of modules to build tests for: rake build_tests[\"functional dom dom-effects\"] (units.js results in the dist/tests dir; this will build oatlib with those modules first)"
 	modules = args.module_string.split(' ').unshift('core').collect {|module_name| File.join('units',module_name + '.tests.js') }
+	puts modules
 	sprocketized_src = sprocketize(['src','units'],modules)
 	dist(File.join(LIBRARY_ROOT,'dist','tests','units.js'),sprocketized_src)
 	Rake::Task['minify'].invoke

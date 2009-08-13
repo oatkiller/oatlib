@@ -26,12 +26,13 @@ test({
 	'can break': function () {
 		var count = 0,
 		ra = [1,2,3,4];
-		ra[o.each](function (element) {
+		var broke = ra[o.each](function (element) {
 			count++;
 			if (element === 3) {
 				return o.each_break;
 			}
 		});
 		Assert.areSame(3,count);
+		Assert.areSame(o.each_break,broke);
 	}
 });
