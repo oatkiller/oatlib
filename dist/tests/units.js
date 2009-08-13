@@ -111,5 +111,23 @@ test({
 			}
 			Assert.fail();
 		}
+	},
+	'local vars are assigned to the with scope': function () {
+		var a = {d: undefined};
+		with (a) {
+			var b = 1;
+			c = 1;
+			d = true;
+		}
+		Assert.isUndefined(a.b,'b');
+		Assert.isUndefined(a.c,'c');
+		Assert.isTrue(a.d,'d');
+	},
+	'what happens to property names in the with obj that arent allowed variables?': function () {
+		var value;
+		with ({'!@#!@kas;dkf': function () {}}) {
+			value = true;
+		}
+		Assert.isTrue(true);
 	}
 });
