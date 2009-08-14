@@ -141,7 +141,7 @@ def symbolize(src)
 ##	codeLines.push(line) # record every line for use later
 ##end
 
-	results.push('(function () {')
+	results.unshift('(function () {')
 	#results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"empty_string = '';"].join())
 	#results.concat(codeLines)
 	results.push('}).apply(this);')

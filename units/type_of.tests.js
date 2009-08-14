@@ -5,5 +5,8 @@ test({
 		Assert.areSame('node',o.type_of(document.createElement('div')));
 		Assert.areSame('array',o.type_of([]));
 		Assert.areSame('null',o.type_of(null));
+	},
+	'works for regex': function () {
+		Assert.areSame('object',o.type_of(/asdf/));
 	}
 });

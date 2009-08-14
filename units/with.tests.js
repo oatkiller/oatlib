@@ -12,11 +12,6 @@ test({
 			Assert.areSame(value,my_fn());
 		};
 	},
-	'you can reference properties of the object as in scope local vars': function () {
-		with (o.dom) {
-			Assert.isTrue(is_tag_name(document.createElement('div'),'DIV'));
-		}
-	},
 	'stuff doesnt sneak onto the object': function () {
 		var my_obj = {};
 		with (my_obj) {
@@ -119,5 +114,12 @@ test({
 			value = true;
 		}
 		Assert.isTrue(true);
+	},
+	'asdf': function () {
+		var my_obj = {};
+		with (my_obj) {
+			blah = 1;
+		}
+		Assert.isUndefined(my_obj.blah);
 	}
 });
