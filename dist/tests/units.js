@@ -466,25 +466,7 @@ test({
 test({
 	name: 'absolutize',
 	'works': function () {
-		var found_position = null;
-		o.dom.find_position = function (my_node) {
-			found_position = my_node;
-			return {
-				y: 10,
-				x: 20
-			};
-		};
-		node = document.createElement('div');
-		node.style.width = '13px';
-		node.style.height = '13px';
-		var position = o.dom.absolutize(node);
-		Assert.areSame(position.y,10);
-		Assert.areSame(position.x,20);
-		Assert.areSame(node,found_position);
-		Assert.areSame(node.style.position,'absolute');
-		Assert.areSame(node.parentNode,document.body);
-		Assert.areSame(node.style.top,'10px');
-		Assert.areSame(node.style.left,'20px');
+		Assert.fail('untested');
 	}
 });
 test({
@@ -995,6 +977,22 @@ test({
 		Assert.areSame('B',o.dom.find_following_sibling_or_self(my_span,function (n) {
 			return n.tagName && n.tagName === 'B';
 		}).tagName);
+	}
+});
+test({
+	name: 'find_position',
+	'works': function () {
+		var my_div = document.createElement('div');
+		document.body.appendChild(my_div);
+
+		var position = o.dom.find_position(my_div);
+
+		Assert.isNotUndefined(position.y);
+		Assert.isNotUndefined(position.x);
+		Assert.isNotUndefined(position.get_height);
+		Assert.isNotUndefined(position.get_width);
+		Assert.isNotUndefined(position.rect);
+
 	}
 });
 test({

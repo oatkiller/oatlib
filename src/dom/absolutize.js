@@ -6,8 +6,8 @@ o.dom.absolutize = function (node) {
 	
 	// get position 
 	var position = o.dom.find_position(node),
-	offset_width = node.offsetWidth,
-	offset_height = node.offsetHeight;
+	offset_width = position.get_width(),
+	offset_height = position.get_height();
 
 	// set to absolute
 	node.style.position = 'absolute';
