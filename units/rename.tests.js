@@ -1,6 +1,6 @@
 test({
 	name: 'rename',
-	'works': function () {
+/*	'works': function () {
 		var key_map = {
 			Name: 'name',
 			Age: 'age',
@@ -87,5 +87,29 @@ test({
 		Assert.isUndefined(obj.Things.Favorite,'Favorite');
 		Assert.isNotUndefined(obj.Things.favorite.movies.badass);
 		Assert.isUndefined(obj.Things.favorite.movies.epic);
+	},*/
+	'works with arrays when trash leftovers': function () {
+		var obj = ['a','b','c'];
+		o.rename(obj,{});
+		Assert.isTrue(obj instanceof Array);
+		Assert.areSame('a',obj[0]);
+		Assert.areSame('b',obj[1]);
+		Assert.areSame('c',obj[2]);
+	},
+	'works with deep arrays': function () {
+		var obj = {
+			an_array: [
+				{nubs: 1},
+				{asdf: 2}
+			]
+		};
+		o.rename(obj,{
+			an_array: 'my_array',
+			nubs: 'noobs',
+			asdf: 'qwer'
+		});
+		Assert.isNotUndefined(obj.my_array);
+		Assert.isNotUndefined(obj.my_array[0].noobs);
+		Assert.isNotUndefined(obj.my_array[1].qwer);
 	}
 });
