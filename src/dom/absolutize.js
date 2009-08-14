@@ -5,9 +5,13 @@
 o.dom.absolutize = function (node) {
 	
 	// get position 
-	var position = o.dom.find_position(node),
-	offset_width = position.get_width(),
-	offset_height = position.get_height();
+	var position = o.dom.find_position(node);
+
+	node.style.padding = '0';
+	var offset_width = node.offsetWidth,
+	offset_height = node.offsetHeight;
+
+	node.style.padding = '';
 
 	// set to absolute
 	node.style.position = 'absolute';
