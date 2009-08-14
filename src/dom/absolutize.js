@@ -7,11 +7,19 @@ o.dom.absolutize = function (node) {
 	// get position 
 	var position = o.dom.find_position(node);
 
-	node.style.padding = '0';
-	var offset_width = node.offsetWidth,
-	offset_height = node.offsetHeight;
+	// this fn uses algebra to guess the apropriate width
 
-	node.style.padding = '';
+	var original_width = parseFloat(node.offsetWidth),
+	original_height = parseFloat(node.offsetHeight);
+
+	node.style.width = original_width + 'px';
+	node.style.height = original_height + 'px';
+
+	var horizontal_padding = parseFloat(node.offsetWidth) - original_width,
+	vertical_padding = parseFloat(node.offsetHeight) - original_height;
+
+	var offset_width = original_width - horizontal_padding,
+	offset_height = original_height - vertical_padding;
 
 	// set to absolute
 	node.style.position = 'absolute';
