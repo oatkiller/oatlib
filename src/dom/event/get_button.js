@@ -10,4 +10,3 @@
 		return fn.apply(this,arguments);
 	};
 })();
-
