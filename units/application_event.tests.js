@@ -76,5 +76,39 @@ test({
 		Assert.areSame(10,a);
 		Assert.areSame(3,b);
 		Assert.areSame(6,c);
+	},
+	'documentation': function () {
+		(function () {
+			var my_event = o.application_event();
+			my_event.subscribe(function (payload) {
+				//alert(payload.data);
+				// do something with the payload
+			});
+
+			my_event.fire({
+				data: 'will be avail. in the function you subscribed'
+			});
+		})();
+		(function () {
+			var my_event = o.application_event();
+			my_event.multi_subscribe({
+				start: function (payload) {
+					// do something when it starts
+					//alert(payload.data);
+				},
+				finish: function (payload) {
+					// do something when it finishes
+					//alert(payload.data);
+				}
+			});
+			my_event.fire({
+				type: 'start',
+				data: 'this obj will be passed to the fn you subscribed to start'
+			});
+			my_event.fire({
+				type: 'finish',
+				data: 'this obj will be passed to the fn you subscribed to finish'
+			});
+		})();
 	}
 });
