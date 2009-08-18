@@ -9,36 +9,27 @@ test({
 	}
 });
 test({
-	name: 'before',
-	'works': function () {
-		var payload = {},
-		got_this = false;
-		my_fn = (function (type,payload) {
-			got_this = payload;
-		})[o.before](function (type) {
-			return type === 'on_drop';
+	name: 'call_once',
+	'call_once calls': function () {
+		var count = 0,
+		do_count = o.call_once(function () {
+			count++;
 		});
-
-		my_fn('blah',payload);
-		Assert.isFalse(got_this);
-		my_fn('on_drop',payload);
-		Assert.areSame(payload,got_this);
+		do_count();
+		Assert.areSame(1,count,'didnt call');
+		do_count();
+		Assert.areSame(1,count,'called too many times');
 	},
 	'documentation': function () {
-		var submitted = false,
-		my_form = {
-			submit: function () {
-				submitted = true;
-			}
-		};
-		var submit_the_form = function () {
-			my_form.submit();
-		}[o.before](confirm[o.curry]('are you sure?'));
-		Assert.isFalse(submitted);
-		submit_the_form();
-		Assert.isFalse(submitted);
-		submit_the_form();
-		Assert.isTrue(submitted);
+
+		var get_a_div = function () {
+			return document.createElement('div');
+		}[o.call_once]();
+
+		var my_div = get_a_div(), // returns a new div
+		my_same_div = get_a_div(); // returns the same div again, as the function is called only once
+
+		Assert.areSame(my_div,my_same_div);
 
 	}
 });
