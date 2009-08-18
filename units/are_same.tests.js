@@ -194,5 +194,63 @@ test({
 				}
 			}
 		));
+	},
+	'documentation': function () {
+		(function () {
+			// these are the exactly the same. 
+			// anything the compares the same with === is the same in are_same
+			Assert.isTrue(o.are_same(1,1)); // true. 
+
+			// you can compare lots of parameters.
+			Assert.isTrue(o.are_same('foo','foo','foo','foo')); // true. 
+
+			// for objects, o.are_same recurses into the object and compares their properties.
+			Assert.isTrue(o.are_same([1,2,3],[1,2,3],[1,2,3])); // true. 
+
+			// even those these arrays have the same elements, they arent in the same order.
+			// property names have to match as well.
+			Assert.isFalse(o.are_same([1,3,2],[1,2,3])); // false.
+
+			// objects have to have the same properties. cant be missing any.
+			Assert.isFalse(o.are_same([1,2],[1,2,3])); // false. 
+
+			// are_same can recurse into objects
+			Assert.isTrue(o.are_same({
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			},{
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			})); // true. 
+
+			//  i changed my favorite book to War & Peace in one record, so now these aren't the same.
+			Assert.isFalse(o.are_same({
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'War &amp; Peace',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			},{
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			})); // false
+		})();
 	}
 });

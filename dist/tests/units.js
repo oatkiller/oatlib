@@ -9,110 +9,249 @@ test({
 	}
 });
 test({
-	name: 'application_event',
-	setUp: function () {
-		this.event = o.application_event();
+	name: 'are_same',
+	'true in this weirder case in ie': function () {
+		Assert.isFalse(o.are_same(2,undefined));
 	},
-	tearDown: function () {
-		delete this.event;
+	'true in this weird case in ie': function () {
+		Assert.isFalse(o.are_same({y: 2},{}));
 	},
-	'returns obj': function () {
-		Assert.isObject(this.event);
+	'true with all the same string': function () {
+		Assert.isTrue(o.are_same('[object Object]','[object Object]','[object Object]'),'[object Object]s');
 	},
-	'subscribe returns fn': function () {
-		Assert.isFunction(this.event.subscribe(function () {}));
+	'false when first obj has more properties': function () {
+		Assert.isFalse(o.are_same({x: 1, y: 2}, {x: 1}),'dissimilar objs should return false');
 	},
-	'subscribe puts its payload in the event return obj bees property': function () {
-		var my_fn = function () {};
-		this.event.subscribe(my_fn);
-		Assert.areSame(this.event.bees[0],my_fn);
+	'false when second obj has more properties': function () {
+		Assert.isFalse(o.are_same({x: 1}, {x: 1, y: 2}),'dis similar objs should return false');
 	},
-	'subscribes return removes the payload from the event return obj bees property': function () {
-		var my_fn = function () {};
-		var remove = this.event.subscribe(my_fn);
-		remove();
-		Assert.areSame(this.event.bees.length,0);
+	'works with one param passed': function () {
+		Assert.isTrue(o.are_same(false),'just one param');
 	},
-	'fire calls all the bees with its payload': function () {
-		var called = false,
-		other_called = false,
-		my_fn = function (e) {
-			called = e;
-		},
-		my_second_fn = function (e) {
-			other_called = e;
-		};
-		this.event.subscribe(my_fn);
-		this.event.subscribe(my_second_fn);
-		this.event.fire('nubs');
-		Assert.areSame(called,other_called);
-		Assert.areSame(called,'nubs');
+	'works with no params': function () {
+		Assert.isTrue(o.are_same(),'no params');
 	},
-	'multisubscribe works': function () {
-		var a = 0, b = a, c = a;
-		this.event.multi_subscribe({
-			a: function (data) {a+=data.value;},
-			b: function (data) {b+=data.value;},
-			c: function (data) {c+=data.value;}
-		});
-		Assert.areSame(0,a);
-		Assert.areSame(0,b);
-		Assert.areSame(0,c);
-		this.event.fire({
-			type: 'a',
-			value: 1
-		});
-		Assert.areSame(1,a);
-		Assert.areSame(0,b);
-		Assert.areSame(0,c);
-		this.event.fire({
-			type: 'a',
-			value: 9
-		});
-		Assert.areSame(10,a);
-		Assert.areSame(0,b);
-		Assert.areSame(0,c);
-		this.event.fire({
-			type: 'b',
-			value: 3
-		});
-		Assert.areSame(10,a);
-		Assert.areSame(3,b);
-		Assert.areSame(0,c);
-		this.event.fire({
-			type: 'c',
-			value: 6
-		});
-		Assert.areSame(10,a);
-		Assert.areSame(3,b);
-		Assert.areSame(6,c);
+	'works with two numbers': function () {
+		Assert.isTrue(o.are_same(1,1));
+	},
+	'works with three numbers': function () {
+		Assert.isTrue(o.are_same(1,1,1));
+	},
+	'works with two empty objs': function () {
+		var result = o.are_same({},{});
+		Assert.isTrue(result);
+	},
+	'works with two dissimilar objs': function () {
+		Assert.isFalse(o.are_same({a:1},{a:2}),'not similar objects should false');
+	},
+	'works with two similar objs': function () {
+		Assert.isTrue(o.are_same({a:1},{a:1}),'similar objects should true');
+	},
+	'works with a bunch of HUGE CRAZY similar objs': function () {
+		Assert.isTrue(o.are_same(
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: Object,
+								p: []
+							}
+						]
+					}
+				}
+			},
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: Object,
+								p: []
+							}
+						]
+					}
+				}
+			},
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: Object,
+								p: []
+							}
+						]
+					}
+				}
+			}
+		));
+	},
+	'work with TWO CRAZY HUGE dissimilar objs': function () {
+		Assert.isFalse(o.are_same(
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: Object,
+								p: []
+							}
+						]
+					}
+				}
+			},
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: Object,
+								p: []
+							}
+						]
+					}
+				}
+			},
+			{
+				a: 1,
+				b: 2,
+				c: 3,
+				d: {
+					e: 5,
+					f: {
+						g: 6,
+						h: [
+							0,
+							1,
+							{
+								i: 'a',
+								j: true,
+								k: null,
+								l: undefined,
+								m: Math,
+								n: Number,
+								o: 'hehe',
+								p: []
+							}
+						]
+					}
+				}
+			}
+		));
 	},
 	'documentation': function () {
 		(function () {
-			var my_event = o.application_event();
-			my_event.subscribe(function (payload) {
-			});
+			Assert.isTrue(o.are_same(1,1)); // true.
 
-			my_event.fire({
-				data: 'will be avail. in the function you subscribed'
-			});
-		})();
-		(function () {
-			var my_event = o.application_event();
-			my_event.multi_subscribe({
-				start: function (payload) {
-				},
-				finish: function (payload) {
+			Assert.isTrue(o.are_same('foo','foo','foo','foo')); // true.
+
+			Assert.isTrue(o.are_same([1,2,3],[1,2,3],[1,2,3])); // true.
+
+			Assert.isFalse(o.are_same([1,3,2],[1,2,3])); // false.
+
+			Assert.isFalse(o.are_same([1,2],[1,2,3])); // false.
+
+			Assert.isTrue(o.are_same({
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
 				}
-			});
-			my_event.fire({
-				type: 'start',
-				data: 'this obj will be passed to the fn you subscribed to start'
-			});
-			my_event.fire({
-				type: 'finish',
-				data: 'this obj will be passed to the fn you subscribed to finish'
-			});
+			},{
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			})); // true.
+
+			Assert.isFalse(o.are_same({
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'War &amp; Peace',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			},{
+				name: 'robert',
+				age: 23,
+				favorites: {
+					book: 'Wuthering Heights',
+					album: 'Bricolages - Ryuichi Sakamoto',
+					tea: 'jasmine'
+				}
+			})); // false
 		})();
 	}
 });
