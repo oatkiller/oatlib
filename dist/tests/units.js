@@ -633,6 +633,29 @@ test({
 			Assert.areSame(4,cells.length);
 			myRa = o.dom.array(cells);
 			Assert.isNotUndefined(myRa.push);
+	},
+	'documentation': function () {
+
+var errors_caught = 0;
+
+var my_div = document.createElement('div');
+my_div.innerHTML = '<span>hi</span><p>a para</p>';
+
+try {
+	my_div.childNodes.push() // error, can't push childNodes because its not an array
+} catch (e) {
+	errors_caught++;
+}
+
+var my_child_nodes = o.dom.array(my_div.childNodes);
+
+my_child_nodes.push('anything');
+Assert.areSame('anything',my_child_nodes[my_child_nodes.length - 1]);
+
+my_div.innerHTML = '';
+
+Assert.areSame('SPAN',my_child_nodes[0].tagName); // still has nodes
+
 	}
 });
 test({
@@ -1507,7 +1530,28 @@ test({
 			count++;
 		});
 		Assert.areSame(1,count);
+	}/*,
+	'documentation': function () {
+[1,2,3][o.each](function (n,index,my_array) {
+
+	alert(n);
+});
+
+o.each({
+	name: 'Robert',
+	age: 23,
+	food: 'peanut butter'
+},function (element,property_name,obj) {
+	alert(property_name + ': ' + element);
+});
+
+[1,2,3][o.each](function (n) {
+	if (n === 2) {
+		return o.each_break;
 	}
+});
+
+	}*/
 });
 test({
 	name: 'error',
@@ -1541,6 +1585,11 @@ test({
 	'works for arrays with undefined in them': function () {
 		var answer = [1,true,'yes',false][o.every](function (a) {return a;});
 		Assert.isFalse(answer);
+	},
+	'documentation': function () {
+Assert.isTrue([1,2,3][o.every](function (n) {return n < 4;})); // true;
+
+Assert.isFalse([1,2,5][o.every](function (n) {return n < 4;})); // false;
 	}
 });
 test({
@@ -1550,6 +1599,36 @@ test({
 		Assert.areSame(2,results.length);
 		Assert.areSame(1,results[0]);
 		Assert.areSame(3,results[1]);
+	},
+	'works on objs': function () {
+		var obj = {
+			a: 1,
+			b: 2,
+			c: 3,
+			d: 4
+		},
+		filtered = o.filter(obj,function (a) {return a % 2 !== 0;}),
+		count = 0;
+		for (var property_name in filtered) {
+			if (count === 0) {
+				Assert.areSame('a',property_name);
+				Assert.areSame(1,filtered[property_name]);
+			} else {
+				Assert.areSame('c',property_name);
+				Assert.areSame(3,filtered[property_name]);
+			}
+			count++;
+		}
+		Assert.areSame(2,count);
+		Assert.isUndefined(filtered.length);
+	},
+	'documentation': function () {
+
+var new_array = [1,2,3,4][o.filter](function (i) {
+	return i % 2;
+});
+Assert.areSame(1,new_array[0]);
+Assert.areSame(3,new_array[1]);
 	}
 });
 test({
@@ -1586,6 +1665,12 @@ test({
 			d: 4
 		},fn);
 		Assert.areSame(6,answer);
+	},
+	'documentation': function () {
+Assert.areSame(3,['blah','ducks','3','woot'][o.first_result](function (n) {
+	return parseFloat(n);
+}));
+
 	}
 });
 test({
@@ -1611,6 +1696,10 @@ test({
 		for (; i < length; i++) {
 			Assert.areSame(result[i],expected_result[i]);
 		}
+	},
+	'documentation': function () {
+Assert.areSame(6,[1,2,[3,4],[5,6]][o.get_flattened]().length);
+[1,2,[3,4],[5,6]][o.get_flattened]();
 	}
 });
 test({
@@ -1621,28 +1710,6 @@ test({
 			name: 'robert'
 		};
 		Assert.areSame(o.get_object_property(obj,'name'),obj.name);
-	}
-});
-test({
-	name: 'get_once',
-	'get_once': function () {
-		var count = 0,
-		proto = {
-			get_it: o.get_once('get_it',function () {
-				count++;
-				return 1;
-			})
-		},
-		C = function () {
-		},
-		my_c;
-		C.prototype = proto;
-		my_c = new C();
-		Assert.areSame(count,0);
-		Assert.areSame(1,my_c.get_it());
-		Assert.areSame(count,1);
-		Assert.areSame(1,my_c.get_it());
-		Assert.areSame(count,1);
 	}
 });
 test({
@@ -1709,6 +1776,12 @@ test({
 		o.invoke(fn);
 		Assert.areSame(count,2);
 
+	},
+	'documentation': function () {
+var my_fn = function (a,b) {
+	return a + b;
+};
+Assert.areSame(7,o.invoke(my_fn,3,4));
 	}
 });
 test({
@@ -1718,6 +1791,16 @@ test({
 	},
 	'works on non arrays': function () {
 		Assert.isFalse(o.is_array({'0': 1, '1': 2, length: 2}));
+	},
+	'documentation': function () {
+		Assert.isTrue(o.is_array([])); // true
+		Assert.isFalse(o.is_array({})); // false
+
+		Assert.isFalse(o.is_array({
+			'0': 'a',
+			'1': 'b',
+			length: 2
+		}));
 	}
 });
 test({
@@ -1792,40 +1875,57 @@ test({
 		Assert.isTrue('name' in masked);
 		Assert.isFalse(masked.hasOwnProperty('name'));
 
+	},
+	'documentation': function () {
+
+var book = {
+	title: 'Anna Karenina',
+	author: 'Leo Tolstoy'
+};
+
+var my_book = o.mask(book);
+
+my_book.notes = 'this book rocks';
+
+Assert.isUndefined(book.notes);
+Assert.isNotUndefined(my_book.notes);
+Assert.isNotUndefined(my_book.title);
+
+
 	}
 });
 test({
 	name: 'newo.memoize',
 	'new o.memoize basic usage': function () {
 		var total = 0,
-		getDouble = o.memoize(function (value) {
+		get_double = o.memoize(function (value) {
 			total += 1;
 			return value * 2;
 		});
 
-		getDouble(1);
-		getDouble(1);
-		getDouble(1);
+		get_double(1);
+		get_double(1);
+		get_double(1);
 		Assert.areSame(1,total);
-		getDouble(2);
-		getDouble(3);
-		getDouble(4);
+		get_double(2);
+		get_double(3);
+		get_double(4);
 		Assert.areSame(4,total);
 	},
-	'new o.memoize, with invalidateKey': function () {
+	'new o.memoize, with invalidate': function () {
 		var total = 0,
 		memo = {},
-		getDouble = function (value) {
+		get_double = function (value) {
 			total += 1;
 			return value * 2;
 		}[o.memoize](memo);
 
-		getDouble(1);
-		getDouble(1);
-		getDouble(1);
+		get_double(1);
+		get_double(1);
+		get_double(1);
 		Assert.areSame(1,total);
-		delete memo[1];
-		getDouble(1);
+		delete memo['1'];
+		get_double(1);
 		Assert.areSame(2,total);
 
 	},
@@ -1867,30 +1967,34 @@ test({
 		process(new AnObject('tresdleton'));
 		process(new AnObject('cranble'));
 		Assert.areSame(4,total);
-	}
-});
-test({
-	name: 'object_memo',
-	'object_memo': function () {
+	},
+	'documentation': function () {
 
-		var myC = function () {},
-		calcCount = 0;
-		myC.prototype = {
-			getIt: o.object_memo('myProperty',function () {
-				calcCount++;
-				return 'value';
-			})
-		},
-		myObj = new myC();
+var my_data;
 
-		Assert.isFalse(myObj.hasOwnProperty('myProperty'));
-		Assert.isFalse(myObj.hasOwnProperty('getIt'));
+var count = 0;
 
-		Assert.areSame(myObj.getIt(),'value');
-		Assert.areSame(calcCount,1);
-		Assert.areSame(myObj.getIt(),'value');
-		Assert.areSame(calcCount,1);
-		Assert.isTrue(myObj.hasOwnProperty('myProperty'));
+
+var my_cached_ajax_responses = {},
+get_data_by_id_and_type = function (id,type) {
+	count++;
+	return my_data; // something you got from ajax
+}[o.memoize](my_cached_ajax_responses);
+
+Assert.areSame(0,count);
+
+get_data_by_id_and_type(1,'name');
+Assert.areSame(1,count);
+
+get_data_by_id_and_type(1,'name');
+Assert.areSame(1,count);
+
+var key = [1,'name'].join(); // '1,name'
+
+delete my_cached_ajax_responses[key];
+
+get_data_by_id_and_type(1,'name');
+Assert.areSame(2,count);
 
 	}
 });
@@ -2101,121 +2205,6 @@ test({
 			}
 		});
 		this.wait();
-	}
-});
-test({
-	name: 'rename',
-/*	'works': function () {
-		var key_map = {
-			Name: 'name',
-			Age: 'age',
-			Id: 'id'
-		},
-		obj = {
-			Name: 'robert',
-			Age: 23,
-			Id: 1
-		};
-		o.rename(obj,key_map);
-		Assert.areSame('robert',obj.name);
-		Assert.isUndefined(obj.Name,'Name');
-		Assert.areSame(23,obj.age);
-		Assert.isUndefined(obj.Age,'Age');
-		Assert.areSame(1,obj.id);
-		Assert.isUndefined(obj.Id,'Id');
-	},
-	'works on deep objs': function () {
-		var key_map = {
-			'Name': 'name',
-			'Favorite': 'favorite',
-			'Things': 'things'
-		},
-		obj = {
-			Name: 'Robert',
-			Things: {
-				Favorite: ['peanut butter','maki','green tea']
-			}
-		};
-		o.rename(obj,key_map);
-		Assert.areSame('Robert',obj.name,'name');
-		Assert.isUndefined(obj.Name,'Name');
-		Assert.isNotUndefined(obj.things,'things');
-		Assert.isUndefined(obj.Things,'Things');
-		Assert.isNotUndefined(obj.things.favorite,'favorite');
-		Assert.isUndefined(obj.things.Favorite,'Favorite');
-	},
-	'dont_trash_leftovers work': function () {
-		var key_map = {
-			'Name': 'name',
-			'Favorite': 'favorite'
-		},
-		obj = {
-			Name: 'Robert',
-			Things: {
-				Favorite: ['peanut butter','maki','green tea']
-			}
-		};
-		o.rename(obj,key_map,true);
-		Assert.areSame('Robert',obj.name,'name');
-		Assert.isUndefined(obj.Name,'Name');
-		Assert.isUndefined(obj.things,'things');
-		Assert.isNotUndefined(obj.Things,'Things');
-		Assert.isNotUndefined(obj.Things.favorite,'favorite');
-		Assert.isUndefined(obj.Things.Favorite,'Favorite');
-	},
-	'works on really deep objs': function () {
-		var key_map = {
-			'Name': 'name',
-			'Favorite': 'favorite',
-			'epic': 'badass'
-		},
-		obj = {
-			Name: 'Robert',
-			Things: {
-				Favorite: {
-					movies: {
-						action: 'Kiss of the Dragon',
-						romance: 'Brokeback Mountain',
-						epic: 'Hero',
-						adventure: 'Crouching Tiger, Hidden Dragon',
-						death_metal_band: 'Atheist'
-					}
-				}
-			}
-		};
-		o.rename(obj,key_map,true);
-		Assert.areSame('Robert',obj.name,'name');
-		Assert.isUndefined(obj.Name,'Name');
-		Assert.isUndefined(obj.things,'things');
-		Assert.isNotUndefined(obj.Things,'Things');
-		Assert.isNotUndefined(obj.Things.favorite,'favorite');
-		Assert.isUndefined(obj.Things.Favorite,'Favorite');
-		Assert.isNotUndefined(obj.Things.favorite.movies.badass);
-		Assert.isUndefined(obj.Things.favorite.movies.epic);
-	},*/
-	'works with arrays when trash leftovers': function () {
-		var obj = ['a','b','c'];
-		o.rename(obj,{});
-		Assert.isTrue(obj instanceof Array);
-		Assert.areSame('a',obj[0]);
-		Assert.areSame('b',obj[1]);
-		Assert.areSame('c',obj[2]);
-	},
-	'works with deep arrays': function () {
-		var obj = {
-			an_array: [
-				{nubs: 1},
-				{asdf: 2}
-			]
-		};
-		o.rename(obj,{
-			an_array: 'my_array',
-			nubs: 'noobs',
-			asdf: 'qwer'
-		});
-		Assert.isNotUndefined(obj.my_array);
-		Assert.isNotUndefined(obj.my_array[0].noobs);
-		Assert.isNotUndefined(obj.my_array[1].qwer);
 	}
 });
 test({

@@ -20,5 +20,11 @@ test({
 			d: 4
 		},fn);
 		Assert.areSame(6,answer);
+	},
+	'documentation': function () {
+Assert.areSame(3,['blah','ducks','3','woot'][o.first_result](function (n) {
+	return parseFloat(n);
+}));
+
 	}
 });

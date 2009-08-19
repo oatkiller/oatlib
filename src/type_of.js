@@ -13,7 +13,7 @@ o.type_of = function (value) {
 			s = 'null';
 		}
 	} else if (s === 'function' && value instanceof RegExp) { // WTF safari bug
-		s = 'object'
+		s = 'object';
 	}
 	return s;
 };
