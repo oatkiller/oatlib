@@ -1,11 +1,11 @@
 //= require <hasOwnProperty>
-//= require <iterate>
+//= require <each>
 o.store(Array,'every',function (fn) {
 	var result = true, that = this;
-	o.iterate(this,function (element,i) {
+	o.each(this,function (element,i) {
 		if (fn.call(this,element,i,that) === false) {
 			result = false;
-			return o.iterate_break;
+			return o.each_break;
 		}
 	});
 	return result;

@@ -1,17 +1,29 @@
 //= require <hasOwnProperty>
-(function () {
-	var my_break = {};
-	o.each_break = my_break;
-	o.store(Array,'each',function (fn) {
-		var broke;
-		for (var property_name in this) {
-			if (o.hasOwnProperty(this,property_name)) {
-				if (fn.call(this, this[property_name], property_name, this) === my_break) {
-					broke = my_break;
-					break;
-				}
-			}
+//= require <take>
+//= require <is_array>
+var my_break = {},
+method_name = 'each',
+qname = o.qname(method_name),
+array_version = function (iterator) {
+	for (var i = 0; i < this.length; i++) {
+		if (iterator.call(this,this[i],i,this) === my_break) {
+			break;
 		}
-		return broke || this;
-	});
-})();
+	}
+	return this;
+},
+object_version = function (iterator) {
+	for (var property_name in this) {
+		if (o.hasOwnProperty(this,property_name) && iterator.call(this,this[property_name],property_name,this) === my_break) {
+			break;
+		}
+	}
+	return this;
+};
+o.store(Array,method_name,array_version);
+o[method_name] = o.take(function () {
+	return o.is_array(this) ? array_version.apply(this,arguments) : object_version.apply(this,arguments);
+});
+o[method_name].toString = function () {
+	return qname;
+};

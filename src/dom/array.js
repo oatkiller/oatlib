@@ -1,6 +1,6 @@
 //= require <dom/reference>
 //= require <array>
-//= require <iterate>
+//= require <each>
 
 (function () {
 
@@ -13,7 +13,7 @@
 		} catch (e) {
 			fn = o.dom.array = function (array_like) {
 				var my_array = [];
-				o.iterate(array_like,function (element) {
+				o.each(array_like,function (element) {
 					my_array.push(element);
 				});
 				return my_array;
