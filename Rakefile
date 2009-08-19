@@ -127,27 +127,24 @@ def pre_symbolize(but_src)
 end
 
 def symbolize(src)
-	#symbols = [] # holds 'symbols' found in js
-	#codeLines = [] # holds every line, to be written out later
-	#results = []
-	results = src
+	symbols = [] # holds 'symbols' found in js
+	codeLines = [] # holds every line, to be written out later
+	results = []
 
-	#pre_symbolize(src).each do |line|
-##src.each do |line|
-##	matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
-##	matches && matches.map {|array| array[0]}.each do |symbol|
-##		symbols.push(symbol) # record any symbols in the array
-##	end
-##	codeLines.push(line) # record every line for use later
-##end
+	pre_symbolize(src).each do |line|
+		matches = line.scan(/\$(\$?_?[A-Za-z][A-Za-z0-9$_]*)/)
+		matches && matches.map {|array| array[0]}.each do |symbol|
+			symbols.push(symbol) # record any symbols in the array
+		end
+		codeLines.push(line) # record every line for use later
+	end
 
 	results.unshift('(function () {')
-	#results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"empty_string = '';"].join())
-	#results.concat(codeLines)
+	results.push([symbols.uniq.inject('var ') {|symbols, symbol| [symbols,'$',symbol,symbol =~ /^\$_(.*)/ && '' || symbol =~ /^\$(.*)/ && [' = ',$1].join() || [" = '",symbol,"'"].join(),', '].join()},"empty_string = '';"].join())
+	results.concat(codeLines)
 	results.push('}).apply(this);')
 
 	return results
-
 end
 
 def auto_dep(src,exclude)
@@ -260,7 +257,30 @@ task :build_plugins, :module_string do |t, args|
 	Rake::Task['minify'].invoke
 end
 
+def add_evil(my_file)
+
+	prepend_string = '(function(){var evil=eval;'
+	append_string = '})();'
+
+	f = File.open(my_file, 'r')  
+	file_data = f.read  
+	f.close 
+
+	f = File.open(my_file, 'w')  
+	f.write(prepend_string)  
+	f.write(file_data)
+	f.write(append_string)  
+	f.close 
+
+end
+
 task :minify do
 	desc "requires java. uses yui min on dist/oatlib.debug.js. this is out of the scope of this Rakefile, but i put it here because the whole point of this weird build process is to optimize yui compressors performance"
-	system 'java -jar ' + File.join(LIBRARY_ROOT,'yuicompressor.jar') + ' -o ' + File.join(LIBRARY_ROOT,'dist','oatlib.min.js') + ' ' + File.join(LIBRARY_ROOT,'dist','oatlib.debug.js')
+	src = File.join(LIBRARY_ROOT,'dist','oatlib.debug.js')
+	dest = File.join(LIBRARY_ROOT,'dist','oatlib.min.js')
+	system 'java -jar ' + File.join(LIBRARY_ROOT,'yuicompressor.jar') + ' -o ' + dest + ' ' + src
+
+	add_evil(src)
+	add_evil(dest)
+
 end
