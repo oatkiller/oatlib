@@ -22,8 +22,9 @@ object_version = function (iterator) {
 };
 o.store(Array,method_name,array_version);
 o[method_name] = o.take(function () {
-	return o.is_array(this) ? array_version.apply(this,arguments) : object_version.apply(this,arguments);
+	return o.is_array(this) || this.length !== undefined && this.length - 1 in this ? array_version.apply(this,arguments) : object_version.apply(this,arguments);
 });
 o[method_name].toString = function () {
 	return qname;
 };
+o.each_break = my_break;

@@ -1,12 +1,12 @@
-//= require <hasOwnProperty>
+//= require <each>
 o.store(Array,'first_result',function (fn) {
-	var property_name, result;
-	for (property_name in this) {
-		if (o.hasOwnProperty(this,property_name)) {
-			if (result = fn.call(this,this[property_name],this)) {
-				return result;
-			}
+	var result = null;
+	o.each(this,function () {
+		var my_result = fn.apply(this,arguments)
+		if (my_result) {
+			result = my_result;
+			return o.each_break;
 		}
-	}
+	});
+	return result;
 });
-

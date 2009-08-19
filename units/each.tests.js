@@ -22,13 +22,15 @@ test({
 		});
 		Assert.areSame(3,count);
 	},
-	'undefineds in array are eachd over': function () {
+	'undefineds in array are eachd over in take form': function () {
 		var count = 0;
 		o.each([undefined,undefined,undefined],function () {
 			count++;
 		});
 		Assert.areSame(3,count);
-		count = 0;
+	},
+	'undefineds in array are eachd over in prototype form': function () {
+		var count = 0;
 		[undefined,undefined,undefined][o.each](function () {
 			count++;
 		});
@@ -67,4 +69,3 @@ test({
 		Assert.areSame(1,count);
 	}
 });
-

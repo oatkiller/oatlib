@@ -10,13 +10,15 @@ test({
 		Assert.areSame(answer,true);
 	},
 	'works for non arrays': function () {
-		var answer = o.first_result({
+		var fn = function (value) {
+			var result = value * 2; return result > 5 ? result : false;
+		},
+		answer = o.first_result({
 			a: 1,
 			b: 2,
 			c: 3,
 			d: 4
-		},function (value) {var result = value * 2; return result > 5 ? result : false;});
+		},fn);
 		Assert.areSame(6,answer);
 	}
 });
-
