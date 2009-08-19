@@ -2004,7 +2004,7 @@ test({
 	}
 });
 test({
-	name: 'xmlhttp-helper',
+	name: 'request',
 	_should: {
 		ignore: {
 			testRequestHeaders: true,
