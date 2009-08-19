@@ -6,11 +6,9 @@
  	var generic_version = function (fn) {
 		var response = o.is_array(this) ? [] : {}, property_name;
 
-		for (property_name in this) {
-			if (o.hasOwnProperty(this,property_name)) {
-				response[property_name] = fn.call(this,this[property_name],property_name,this);
-			}
-		}
+		o.each(this,function (element,property_name) {
+			return (response[property_name] = fn.call(this,this[property_name],property_name,this));
+		});
 
 		return response;
 

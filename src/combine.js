@@ -1,13 +1,14 @@
 //= require <reduce>
 //= require <curry>
+//= require <each>
 (function () {
 
 	var iterator = function (test,result_obj,an_obj) { // combines two objects
-		for (var property_name in an_obj) {
+		o.each(an_obj,function (element,property_name) {
 			if (test(an_obj,property_name)) {
 				result_obj[property_name] = an_obj[property_name];
 			}
-		}
+		});
 		return result_obj;
 	},
 	combinator = function (an_iterator,result_obj) { // combines any number of objects

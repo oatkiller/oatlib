@@ -1,5 +1,5 @@
 test({
-	name: 'xmlhttp-helper',
+	name: 'request',
 	_should: {
 		ignore: {
 			// no way to actually test this i think :(
