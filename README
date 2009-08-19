@@ -1,1 +1,5 @@
-blah blah
+Hi there,
+
+oatlib is a javascript library. Its suitable for production level cross browser projects as well as server side and other non browser environments. oatlib can't collide with other javascript libraries, so you can use it along side anything else. oatlib has a lot of tests and works in ie 6, ie 7, ie 7, firefox, safari and others. In this wiki I document a few of oatlib's functions. below if a list of pages you should checkout if you're new to oatlib
+
+* [[- getting started]]
