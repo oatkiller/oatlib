@@ -81,7 +81,8 @@ end
 def pre_symbolize(but_src)
 
 	hash_of_symbols = Hash.new
-	src = handle_prototypal_references(handle_constants(but_src))
+	#src = handle_prototypal_references(handle_constants(but_src))
+	src = handle_constants(but_src)
 
 	src.each do |line|
 		neutralized = neutralize_literals(line)
