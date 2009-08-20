@@ -40,7 +40,9 @@ def handle_prototypal_references(src)
 end
 
 def handle_constants(src)
+	# not working. needs to ignore regexs
 	hash_of_symbols = Hash.new
+	return src
 
 	src.each do |line|
 		neutralized = neutralize_literals(line)
