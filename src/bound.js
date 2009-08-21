@@ -1,3 +1,3 @@
 o.bound = function (n,l,u) {
-	return n < l ? l : n > u ? u : n;
+	return typeof n !== 'number' ? l : n < l ? l : n > u ? u : n;
 };
