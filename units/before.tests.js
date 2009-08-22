@@ -1,34 +1,49 @@
-test({
-	name: 'before',
-	'works': function () {
-		var payload = {},
-		got_this = false;
-		my_fn = (function (type,payload) {
-			got_this = payload;
-		})[o.before](function (type) {
-			return type === 'on_drop';
-		});
+(function () {
 
-		my_fn('blah',payload);
-		Assert.isFalse(got_this);
-		my_fn('on_drop',payload);
-		Assert.areSame(payload,got_this);
-	}/*,
-	'documentation': function () {
-		var submitted = false,
-		my_form = {
-			submit: function () {
-				submitted = true;
+	var takes_numbers = function (n) {
+		if (typeof n !== 'number') {
+			throw new TypeError('needs number');
+		}
+	},
+	fancy_takes_numbers = takes_numbers[o.before](parseFloat),
+	takes_3_numbers = function (a,b,c) {
+		takes_numbers(a);
+		takes_numbers(b);
+		takes_numbers(c);
+	},
+	fancy_takes_3_numbers = takes_3_numbers[o.before](function () {
+		for (var i = 0, length = arguments.length; i < length; i++) {
+			arguments[i] = parseFloat(arguments[i]);
+		}
+		return arguments;
+	});
+
+	test({
+		name: 'before',
+		_should: {
+			error: {
+				'takes_numbers error': true,
+				'takes_3_numbers error': true
 			}
-		};
-		var submit_the_form = function () {
-			my_form.submit();
-		}[o.before](confirm[o.curry]('are you sure?'));
-		Assert.isFalse(submitted);
-		submit_the_form();
-		Assert.isFalse(submitted);
-		submit_the_form();
-		Assert.isTrue(submitted);
+		},
+		'takes_numbers error': function () {
+			takes_numbers('1');
+		},
+		'takes_numbers': function () {
+			takes_numbers(1);
+		},
+		'fancy_takes_numbers': function () {
+			fancy_takes_numbers('1');
+		},
+		'takes_3_numbers error': function () {
+			takes_3_numbers(1,2,'3');
+		},
+		'takes_3_numbers': function () {
+			takes_3_numbers(1,2,3);
+		},
+		'fancy_takes_3_numbers': function () {
+			fancy_takes_3_numbers('1','2','3');
+		}
+	});
 
-	}*/
-});
+})();

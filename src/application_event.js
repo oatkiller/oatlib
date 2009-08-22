@@ -1,6 +1,6 @@
 //= require <each>
 //= require <indexOf>
-//= require <before>
+//= require <only_if>
 o.application_event = function () {
 	return {
 		bees: [],
@@ -14,7 +14,7 @@ o.application_event = function () {
 		multi_subscribe: function (hash) {
 		 	var that = this;
 			o.each(hash,function (fn,key) {
-				that.subscribe(fn[o.before](function (data) {
+				that.subscribe(fn[o.only_if](function (data) {
 					return data.type === key;
 				}));
 			});

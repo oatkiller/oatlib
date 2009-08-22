@@ -2,7 +2,7 @@
 //= require <curry>
 //= require <hasOwnProperty>
 //= require <return_true>
-//= require <before>
+//= require <only_if>
 (function () {
 
 	var iterator = function (test,result_obj,an_obj) { // combines two objects
@@ -19,7 +19,7 @@
 	combine_test = function (an_obj,property_name) { // curries combinator with a test to make sure the properties are on the subject argument directly, as opposed to being on its prototype
 		return o.hasOwnProperty(an_obj,property_name);
 	},
-	soft_combine_test = combine_test[o.before](function (an_obj,property_name,result_obj) {
+	soft_combine_test = combine_test[o.only_if](function (an_obj,property_name,result_obj) {
 		return !o.hasOwnProperty(result_obj,property_name);
 	}),
 	make_combinator = function (test) {
