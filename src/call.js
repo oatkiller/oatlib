@@ -1,4 +1,4 @@
 //= require <array>
-o.invoke = function (n) {
+o.call = function (n) {
 	return n.apply(this,o.array(arguments).slice(1));
 };

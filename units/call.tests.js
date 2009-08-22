@@ -1,14 +1,14 @@
 test({
-	name: 'invoke',
-	'invoke': function () {
+	name: 'call',
+	'call': function () {
 		var count = 0,
 		fn = function () {
 			count++;
 		};
 		Assert.areSame(count,0);
-		o.invoke(fn);
+		o.call(fn);
 		Assert.areSame(count,1);
-		o.invoke(fn);
+		o.call(fn);
 		Assert.areSame(count,2);
 
 	},
@@ -16,6 +16,6 @@ test({
 var my_fn = function (a,b) {
 	return a + b;
 };
-Assert.areSame(7,o.invoke(my_fn,3,4));
+Assert.areSame(7,o.call(my_fn,3,4));
 	}
 });
