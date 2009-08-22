@@ -1747,6 +1747,29 @@ test({
 	}
 });
 test({
+	name: 'get_once',
+	'get_once': function () {
+		var count = 0,
+		proto = {
+			get_it: o.get_once('get_it',function () {
+				count++;
+				return 1;
+			})
+		},
+		C = function () {
+		},
+		my_c;
+		C.prototype = proto;
+		my_c = new C();
+		Assert.areSame(count,0);
+		Assert.areSame(1,my_c.get_it());
+		Assert.areSame(count,1);
+		Assert.areSame(1,my_c.get_it());
+		Assert.areSame(count,1);
+	}
+});
+
+test({
 	name: 'indexOf',
 	'indexOf': function () {
 		Assert.areSame([1,2,3][o.indexOf](2),1);
@@ -2125,9 +2148,9 @@ test({
 	}
 });
 test({
-	name: 'query_string_obj_from_hash',
+	name: 'query_string_obj',
 	'works': function () {
-		var obj1 = o.remote.query_string_obj_from_hash({
+		var obj1 = o.remote.query_string_obj({
 			a: 1,
 			b: 2
 		});

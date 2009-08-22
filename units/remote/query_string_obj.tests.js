@@ -1,7 +1,7 @@
 test({
-	name: 'query_string_obj_from_hash',
+	name: 'query_string_obj',
 	'works': function () {
-		var obj1 = o.remote.query_string_obj_from_hash({
+		var obj1 = o.remote.query_string_obj({
 			a: 1,
 			b: 2
 		});
