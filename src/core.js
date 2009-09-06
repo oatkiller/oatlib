@@ -29,3 +29,5 @@ o.store = function (global,name,fn) {
 	global.prototype[qname] = fn;
 	o[name].toString = function () {return qname;};
 };
+
+o.properties = {};
