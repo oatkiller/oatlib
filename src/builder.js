@@ -3,6 +3,7 @@
 (function () {
  
   var single_builder = function (prototype) { // takes a prototype and produces a function which takes a properties object and produces an instance
+		prototype = prototype || {};
     return function (properties) {
       return new (o.constructor(prototype))(properties);
     };
