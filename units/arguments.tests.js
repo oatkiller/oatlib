@@ -2,7 +2,7 @@ test({
 	name: 'arguments',
 	_should: {
 		ignore: 'asdf'
-	}
+	},
 	'asdf': function () {
 		var my_fn = function (a) {
 			Assert.areSame(0,a);
