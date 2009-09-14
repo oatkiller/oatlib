@@ -12,8 +12,10 @@ o.toString = function () {
 	return namespace;
 };
 
+var array_slice = Array.prototype.slice
+
 o.array = function (array_like) {
-	return Array.prototype.slice.call(array_like);
+	return array_slice.call(array_like);
 };
 
 o.take = function (fn) {
