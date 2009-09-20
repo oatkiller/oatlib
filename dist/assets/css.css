@@ -1,0 +1,77 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+caption,th {text-align:left;}
+q:before,q:after {content:'';}
+input,button,textarea,select,optgroup,option {font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
+input,button,textarea,select {*font-size:100%;}
+ 
+body {
+	font-family: 'Georgia','Times New Roman',serif;
+	line-height: 1.4;
+}
+
+h1,h2,h3,h4,h5,h6,p,table,ul,ol,blockquote,address,fieldset {
+	margin: 0 0 20px 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Arial',sans-serif;
+	margin-bottom: 10px;
+}
+
+h1 {font-size: 110%; text-align: right; color: #333; border-bottom: 1px solid #ccc; font-style: italic; margin-bottom: 10px; padding-bottom: 10px;}
+h2 {font-size: 140%;}
+h3 {font-size: 150%;}
+h4 {font-size: 120%;}
+h5 {font-size: 90%;}
+h5 {font-size: 60%;}
+
+ul, ol {
+	padding-left: 15px;
+}
+
+li {
+	list-style-type: disc;
+	margin-bottom: 7px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td,th {
+	vertical-align: top;
+	border-top: 2px solid #ccc;
+	padding: 10px;
+}
+th {
+	white-space: nowrap;
+}
+
+#main {
+	padding: 0 10px;
+	width: 500px;
+	margin: 20px auto;
+}
+
+a {
+	color: #125c82;
+}
+
+a:active,
+a:hover {
+	text-decoration: none;
+}
+
+strong {font-weight: bold;}
+
+@media print {
+	body {
+		font-size: 12pt;
+	}
+	h3, a {
+		color: #000;
+	}
+	#main {padding: 0; width: auto;}
+}

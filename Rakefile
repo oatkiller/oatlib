@@ -5,23 +5,26 @@ require 'yaml'
 LIBRARY_ROOT = File.expand_path(File.dirname(__FILE__))
 YUI_COMPRESSOR_ROOT = File.join(LIBRARY_ROOT,'yuicompressor.jar')
 
-def sprocketize(load_path, sources)
+def sprocketize(load_path, sources,asset_path = nil)
   begin
     require "sprockets"
   rescue LoadError => e
-    puts "\nYou'll need Sprockets to build oatlib. Just run:\n\n"
-    puts " $ git submodule init"
-    puts " $ git submodule update"
-    puts "\nand you should be all set.\n\n"
+    puts "\nYou'll need Sprockets to build oatlib\n\n"
   end
   
   secretary = Sprockets::Secretary.new(
     :root => LIBRARY_ROOT,
     :load_path => load_path,
-    :source_files => sources
+    :source_files => sources,
+		:asset_root => asset_path
   )
 
-  secretary.concatenation.to_s.split(/\n/)
+	if !asset_path.nil?
+		puts "\ndoin them assets in " + asset_path
+		secretary.install_assets
+	else
+		secretary.concatenation.to_s.split(/\n/)
+	end
 end
 
 def neutralize_literals(line)
@@ -221,6 +224,7 @@ task :build_tests, [:module_string] => [:build] do |t, args|
 	puts modules
 	sprocketized_src = sprocketize(['src','units'],modules)
 	dist(File.join(LIBRARY_ROOT,'dist','tests','units.js'),sprocketized_src)
+	sprocketized_src = sprocketize(['src','units'],modules,File.join(LIBRARY_ROOT,'dist','tests'))
 	Rake::Task['minify'].invoke
 end
 
@@ -257,6 +261,7 @@ task :build_plugins, :module_string do |t, args|
 	symbolized_src = symbolize(sprocketized_src)
 	#symbolized_src = sprocketized_src
 	dist(File.join(LIBRARY_ROOT,'dist','oatlib.debug.js'),symbolized_src)
+	sprocketized_src = sprocketize(['src','plugins'],modules,File.join(LIBRARY_ROOT,'dist','assets'))
 	Rake::Task['minify'].invoke
 end
 
