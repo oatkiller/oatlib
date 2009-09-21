@@ -21,6 +21,7 @@ object_version = function (iterator) {
 	}
 	return this;
 };
+// o.store(Array,'each' for tags
 o.store(Array,method_name,array_version);
 o[method_name] = o.take(function () {
 	return o.is_array(this) || this.length !== undefined && this.length - 1 in this ? array_version.apply(this,arguments) : object_version.apply(this,arguments);

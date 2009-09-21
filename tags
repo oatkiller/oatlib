@@ -13,12 +13,105 @@ o.bind	src/bind.js	/^o.store(Function,'bind',function (obj) { \/\/ holds the log
 o.bound	src/bound.js	/^o.bound = function (n,l,u) {$/;"	r
 o.builder	src/builder.js	/^	o.builder = o.reducer(function () {return single_builder({});},function (a_single_builder,a_prototype) {return single_builder(a_single_builder(a_prototype));});$/;"	r
 o.call_once	src/call_once.js	/^o.store(Function,'call_once',function () {$/;"	r
+o.capacitate	src/dom/capacitate.js	/^o.store(Function,'capacitate',function (threshold) {$/;"	r
+o.cartesian	src/cartesian/reference.js	/^o.cartesian = {};$/;"	r
+o.cartesian.distance	src/cartesian/distance.js	/^o.cartesian.distance = function (p1,p2) {$/;"	r
 o.chop	src/chop.js	/^o.store(Array,'chop',function () {$/;"	r
 o.combine	src/combine.js	/^	o.combine = make_combinator(combine_test);$/;"	r
 o.concat	src/concat.js	/^o.concat = o.take(Array.prototype.concat);$/;"	r
 o.constructor	src/constructor.js	/^o.constructor = function (prototype) { \/\/ produces a new generic object constructor function$/;"	r
 o.contains	src/contains.js	/^o.store(Array,'contains',function () {$/;"	r
 o.curry	src/curry.js	/^o.store(Function,'curry',function () {$/;"	r
+o.debounce	src/dom/debounce.js	/^o.store(Function,'debounce',function (threshold) {$/;"	r
+o.dom	src/dom/reference.js	/^o.dom = {};$/;"	r
+o.dom.absolutize	src/dom/absolutize.js	/^o.dom.absolutize = function (node) {$/;"	r
+o.dom.add_class_name	src/dom/add_class_name.js	/^o.dom.add_class_name = function (element,class_name) {$/;"	r
+o.dom.array	src/dom/array.js	/^			fn = o.dom.array = function (array_like) {$/;"	r
+o.dom.array	src/dom/array.js	/^			fn = o.dom.array = o.array;$/;"	r
+o.dom.array	src/dom/array.js	/^	o.dom.array = function () {$/;"	r
+o.dom.array_find	src/dom/array_find.js	/^o.dom.array_find = function (iterate,node,test) {$/;"	r
+o.dom.class_name_test_regex	src/dom/class_name_test_regex.js	/^o.dom.class_name_test_regex = function (class_name) {$/;"	r
+o.dom.clear_interval	src/dom/clear_interval.js	/^o.dom.clear_interval = function (payload) {$/;"	r
+o.dom.clear_opacity	src/dom/clear_opacity.js	/^o.dom.clear_opacity = function (node) {$/;"	r
+o.dom.clear_timeout	src/dom/clear_timeout.js	/^o.dom.clear_timeout = function (payload) {$/;"	r
+o.dom.contains	src/dom/contains.js	/^		return (fn = o.dom.contains = ancestor.contains ? function (ancestor,descendant) {$/;"	r
+o.dom.contains	src/dom/contains.js	/^	o.dom.contains = function () {$/;"	r
+o.dom.create_element	src/dom/create_element.js	/^o.dom.create_element = function (tag_name) {$/;"	r
+o.dom.element	src/dom/element.js	/^o.dom.element = function (id) {$/;"	r
+o.dom.elements_by_tag	src/dom/elements_by_tag.js	/^o.dom.elements_by_tag = function (tag) {$/;"	r
+o.dom.empty	src/dom/empty.js	/^o.dom.empty = function (node) {$/;"	r
+o.dom.event	src/dom/event/reference.js	/^o.dom.event = {};$/;"	r
+o.dom.event.add_handler	src/dom/event/add_handler.js	/^o.dom.event.add_handler = o.dom.event.register[o.curry](true);$/;"	r
+o.dom.event.add_listener	src/dom/event/add_listener.js	/^o.dom.event.add_listener = function (node,type,fn,bubble) {$/;"	r
+o.dom.event.cancel	src/dom/event/cancel.js	/^		return (fn = o.dom.event.cancel = 'stopPropagation' in e ? function (e) {return e.stopPropagation();} : function (e) {return e.cancelBubble = true;}).apply(this,arguments);$/;"	r
+o.dom.event.cancel	src/dom/event/cancel.js	/^	o.dom.event.cancel = function () {$/;"	r
+o.dom.event.delegate	src/dom/event/delegate.js	/^	o.dom.event.delegate = function (options) {$/;"	r
+o.dom.event.events_to_remove	src/dom/event/schedule_for_remove.js	/^o.dom.event.events_to_remove = [];$/;"	r
+o.dom.event.get_abstraction	src/dom/event/get_abstraction.js	/^	o.dom.event.get_abstraction = function (e) {$/;"	r
+o.dom.event.get_button	src/dom/event/get_button.js	/^	o.dom.event.get_button = function (e) {$/;"	r
+o.dom.event.get_element_from_point	src/dom/event/get_element_from_point.js	/^		\/\/return (fn = o.dom.event.get_element_from_point = (!('pageX' in e) || !('x' in e)) ?  function (e) {$/;"	r
+o.dom.event.get_element_from_point	src/dom/event/get_element_from_point.js	/^		return (fn = o.dom.event.get_element_from_point = e.pageX === undefined || e.x === undefined ? function (e) {$/;"	r
+o.dom.event.get_element_from_point	src/dom/event/get_element_from_point.js	/^	o.dom.event.get_element_from_point = function (e) {$/;"	r
+o.dom.event.get_event	src/dom/event/get_event.js	/^	o.dom.event.get_event = function (e) {$/;"	r
+o.dom.event.get_key	src/dom/event/get_key.js	/^o.dom.event.get_key = function (e) {$/;"	r
+o.dom.event.get_mouse_coordinates	src/dom/event/get_mouse_coordinates.js	/^		return (fn = o.dom.event.get_mouse_coordinates = e.pageX !== undefined ? function (e) {$/;"	r
+o.dom.event.get_mouse_coordinates	src/dom/event/get_mouse_coordinates.js	/^	o.dom.event.get_mouse_coordinates = function (e) {$/;"	r
+o.dom.event.get_target	src/dom/event/get_target.js	/^		return (fn = o.dom.event.get_target =  e.target !== undefined ? base_fn[o.curry]('target') : base_fn[o.curry]('srcElement')).apply(this,arguments);$/;"	r
+o.dom.event.get_target	src/dom/event/get_target.js	/^	o.dom.event.get_target = function () {$/;"	r
+o.dom.event.prevent_default	src/dom/event/prevent_default.js	/^		return (fn = o.dom.event.prevent_default = e.preventDefault !== undefined ? function (e) {return e.preventDefault();} : function (e) {return e.returnValue = false;}).apply(this,arguments);$/;"	r
+o.dom.event.prevent_default	src/dom/event/prevent_default.js	/^	o.dom.event.prevent_default = function () {$/;"	r
+o.dom.event.prevent_select	src/dom/event/prevent_select.js	/^o.dom.event.prevent_select = function (test) {$/;"	r
+o.dom.event.register	src/dom/event/register.js	/^		return (fn = o.dom.event.register = o.dom.event.register = function (add,node,type,fn,bubble) {$/;"	r
+o.dom.event.register	src/dom/event/register.js	/^	o.dom.event.register = function () {$/;"	r
+o.dom.event.remove_handler	src/dom/event/remove_handler.js	/^o.dom.event.remove_handler = o.dom.event.register[o.curry](false);$/;"	r
+o.dom.event.setup_get_button	src/dom/event/get_button.js	/^(o.dom.event.setup_get_button = function () {$/;"	r
+o.dom.event.setup_get_element_from_point	src/dom/event/get_element_from_point.js	/^(o.dom.event.setup_get_element_from_point = function (my_document) {$/;"	r
+o.dom.event.setup_get_event	src/dom/event/get_event.js	/^(o.dom.event.setup_get_event = function (my_window) {$/;"	r
+o.dom.event.setup_get_mouse_coordinates	src/dom/event/get_mouse_coordinates.js	/^(o.dom.event.setup_get_mouse_coordinates = function (my_document) {$/;"	r
+o.dom.event.setup_get_related_target	src/dom/event/get_related_target.js	/^(o.dom.event.setup_get_related_target = function () {$/;"	r
+o.dom.event.setup_get_target	src/dom/event/get_target.js	/^(o.dom.event.setup_get_target = function () {$/;"	r
+o.dom.event.setup_prevent_default	src/dom/event/prevent_default.js	/^(o.dom.event.setup_prevent_default = function () {$/;"	r
+o.dom.find	src/dom/find.js	/^o.dom.find = function (iterate,node,test) {$/;"	r
+o.dom.find_ancestor_or_self	src/dom/find_ancestor_or_self.js	/^o.dom.find_ancestor_or_self = o.dom.find[o.curry](function (node) {$/;"	r
+o.dom.find_descendant_or_self	src/dom/find_descendant_or_self.js	/^o.dom.find_descendant_or_self = o.dom.array_find[o.curry](function (node) {$/;"	r
+o.dom.find_descendants	src/dom/find_descendants.js	/^o.dom.find_descendants = function (node,test) {$/;"	r
+o.dom.find_following_sibling_or_self	src/dom/find_following_sibling_or_self.js	/^o.dom.find_following_sibling_or_self = o.dom.find[o.curry](function (node) {$/;"	r
+o.dom.find_position	src/dom/find_position.js	/^o.dom.find_position = function (node) {$/;"	r
+o.dom.find_preceding_sibling_or_self	src/dom/find_preceding_sibling_or_self.js	/^o.dom.find_preceding_sibling_or_self = o.dom.find[o.curry](function (node) {$/;"	r
+o.dom.fragment	src/dom/fragment.js	/^		return (fn = o.dom.fragment = function (html) {$/;"	r
+o.dom.fragment	src/dom/fragment.js	/^	o.dom.fragment = function () {$/;"	r
+o.dom.get_scroll_offsets	src/dom/get_scroll_offsets.js	/^		return (fn = o.dom.get_scroll_offsets = typeof window.pageYOffset === 'number' ? function () {$/;"	r
+o.dom.get_scroll_offsets	src/dom/get_scroll_offsets.js	/^	o.dom.get_scroll_offsets = function () {$/;"	r
+o.dom.get_style	src/dom/get_style.js	/^		return (fn = o.dom.get_style = node.currentStyle ? function (node,style) {$/;"	r
+o.dom.get_style	src/dom/get_style.js	/^	o.dom.get_style = function () {$/;"	r
+o.dom.get_text_content	src/dom/get_text_content.js	/^		return (fn = o.dom.get_text_content = 'innerText' in node ? o.get_object_property[o.rcurry]('innerText') : o.get_object_property[o.rcurry]('textContent')).apply(this,arguments);$/;"	r
+o.dom.get_text_content	src/dom/get_text_content.js	/^	o.dom.get_text_content = function () {$/;"	r
+o.dom.get_window_size	src/dom/get_window_size.js	/^		return (fn = o.dom.get_window_size = (typeof window.innerHeight === 'number') ? function () {$/;"	r
+o.dom.get_window_size	src/dom/get_window_size.js	/^	o.dom.get_window_size = function () {$/;"	r
+o.dom.has_class_name	src/dom/has_class_name.js	/^o.dom.has_class_name = function (element,class_name) {$/;"	r
+o.dom.hide	src/dom/hide.js	/^o.dom.hide = function (node) {$/;"	r
+o.dom.insert_after	src/dom/insert_after.js	/^o.dom.insert_after = function (target,payload) {$/;"	r
+o.dom.insert_before	src/dom/insert_before.js	/^o.dom.insert_before = function (target,payload) {$/;"	r
+o.dom.is_node	src/dom/is_node.js	/^o.dom.is_node = function (obj) {$/;"	r
+o.dom.is_tag_name	src/dom/is_tag_name.js	/^o.dom.is_tag_name = function (node,name) {$/;"	r
+o.dom.isnt_whitespace_node	src/dom/isnt_whitespace_node.js	/^o.dom.isnt_whitespace_node = function (node) {$/;"	r
+o.dom.node	src/dom/node.js	/^o.dom.node = function (html) {$/;"	r
+o.dom.parse_pixel_value	src/dom/parse_pixel_value.js	/^o.dom.parse_pixel_value = function (value) {$/;"	r
+o.dom.prepend_child	src/dom/prepend_child.js	/^o.dom.prepend_child = function (parent_node,node_to_insert) {$/;"	r
+o.dom.query_string_from_form	src/dom/query_string_from_form.js	/^o.dom.query_string_from_form = function (form_node) {$/;"	r
+o.dom.query_string_obj_from_form	src/dom/query_string_obj_from_form.js	/^o.dom.query_string_obj_from_form = function (form_node) {$/;"	r
+o.dom.remove	src/dom/remove.js	/^o.dom.remove = function (node) {$/;"	r
+o.dom.remove_class_name	src/dom/remove_class_name.js	/^o.dom.remove_class_name = function (element,class_name) {$/;"	r
+o.dom.replace	src/dom/replace.js	/^o.dom.replace = function (node,new_node) {$/;"	r
+o.dom.set_dimensions	src/dom/set_dimensions.js	/^o.dom.set_dimensions = function (node,dimensions) {$/;"	r
+o.dom.set_interval	src/dom/set_interval.js	/^o.dom.set_interval = function (fn,time) {$/;"	r
+o.dom.set_opacity	src/dom/set_opacity.js	/^		return (fn = o.dom.set_opacity = node.filters ? function (node,value) {$/;"	r
+o.dom.set_opacity	src/dom/set_opacity.js	/^	o.dom.set_opacity = function () {$/;"	r
+o.dom.set_timeout	src/dom/set_timeout.js	/^o.dom.set_timeout = function (fn,time) {$/;"	r
+o.dom.surroundings	src/dom/surroundings.js	/^o.dom.surroundings = function (node) {$/;"	r
+o.dom.unhide	src/dom/unhide.js	/^o.dom.unhide = function (node) {$/;"	r
+o.dom.update	src/dom/update.js	/^o.dom.update = function (node,fragment) {$/;"	r
+o.each	src/each.js	/^\/\/ o.store(Array,'each' for tags$/;"	r
 o.each_break	src/each.js	/^o.each_break = my_break;$/;"	r
 o.empty_function	src/empty_function.js	/^o.empty_function = function () {};$/;"	r
 o.error	src/error.js	/^o.error = function () {$/;"	r
@@ -38,6 +131,9 @@ o.is_array	src/is_array.js	/^	o.is_array = function (obj) {$/;"	r
 o.is_false	src/is_false.js	/^o.is_false = function (n) {$/;"	r
 o.is_not_false	src/is_not_false.js	/^o.is_not_false = function (n) {$/;"	r
 o.join	src/join.js	/^o.join = o.take(Array.prototype.join);$/;"	r
+o.json	src/json/reference.js	/^o.json = {};$/;"	r
+o.json.parse	src/json/parse.js	/^o.json.parse = function (text, reviver) {$/;"	r
+o.json.stringify	src/json/stringify.js	/^	o.json.stringify = function (value, replacer, space) {$/;"	r
 o.last	src/last.js	/^o.store(Array,'last',function () {$/;"	r
 o.map	src/map.js	/^	o.map = o.take(generic_version);$/;"	r
 o.map	src/map.js	/^	o.store(Array,'map',array_version);$/;"	r
@@ -54,6 +150,13 @@ o.rcurry	src/rcurry.js	/^o.store(Function,'rcurry',function () {$/;"	r
 o.reduce	src/reduce.js	/^o.store(Array,'reduce',function (fn) {$/;"	r
 o.reducer	src/reducer.js	/^o.reducer = function (memo_builder, iterator) { \/\/ takes a function which returns a new memo and an iterator function. returns a function which wraps reduce, passes it a new memo each times its called. see document.getFragmentWithNodes. this is the way you should use reduce if the memo is not primitive$/;"	r
 o.regex	src/regex.js	/^o.regex = function (pattern,flags) {$/;"	r
+o.remote	src/remote/reference.js	/^o.remote = {};$/;"	r
+o.remote.ajax	src/remote/ajax.js	/^				o.remote.ajax = fn = an_fn;$/;"	r
+o.remote.ajax	src/remote/ajax.js	/^	o.remote.ajax = function () {$/;"	r
+o.remote.query_string	src/remote/query_string.js	/^o.remote.query_string = function (hash) {$/;"	r
+o.remote.query_string_from_obj	src/remote/query_string_from_obj.js	/^o.remote.query_string_from_obj = function (obj) {$/;"	r
+o.remote.query_string_obj	src/remote/query_string_obj.js	/^o.remote.query_string_obj = function (hash) {$/;"	r
+o.remote.request	src/remote/request.js	/^ 	o.remote.request = function (response_options) {$/;"	r
 o.return_false	src/return_false.js	/^o.return_false = function () {return false;};$/;"	r
 o.return_true	src/return_true.js	/^o.return_true = function () {return true;};$/;"	r
 o.slice	src/slice.js	/^o.slice = o.take(Array.prototype.slice);$/;"	r
