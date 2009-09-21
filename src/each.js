@@ -1,6 +1,7 @@
 //= require <hasOwnProperty>
 //= require <take>
 //= require <is_array>
+
 var my_break = {},
 method_name = 'each',
 qname = o.qname(method_name),

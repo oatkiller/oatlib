@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin-bottom: 10px;
 }
 
-h1 {font-size: 110%; text-align: right; color: #333; border-bottom: 1px solid #ccc; font-style: italic; margin-bottom: 10px; padding-bottom: 10px;}
+h1 {font-size: 110%; text-align: left; color: #333; border-bottom: 1px solid #ccc; font-style: italic; margin-bottom: 10px; padding-bottom: 10px;}
 h2 {font-size: 140%;}
 h3 {font-size: 150%;}
 h4 {font-size: 120%;}
@@ -50,9 +50,10 @@ th {
 }
 
 #main {
-	padding: 0 10px;
+	padding: 20px 10px 0;
 	width: 500px;
-	margin: 20px auto;
+	margin: 0 auto 20px;
+	min-height: 300px;
 }
 
 a {
@@ -74,4 +75,32 @@ strong {font-weight: bold;}
 		color: #000;
 	}
 	#main {padding: 0; width: auto;}
+}
+.line:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.line{_zoom:1;}
+.unit{float:left;/*_zoom:1;*/}
+.size1of1{float:none;}
+.size1of2{width:50%;}
+.size1of3{width:33.33333%;}
+.size2of3{width:66.66666%;}
+.size1of4{width:25%;}
+.size3of4{width:75%;}
+.size1of5{width:20%;}
+.size2of5{width:40%;}
+.size3of5{width:60%;}
+.size4of5{width:80%;}
+.lastUnit {display: table-cell; _display:block;float:none;_position:relative; _left:-3px; _margin-right: -3px;width:auto;}
+
+.ilb {display: inline-block;}
+
+.txtR {text-align:right;}
+.txtC {text-align:center;}
+.txtL {text-align:left;}
+
+.background_image {
+	font-size: 0;
+	line-height: 0;
+	text-decoration: none;
+	text-indent: -9999px;
+	display: block;
 }

@@ -1,9 +1,9 @@
 require 'rake'
 require 'rake/packagetask'
-require 'yaml'
 
 LIBRARY_ROOT = File.expand_path(File.dirname(__FILE__))
 YUI_COMPRESSOR_ROOT = File.join(LIBRARY_ROOT,'yuicompressor.jar')
+NATURAL_DOCS_DIR = File.join(LIBRARY_ROOT,'..','natural_docs')
 
 def sprocketize(load_path, sources,asset_path = nil)
   begin
@@ -291,4 +291,10 @@ task :minify do
 	add_evil(src)
 	add_evil(dest)
 
+end
+
+task :docs do
+	cmd = File.join(NATURAL_DOCS_DIR,'NaturalDocs')+' -i '+File.join(LIBRARY_ROOT,'dist')+' -o HTML '+File.join(LIBRARY_ROOT,'docs')+' -p '+File.join(LIBRARY_ROOT,'natural_docs_proj')+' -r'
+	puts cmd
+	system(cmd)
 end
