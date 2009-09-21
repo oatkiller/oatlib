@@ -3,36 +3,6 @@
 //= require <hasOwnProperty>
 //= require <return_true>
 //= require <only_if>
-/*
-	Function: combine
-
-	copies all the properties of arguments 2-n into argument 1
-
-	Parameters:
-		
-		destination_object - the object to which all the properites will be copies
-		nth_source_object - the first of n source objects from which properties will be copied
-
-	Returns:
-	
-		destination_object
-
-	See Also:
-
-		super_combine
-
-	Example:
-
-		(start code)
-
-		var obj1 = {a: 1},
-		obj2 = {b: 2},
-		my_combined_object = o.combine({},obj1,obj2});
-		my_combined_object.a; // 1
-		my_combined_object.b; // 2
-
-		(end)
-*/
 
 (function () {
 

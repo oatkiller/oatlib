@@ -1,0 +1,4 @@
+--langdef=oatlibjs
+--langmap=oatlibjs:.js
+--regex-oatlibjs=/o\.store\([^,]['"]([a-zA-Z0-9_.$]+)['"] = /\1//
+--regex-oatlibjs=/(o\.[a-zA-Z0-9_.$]+) = /\1//

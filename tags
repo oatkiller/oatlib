@@ -1,0 +1,50 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+o.K	src/K.js	/^o.K = function (e) {return e;};$/;"	r
+o.application_event	src/application_event.js	/^o.application_event = function () {$/;"	r
+o.are_same	src/are_same.js	/^	o.are_same = function () {$/;"	r
+o.array	src/core.js	/^o.array = function (array_like) {$/;"	r
+o.bound	src/bound.js	/^o.bound = function (n,l,u) {$/;"	r
+o.builder	src/builder.js	/^	o.builder = o.reducer(function () {return single_builder({});},function (a_single_builder,a_prototype) {return single_builder(a_single_builder(a_prototype));});$/;"	r
+o.combine	src/combine.js	/^	o.combine = make_combinator(combine_test);$/;"	r
+o.concat	src/concat.js	/^o.concat = o.take(Array.prototype.concat);$/;"	r
+o.constructor	src/constructor.js	/^o.constructor = function (prototype) { \/\/ produces a new generic object constructor function$/;"	r
+o.each_break	src/each.js	/^o.each_break = my_break;$/;"	r
+o.empty_function	src/empty_function.js	/^o.empty_function = function () {};$/;"	r
+o.error	src/error.js	/^o.error = function () {$/;"	r
+o.get_object_property	src/get_object_property.js	/^o.get_object_property = function (obj,property_name) {$/;"	r
+o.get_once	src/get_once.js	/^o.get_once = function (method) {$/;"	r
+o.get_property_name	src/get_property_name.js	/^o.get_property_name = o.take(function (property) {$/;"	r
+o.hasOwnProperty	src/hasOwnProperty.js	/^o.hasOwnProperty = o.take(Object.prototype.hasOwnProperty);$/;"	r
+o.inspect	src/inspect.js	/^	o.inspect = function (n,tab_count,processed_objs) {$/;"	r
+o.invoke	src/invoke.js	/^o.invoke = function (n) {$/;"	r
+o.is_array	src/is_array.js	/^	o.is_array = function (obj) {$/;"	r
+o.is_false	src/is_false.js	/^o.is_false = function (n) {$/;"	r
+o.is_not_false	src/is_not_false.js	/^o.is_not_false = function (n) {$/;"	r
+o.join	src/join.js	/^o.join = o.take(Array.prototype.join);$/;"	r
+o.map	src/map.js	/^	o.map = o.take(generic_version);$/;"	r
+o.map.toString	src/map.js	/^	o.map.toString = function () {$/;"	r
+o.mask	src/mask.js	/^o.mask = function (obj) {$/;"	r
+o.properties	src/core.js	/^o.properties = {};$/;"	r
+o.properties.memo	src/memoize.js	/^ 	var property = (o.properties.memo = o.qname('memo'));$/;"	r
+o.property	src/property.js	/^o.property = function (property_name,obj) {$/;"	r
+o.push	src/push.js	/^o.push = o.take(Array.prototype.push);$/;"	r
+o.qname	src/core.js	/^o.qname = function (name) {$/;"	r
+o.reducer	src/reducer.js	/^o.reducer = function (memo_builder, iterator) { \/\/ takes a function which returns a new memo and an iterator function. returns a function which wraps reduce, passes it a new memo each times its called. see document.getFragmentWithNodes. this is the way you should use reduce if the memo is not primitive$/;"	r
+o.regex	src/regex.js	/^o.regex = function (pattern,flags) {$/;"	r
+o.return_false	src/return_false.js	/^o.return_false = function () {return false;};$/;"	r
+o.return_true	src/return_true.js	/^o.return_true = function () {return true;};$/;"	r
+o.slice	src/slice.js	/^o.slice = o.take(Array.prototype.slice);$/;"	r
+o.soft_combine	src/combine.js	/^	o.soft_combine = make_combinator(soft_combine_test);$/;"	r
+o.splice	src/splice.js	/^o.splice = Array.prototype.splice;$/;"	r
+o.store	src/core.js	/^o.store = function (global,name,fn) {$/;"	r
+o.string	src/string.js	/^o.string = function () {$/;"	r
+o.super_combine	src/combine.js	/^	o.super_combine = make_combinator(o.return_true);$/;"	r
+o.supplant_regex	src/supplant.js	/^	var regex = (o.supplant_regex = \/{([^{}]*)}\/g);$/;"	r
+o.take	src/core.js	/^o.take = function (fn) {$/;"	r
+o.toString	src/core.js	/^o.toString = function () {$/;"	r
+o.type_of	src/type_of.js	/^o.type_of = function (value) {$/;"	r
