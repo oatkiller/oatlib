@@ -82,6 +82,7 @@ o.dom.fragment	src/dom/fragment.js	/^		return (fn = o.dom.fragment = function (h
 o.dom.fragment	src/dom/fragment.js	/^	o.dom.fragment = function () {$/;"	r
 o.dom.get_scroll_offsets	src/dom/get_scroll_offsets.js	/^		return (fn = o.dom.get_scroll_offsets = typeof window.pageYOffset === 'number' ? function () {$/;"	r
 o.dom.get_scroll_offsets	src/dom/get_scroll_offsets.js	/^	o.dom.get_scroll_offsets = function () {$/;"	r
+o.dom.get_size	src/dom/get_size.js	/^o.dom.get_size = function (node) {$/;"	r
 o.dom.get_style	src/dom/get_style.js	/^		return (fn = o.dom.get_style = node.currentStyle ? function (node,style) {$/;"	r
 o.dom.get_style	src/dom/get_style.js	/^	o.dom.get_style = function () {$/;"	r
 o.dom.get_text_content	src/dom/get_text_content.js	/^		return (fn = o.dom.get_text_content = 'innerText' in node ? o.get_object_property[o.rcurry]('innerText') : o.get_object_property[o.rcurry]('textContent')).apply(this,arguments);$/;"	r

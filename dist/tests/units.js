@@ -487,6 +487,56 @@ test({
 	}
 });
 test({
+	name: 'blog',
+	adsf: function () {
+String.prototype.isEmail = function () {
+	return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(this);
+};
+Assert.isTrue('robert@oatlab.com'.isEmail());
+Assert.isFalse('robertoatlab.com'.isEmail());
+Assert.isTrue('webmaster@del.icio.us'.isEmail());
+	},
+	blah: function () {
+String.prototype.isEmail = function () {
+	return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(this);
+};
+
+String.prototype.isEmail = function () {
+	return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(this);
+};
+
+Assert.isTrue('robert@oatlab.com'.isEmail());
+Assert.isFalse('robertoatlab.com'.isEmail());
+Assert.isTrue('webmaster@del.icio.us'.isEmail(),'the .us one'); //  this will fail! the definition included by someone else overwrote yours, and doesn't match this address
+
+	},
+yeaaah: function () {
+var namespace = 'http://oatkiller.com/javascript',
+
+r = {},
+
+qualify = function (name) {
+	var qualified_name = r[name] = namespace + ':::' + name;
+
+	return qualified_name;
+};
+
+String.prototype[qualify('isEmail')] = function () {
+	return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(this);
+};
+
+
+String.prototype.isEmail = function () {
+	return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(this);
+};
+
+Assert.isTrue('robert@oatlab.com'[r.isEmail]());
+Assert.isFalse('robertoatlab.com'[r.isEmail]());
+Assert.isTrue('webmaster@del.icio.us'[r.isEmail](),'the .us one');
+}
+
+});
+test({
 	name: 'bound',
 	'works for under lower': function () {
 		Assert.areSame(3,o.bound(2,3,5));
@@ -1956,6 +2006,41 @@ test({
 		Assert.areSame(o.last([1,2,3]),3);
 	}
 });
+test({
+	name: 'localStorage',
+	'FFFFFFFFF': function () {
+		Assert.isTrue('localStorage' in window,'localStorage doesn\'t exist');
+	},
+	'speed test': function () {
+		var obj = {},
+		obj_start_time = new Date().getTime(),
+		i;
+		for (i = 0; i < 1000; i++) {
+			obj[i] = i;
+		}
+		var obj_offset = new Date().getTime() - obj_start_time,
+		local_storage_start_time = new Date().getTime();
+		for (i = 0; i < 1000; i++) {
+			localStorage[i] = i;
+		}
+		var local_storage_offset = new Date().getTime() - local_storage_start_time;
+		console.log('obj: ',obj_offset,' local_storage: ',local_storage_offset);
+	}
+});
+
+/*
+	local storage speed test on crazy fast pc:
+
+	litmus: setting 1000 values into 1000 keys. control is an object
+
+	numbers reported by javascript, captured with new Date().getTime()
+
+<table><legend>how fast is localStorage compared to an object</legend>
+	<thead><tr><th headers="localStorage control" colspan="2" id="safari">safari</th><th headers="localStorage control" id="firefox">firefox</th><th headers="localStorage control" id="IE">IE</th></tr></thead>
+	<tbody>
+		<tr><th id="localStorage">localStorage</th><td headers="localStorage safari">1-4ms</td><td headers="localStorage firefox">64ms</td><td headers="localStorage IE">90-230ms</td></tr>
+		<tr><th id="control">control</th><td headers="control safari">1ms</td><td headers="control firefox">1ms</td><td headers="control IE">0ms</td></tr></tbody></table>
+*/
 test({
 	name: 'map',
 	'works with arrays': function () {

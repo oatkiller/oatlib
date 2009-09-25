@@ -216,6 +216,7 @@ task :default do
 	desc "build all modules and their tests"
 	Rake::Task['build_all_tests'].invoke
 	Rake::Task['build_all'].invoke
+	Rake::Task['tags'].invoke
 end
 
 task :build_tests, [:module_string] => [:build] do |t, args|
@@ -293,8 +294,9 @@ task :minify do
 
 end
 
-task :docs do
-	cmd = File.join(NATURAL_DOCS_DIR,'NaturalDocs')+' -i '+File.join(LIBRARY_ROOT,'dist')+' -o HTML '+File.join(LIBRARY_ROOT,'docs')+' -p '+File.join(LIBRARY_ROOT,'natural_docs_proj')+' -r'
+task :tags do
+	cd LIBRARY_ROOT
+	cmd = 'ctags -R src'
 	puts cmd
 	system(cmd)
 end
