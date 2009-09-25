@@ -17,6 +17,8 @@ o.capacitate	src/dom/capacitate.js	/^o.store(Function,'capacitate',function (thr
 o.cartesian	src/cartesian/reference.js	/^o.cartesian = {};$/;"	r
 o.cartesian.distance	src/cartesian/distance.js	/^o.cartesian.distance = function (p1,p2) {$/;"	r
 o.chop	src/chop.js	/^o.store(Array,'chop',function () {$/;"	r
+o.color	src/color/reference.js	/^o.color = {};$/;"	r
+o.color.rgb_to_hsl	src/color/hsl_to_rgb.js	/^	o.color.rgb_to_hsl = function () {$/;"	r
 o.combine	src/combine.js	/^	o.combine = make_combinator(combine_test);$/;"	r
 o.concat	src/concat.js	/^o.concat = o.take(Array.prototype.concat);$/;"	r
 o.constructor	src/constructor.js	/^o.constructor = function (prototype) { \/\/ produces a new generic object constructor function$/;"	r
