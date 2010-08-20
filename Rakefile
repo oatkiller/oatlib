@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'sprockets'
 require 'rake'
 require 'rake/packagetask'
 
@@ -268,18 +270,20 @@ end
 
 def add_evil(my_file)
 
-	prepend_string = '(function(){var evil=eval;'
-	append_string = '})();'
+	if File.exists?(my_file)
+		prepend_string = '(function(){var evil=eval;'
+		append_string = '})();'
 
-	f = File.open(my_file, 'r')  
-	file_data = f.read  
-	f.close 
+		f = File.open(my_file, 'r')  
+		file_data = f.read  
+		f.close 
 
-	f = File.open(my_file, 'w')  
-	f.write(prepend_string)  
-	f.write(file_data)
-	f.write(append_string)  
-	f.close 
+		f = File.open(my_file, 'w')  
+		f.write(prepend_string)  
+		f.write(file_data)
+		f.write(append_string)  
+		f.close 
+	end
 
 end
 
