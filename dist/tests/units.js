@@ -1939,41 +1939,6 @@ test({
 	}
 });
 test({
-	name: 'localStorage',
-	'FFFFFFFFF': function () {
-		Assert.isTrue('localStorage' in window,'localStorage doesn\'t exist');
-	},
-	'speed test': function () {
-		var obj = {},
-		obj_start_time = new Date().getTime(),
-		i;
-		for (i = 0; i < 1000; i++) {
-			obj[i] = i;
-		}
-		var obj_offset = new Date().getTime() - obj_start_time,
-		local_storage_start_time = new Date().getTime();
-		for (i = 0; i < 1000; i++) {
-			localStorage[i] = i;
-		}
-		var local_storage_offset = new Date().getTime() - local_storage_start_time;
-		console.log('obj: ',obj_offset,' local_storage: ',local_storage_offset);
-	}
-});
-
-/*
-	local storage speed test on crazy fast pc:
-
-	litmus: setting 1000 values into 1000 keys. control is an object
-
-	numbers reported by javascript, captured with new Date().getTime()
-
-<table><legend>how fast is localStorage compared to an object</legend>
-	<thead><tr><th headers="localStorage control" colspan="2" id="safari">safari</th><th headers="localStorage control" id="firefox">firefox</th><th headers="localStorage control" id="IE">IE</th></tr></thead>
-	<tbody>
-		<tr><th id="localStorage">localStorage</th><td headers="localStorage safari">1-4ms</td><td headers="localStorage firefox">64ms</td><td headers="localStorage IE">90-230ms</td></tr>
-		<tr><th id="control">control</th><td headers="control safari">1ms</td><td headers="control firefox">1ms</td><td headers="control IE">0ms</td></tr></tbody></table>
-*/
-test({
 	name: 'type_of',
 	'works': function () {
 		Assert.areSame('object',o.type_of({}));
@@ -2186,17 +2151,6 @@ test({
 	}
 });
 test({
-	name: 'rgb_to_hsl',
-	'asdf': function () {
-		var rgb = [56,60,0],
-		expected_hsl = {h: 64, s: 100, l: 26},
-		hsl = o.color.rgb_to_hsl.apply(null,rgb);
-		Assert.areSame(hsl.h,expected_hsl.h);
-		Assert.areSame(hsl.s,expected_hsl.s);
-		Assert.areSame(hsl.l,expected_hsl.l);
-	}
-});
-test({
 	name: 'supplant',
 	'supplant': function () {
 		Assert.areSame('a: 1, b: 2, c: 3','a: {a}, b: {b}, c: {c}'[o.supplant]({
@@ -2273,8 +2227,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'ajaxtest.xml',
 			on_complete: function (responseObj) {
-				Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
-				that.resume();
+				that.resume(function () {
+					Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
+				});
 			}
 		});
 		this.wait();
@@ -2284,8 +2239,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'ajaxtest.xml',
 			on_success: function (responseObj,options) {
-				that.resume();
-				delete options.on_complete;
+				that.resume(function () {
+					delete options.on_complete;
+				});
 			}
 		});
 		this.wait();
@@ -2295,8 +2251,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'asdfasdfasdfa',
 			on_failure: function (responseObj,options) {
-				that.resume();
-				delete options.on_complete;
+				that.resume(function () {
+					delete options.on_complete;
+				});
 			}
 		});
 		this.wait();

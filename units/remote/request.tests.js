@@ -48,8 +48,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'ajaxtest.xml',
 			on_complete: function (responseObj) {
-				Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
-				that.resume();
+				that.resume(function () {
+					Assert.areSame(responseObj.statusText,'OK','failed to get a good status txt');
+				});
 			}
 		});
 		this.wait();
@@ -59,8 +60,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'ajaxtest.xml',
 			on_success: function (responseObj,options) {
-				that.resume();
-				delete options.on_complete;
+				that.resume(function () {
+					delete options.on_complete;
+				});
 			}
 		});
 		this.wait();
@@ -70,8 +72,9 @@ test({
 		var myRequest = o.remote.request({
 			url: 'asdfasdfasdfa',
 			on_failure: function (responseObj,options) {
-				that.resume();
-				delete options.on_complete;
+				that.resume(function () {
+					delete options.on_complete;
+				});
 			}
 		});
 		this.wait();
