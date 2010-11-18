@@ -12,7 +12,7 @@
 			add_property_name = 'addEventListener';
 			remove_property_name = 'removeEventListener';
 		}
-		return (fn = o.dom.event.register = o.dom.event.register = function (add,node,type,fn,bubble) {
+		return (fn = o.dom.event.register = function (add,node,type,fn,bubble) {
 			return node[add ? add_property_name : remove_property_name](prefix + type,fn,bubble);
 		}).apply(this,arguments);
 	};
